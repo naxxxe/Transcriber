@@ -9,3 +9,14 @@ C:\Users\nAXe_\Documents\textpointrepo\WithExtensions\TextPointunitTest\bin\Debu
 C:\Users\nAXe_\Documents\textpointrepo\WithExtensions\TextPointunitTest\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.xml
 C:\Users\nAXe_\Documents\textpointrepo\WithExtensions\TextPointunitTest\obj\Debug\TextPointunitTest.dll
 C:\Users\nAXe_\Documents\textpointrepo\WithExtensions\TextPointunitTest\obj\Debug\TextPointunitTest.pdb
+C:\Users\nAXe_\Source\Repos\Transcriber\TextPointunitTest\bin\Debug\TextPointunitTest.dll
+C:\Users\nAXe_\Source\Repos\Transcriber\TextPointunitTest\bin\Debug\TextPointunitTest.pdb
+C:\Users\nAXe_\Source\Repos\Transcriber\TextPointunitTest\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+C:\Users\nAXe_\Source\Repos\Transcriber\TextPointunitTest\bin\Debug\TextPoint.exe
+C:\Users\nAXe_\Source\Repos\Transcriber\TextPointunitTest\bin\Debug\TextPointExtensibility.dll
+C:\Users\nAXe_\Source\Repos\Transcriber\TextPointunitTest\bin\Debug\TextPointExtensibility.pdb
+C:\Users\nAXe_\Source\Repos\Transcriber\TextPointunitTest\bin\Debug\TextPoint.pdb
+C:\Users\nAXe_\Source\Repos\Transcriber\TextPointunitTest\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.xml
+C:\Users\nAXe_\Source\Repos\Transcriber\TextPointunitTest\obj\Debug\TextPointunitTest.csprojResolveAssemblyReference.cache
+C:\Users\nAXe_\Source\Repos\Transcriber\TextPointunitTest\obj\Debug\TextPointunitTest.dll
+C:\Users\nAXe_\Source\Repos\Transcriber\TextPointunitTest\obj\Debug\TextPointunitTest.pdb

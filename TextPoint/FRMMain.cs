@@ -16,15 +16,20 @@ namespace TextPoint
 {
     public partial class FRMMain : Form, ITextPoint
     {
+        IPlayer player;
 
         public FRMMain()
         {
             InitializeComponent();
             //Media player
-            var player = new WindowsMediaPlayer();
-            player.URL = "X:/[musik]/Blink_182_-_Neighborhoods-2011-MOD/01_blink_182_-_ghost_on_the_dance_floor.mp3";
-            player.settings.rate = 0.5;
-            player.controls.play();
+            player = new AudioPlayer();
+            //player.Load(@"C:\Users\nAXe_\Desktop\eagle.wav");
+            
+            player.Load(@"X:\[musik]\Blink_182_-_Neighborhoods-2011-MOD\01_blink_182_-_ghost_on_the_dance_floor.mp3");
+            //player.settings.rate = 0.5;
+            player.PlayPause();
+            string test = player.Filename();
+            string timestamp = player.Timestamp();
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -115,6 +120,14 @@ namespace TextPoint
             RTBText.Text = text;
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            player.Repeat(2);
+        }
 
+        private void FRMMain_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Environment.Exit(0);
+        }
     }
 }

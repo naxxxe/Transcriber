@@ -12,3 +12,7 @@ C:\Users\nAXe_\Documents\textpointrepo\WithExtensions\TextPointExtensibility\bin
 C:\Users\nAXe_\Documents\textpointrepo\WithExtensions\TextPointExtensibility\bin\Debug\TextPointExtensibility.pdb
 C:\Users\nAXe_\Documents\textpointrepo\WithExtensions\TextPointExtensibility\obj\Debug\TextPointExtensibility.dll
 C:\Users\nAXe_\Documents\textpointrepo\WithExtensions\TextPointExtensibility\obj\Debug\TextPointExtensibility.pdb
+C:\Users\nAXe_\Source\Repos\Transcriber\TextPointExtensibility\bin\Debug\TextPointExtensibility.dll
+C:\Users\nAXe_\Source\Repos\Transcriber\TextPointExtensibility\bin\Debug\TextPointExtensibility.pdb
+C:\Users\nAXe_\Source\Repos\Transcriber\TextPointExtensibility\obj\Debug\TextPointExtensibility.dll
+C:\Users\nAXe_\Source\Repos\Transcriber\TextPointExtensibility\obj\Debug\TextPointExtensibility.pdb

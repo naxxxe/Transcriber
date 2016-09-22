@@ -19,3 +19,10 @@ C:\Users\nAXe_\Documents\textpointrepo\WithExtensions\InvertedColorsExtension\bi
 C:\Users\nAXe_\Documents\textpointrepo\WithExtensions\InvertedColorsExtension\obj\Debug\InvertedColorsExtension.csprojResolveAssemblyReference.cache
 C:\Users\nAXe_\Documents\textpointrepo\WithExtensions\InvertedColorsExtension\obj\Debug\InvertedColorsExtension.dll
 C:\Users\nAXe_\Documents\textpointrepo\WithExtensions\InvertedColorsExtension\obj\Debug\InvertedColorsExtension.pdb
+C:\Users\nAXe_\Source\Repos\Transcriber\InvertedColorsExtension\bin\Debug\InvertedColorsExtension.dll
+C:\Users\nAXe_\Source\Repos\Transcriber\InvertedColorsExtension\bin\Debug\InvertedColorsExtension.pdb
+C:\Users\nAXe_\Source\Repos\Transcriber\InvertedColorsExtension\bin\Debug\TextPointExtensibility.dll
+C:\Users\nAXe_\Source\Repos\Transcriber\InvertedColorsExtension\bin\Debug\TextPointExtensibility.pdb
+C:\Users\nAXe_\Source\Repos\Transcriber\InvertedColorsExtension\obj\Debug\InvertedColorsExtension.csprojResolveAssemblyReference.cache
+C:\Users\nAXe_\Source\Repos\Transcriber\InvertedColorsExtension\obj\Debug\InvertedColorsExtension.dll
+C:\Users\nAXe_\Source\Repos\Transcriber\InvertedColorsExtension\obj\Debug\InvertedColorsExtension.pdb
