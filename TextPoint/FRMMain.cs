@@ -20,6 +20,7 @@ namespace TextPoint
         public FRMMain()
         {
             InitializeComponent();
+            //Media player
             var player = new WindowsMediaPlayer();
             player.URL = "X:/[musik]/Blink_182_-_Neighborhoods-2011-MOD/01_blink_182_-_ghost_on_the_dance_floor.mp3";
             player.settings.rate = 0.5;
