@@ -121,7 +121,7 @@
             // trackBarSpeed
             // 
             this.trackBarSpeed.LargeChange = 1;
-            this.trackBarSpeed.Location = new System.Drawing.Point(22, 66);
+            this.trackBarSpeed.Location = new System.Drawing.Point(12, 66);
             this.trackBarSpeed.Maximum = 2;
             this.trackBarSpeed.Name = "trackBarSpeed";
             this.trackBarSpeed.Size = new System.Drawing.Size(104, 45);
