@@ -90,8 +90,12 @@ namespace TextPoint
 
         public string Timestamp()
         {
-            TimeSpan timestamp = TimeSpan.FromSeconds(player.controls.currentPosition);
-            return timestamp.ToString(@"hh\:mm\:ss\:fff");
+            if (fileloaded)
+            {
+                TimeSpan timestamp = TimeSpan.FromSeconds(player.controls.currentPosition);
+                return "(" + timestamp.ToString(@"hh\:mm\:ss\:fff") +")" + "\n";
+            }
+            else { return ""; }
         }
 
         public void Speed(double speed)

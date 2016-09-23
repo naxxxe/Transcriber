@@ -132,6 +132,7 @@ namespace TextPoint
             {
                 player.Load(ofd.FileName);
             }
+            RTBText.AppendText(player.Filename() + "\n");
             //progressBar.Maximum = (int)player.GetLength();
         }
 
@@ -163,7 +164,7 @@ namespace TextPoint
 
         private void timeStampBtn_Click(object sender, EventArgs e)
         {
-            RTBText.AppendText(Environment.NewLine + player.Timestamp());
+            RTBText.AppendText(player.Timestamp());
         }
     }
 }
