@@ -15,6 +15,7 @@ namespace TextPoint
         string Timestamp();
         string Filename();
         void Speed(double speed);
+        double GetLength();
 
 
     }

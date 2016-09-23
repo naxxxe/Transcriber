@@ -36,10 +36,17 @@
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.button1 = new System.Windows.Forms.Button();
+            this.playPauseBtn = new System.Windows.Forms.Button();
             this.trackBarSpeed = new System.Windows.Forms.TrackBar();
+            this.LoadFileBtn = new System.Windows.Forms.Button();
+            this.StopBtn = new System.Windows.Forms.Button();
+            this.RepeatBtn = new System.Windows.Forms.Button();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.timeStampBtn = new System.Windows.Forms.Button();
+            this.progressBar = new System.Windows.Forms.TrackBar();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarSpeed)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.progressBar)).BeginInit();
             this.SuspendLayout();
             // 
             // RTBText
@@ -108,32 +115,95 @@
             this.toolsToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
             this.toolsToolStripMenuItem.Text = "Tools";
             // 
-            // button1
+            // playPauseBtn
             // 
-            this.button1.Location = new System.Drawing.Point(264, 47);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.playPauseBtn.Location = new System.Drawing.Point(93, 37);
+            this.playPauseBtn.Name = "playPauseBtn";
+            this.playPauseBtn.Size = new System.Drawing.Size(75, 23);
+            this.playPauseBtn.TabIndex = 2;
+            this.playPauseBtn.Text = "Play/Pause";
+            this.playPauseBtn.UseVisualStyleBackColor = true;
+            this.playPauseBtn.Click += new System.EventHandler(this.playPauseBtn_Click);
             // 
             // trackBarSpeed
             // 
             this.trackBarSpeed.LargeChange = 1;
-            this.trackBarSpeed.Location = new System.Drawing.Point(12, 66);
+            this.trackBarSpeed.Location = new System.Drawing.Point(468, 37);
             this.trackBarSpeed.Maximum = 2;
             this.trackBarSpeed.Name = "trackBarSpeed";
-            this.trackBarSpeed.Size = new System.Drawing.Size(104, 45);
+            this.trackBarSpeed.Size = new System.Drawing.Size(55, 45);
             this.trackBarSpeed.TabIndex = 3;
+            this.trackBarSpeed.Value = 1;
+            this.trackBarSpeed.ValueChanged += new System.EventHandler(this.trackBarSpeed_ValueChanged);
+            // 
+            // LoadFileBtn
+            // 
+            this.LoadFileBtn.Location = new System.Drawing.Point(13, 37);
+            this.LoadFileBtn.Name = "LoadFileBtn";
+            this.LoadFileBtn.Size = new System.Drawing.Size(75, 23);
+            this.LoadFileBtn.TabIndex = 4;
+            this.LoadFileBtn.Text = "Load";
+            this.LoadFileBtn.UseVisualStyleBackColor = true;
+            this.LoadFileBtn.Click += new System.EventHandler(this.LoadFileBtn_Click);
+            // 
+            // StopBtn
+            // 
+            this.StopBtn.Location = new System.Drawing.Point(175, 37);
+            this.StopBtn.Name = "StopBtn";
+            this.StopBtn.Size = new System.Drawing.Size(75, 23);
+            this.StopBtn.TabIndex = 5;
+            this.StopBtn.Text = "Stop";
+            this.StopBtn.UseVisualStyleBackColor = true;
+            this.StopBtn.Click += new System.EventHandler(this.StopBtn_Click);
+            // 
+            // RepeatBtn
+            // 
+            this.RepeatBtn.Location = new System.Drawing.Point(257, 37);
+            this.RepeatBtn.Name = "RepeatBtn";
+            this.RepeatBtn.Size = new System.Drawing.Size(75, 23);
+            this.RepeatBtn.TabIndex = 6;
+            this.RepeatBtn.Text = "Repeat";
+            this.RepeatBtn.UseVisualStyleBackColor = true;
+            this.RepeatBtn.Click += new System.EventHandler(this.RepeatBtn_Click);
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(257, 66);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(100, 20);
+            this.textBox1.TabIndex = 7;
+            this.textBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
+            // 
+            // timeStampBtn
+            // 
+            this.timeStampBtn.Location = new System.Drawing.Point(338, 37);
+            this.timeStampBtn.Name = "timeStampBtn";
+            this.timeStampBtn.Size = new System.Drawing.Size(75, 23);
+            this.timeStampBtn.TabIndex = 8;
+            this.timeStampBtn.Text = "Timestamp";
+            this.timeStampBtn.UseVisualStyleBackColor = true;
+            this.timeStampBtn.Click += new System.EventHandler(this.timeStampBtn_Click);
+            // 
+            // progressBar
+            // 
+            this.progressBar.Location = new System.Drawing.Point(13, 66);
+            this.progressBar.Name = "progressBar";
+            this.progressBar.Size = new System.Drawing.Size(237, 45);
+            this.progressBar.TabIndex = 9;
             // 
             // FRMMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(535, 486);
+            this.Controls.Add(this.progressBar);
+            this.Controls.Add(this.timeStampBtn);
+            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.RepeatBtn);
+            this.Controls.Add(this.StopBtn);
+            this.Controls.Add(this.LoadFileBtn);
             this.Controls.Add(this.trackBarSpeed);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.playPauseBtn);
             this.Controls.Add(this.RTBText);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
@@ -144,6 +214,7 @@
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarSpeed)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.progressBar)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -159,8 +230,14 @@
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolsToolStripMenuItem;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button playPauseBtn;
         private System.Windows.Forms.TrackBar trackBarSpeed;
+        private System.Windows.Forms.Button LoadFileBtn;
+        private System.Windows.Forms.Button StopBtn;
+        private System.Windows.Forms.Button RepeatBtn;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Button timeStampBtn;
+        private System.Windows.Forms.TrackBar progressBar;
     }
 }
 

@@ -22,10 +22,10 @@ namespace TextPoint
         {
             InitializeComponent();
             player = new AudioPlayer();
-            player.Load(@"X:\[musik]\Blink_182_-_Neighborhoods-2011-MOD\01_blink_182_-_ghost_on_the_dance_floor.mp3");
-            player.PlayPause();
-            string test = player.Filename();
-            string timestamp = player.Timestamp();
+            //player.Load(@"X:\[musik]\Blink_182_-_Neighborhoods-2011-MOD\01_blink_182_-_ghost_on_the_dance_floor.mp3");
+            //player.PlayPause();
+            //string test = player.Filename();
+            //string timestamp = player.Timestamp();
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -117,9 +117,53 @@ namespace TextPoint
             Environment.Exit(0);
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void playPauseBtn_Click(object sender, EventArgs e)
         {
-            //////////
+            
+            player.PlayPause();
+        }
+
+        private void LoadFileBtn_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "Sound Files (*.mp3, *.wav)|*.mp3;*.wav";
+            ofd.CheckFileExists = true;
+            if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                player.Load(ofd.FileName);
+            }
+            //progressBar.Maximum = (int)player.GetLength();
+        }
+
+        private void StopBtn_Click(object sender, EventArgs e)
+        {
+            player.Stop();
+        }
+
+        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
+        }
+
+        private void RepeatBtn_Click(object sender, EventArgs e)
+        {
+            if (textBox1.Text != "")
+            {
+                int sec = Convert.ToInt32(textBox1.Text);
+                player.Repeat(sec);
+            }
+        }
+
+        private void trackBarSpeed_ValueChanged(object sender, EventArgs e)
+        {
+            if(trackBarSpeed.Value == 0){ player.Speed(0.5); }
+            else if (trackBarSpeed.Value == 1) { player.Speed(1); }
+            else { player.Speed(2); }
+        }
+
+        private void timeStampBtn_Click(object sender, EventArgs e)
+        {
+            RTBText.AppendText(Environment.NewLine + player.Timestamp());
         }
     }
 }

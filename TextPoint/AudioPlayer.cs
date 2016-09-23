@@ -84,6 +84,7 @@ namespace TextPoint
             if (fileloaded)
             {
                 player.controls.stop();
+                playing = false;
             }
         }
 
@@ -96,6 +97,10 @@ namespace TextPoint
         public void Speed(double speed)
         {
             player.settings.rate = speed;
+        }
+        public double GetLength()
+        {
+            return player.currentMedia.duration;
         }
     }
 }
