@@ -36,7 +36,10 @@
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.button1 = new System.Windows.Forms.Button();
+            this.trackBarSpeed = new System.Windows.Forms.TrackBar();
             this.menuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarSpeed)).BeginInit();
             this.SuspendLayout();
             // 
             // RTBText
@@ -45,9 +48,9 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.RTBText.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.RTBText.Location = new System.Drawing.Point(0, 91);
+            this.RTBText.Location = new System.Drawing.Point(0, 117);
             this.RTBText.Name = "RTBText";
-            this.RTBText.Size = new System.Drawing.Size(535, 305);
+            this.RTBText.Size = new System.Drawing.Size(535, 370);
             this.RTBText.TabIndex = 0;
             this.RTBText.Text = "";
             // 
@@ -105,11 +108,32 @@
             this.toolsToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
             this.toolsToolStripMenuItem.Text = "Tools";
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(264, 47);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 2;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // trackBarSpeed
+            // 
+            this.trackBarSpeed.LargeChange = 1;
+            this.trackBarSpeed.Location = new System.Drawing.Point(12, 66);
+            this.trackBarSpeed.Maximum = 2;
+            this.trackBarSpeed.Name = "trackBarSpeed";
+            this.trackBarSpeed.Size = new System.Drawing.Size(104, 45);
+            this.trackBarSpeed.TabIndex = 3;
+            // 
             // FRMMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(535, 395);
+            this.ClientSize = new System.Drawing.Size(535, 486);
+            this.Controls.Add(this.trackBarSpeed);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.RTBText);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
@@ -119,6 +143,7 @@
             this.Load += new System.EventHandler(this.FRMMain_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarSpeed)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -134,6 +159,8 @@
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolsToolStripMenuItem;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TrackBar trackBarSpeed;
     }
 }
 
