@@ -35,6 +35,9 @@ namespace TextPoint
             filename = path;
             player.URL = path;
             fileloaded = true;
+            Stop();
+            playing = false;
+            repeat = false;
         }
 
         public void PlayPause()
@@ -69,8 +72,6 @@ namespace TextPoint
                 timer.Elapsed += Timer_Elapsed;
                 timer.Enabled = true;
             }
-            
-            
         }
 
         private void Timer_Elapsed(object sender, ElapsedEventArgs e)
