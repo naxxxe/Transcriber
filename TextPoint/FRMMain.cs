@@ -21,12 +21,8 @@ namespace TextPoint
         public FRMMain()
         {
             InitializeComponent();
-            //Media player
             player = new AudioPlayer();
-            //player.Load(@"C:\Users\nAXe_\Desktop\eagle.wav");
-            
             player.Load(@"X:\[musik]\Blink_182_-_Neighborhoods-2011-MOD\01_blink_182_-_ghost_on_the_dance_floor.mp3");
-            //player.settings.rate = 0.5;
             player.PlayPause();
             string test = player.Filename();
             string timestamp = player.Timestamp();
@@ -85,14 +81,10 @@ namespace TextPoint
                 }
             }
         }
-
-
         void tsi_Click(object sender, EventArgs e)
         {
             
         }
-
-
         // Plugin support below from here (ITextPoint)
         
         public void SetBackgroundColor(Color col)
@@ -118,11 +110,6 @@ namespace TextPoint
         public void SetText(string text)
         {
             RTBText.Text = text;
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            player.Repeat(2);
         }
 
         private void FRMMain_FormClosing(object sender, FormClosingEventArgs e)
