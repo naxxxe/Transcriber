@@ -17,6 +17,7 @@ namespace TextPoint
     public partial class FRMMain : Form, ITextPoint
     {
         IPlayer player;
+        bool playing = false;
 
         public FRMMain()
         {
@@ -58,6 +59,7 @@ namespace TextPoint
         private void FRMMain_Load(object sender, EventArgs e)
         {
             initiateExtensions();
+            timer1.Interval = 1000;
         }
 
         private void initiateExtensions()
@@ -119,8 +121,13 @@ namespace TextPoint
 
         private void playPauseBtn_Click(object sender, EventArgs e)
         {
-            
-            player.PlayPause();
+            playing = player.PlayPause();
+            if (playing)
+            {
+                timer1.Start();
+            }
+            else { timer1.Stop(); }
+            progressBar.Maximum = (int)player.GetLength();
         }
 
         private void LoadFileBtn_Click(object sender, EventArgs e)
@@ -131,8 +138,9 @@ namespace TextPoint
             if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 player.Load(ofd.FileName);
+                RTBText.AppendText(player.Filename() + "\n");
+                playing = false;
             }
-            RTBText.AppendText(player.Filename() + "\n");
             //progressBar.Maximum = (int)player.GetLength();
         }
 
@@ -158,13 +166,31 @@ namespace TextPoint
         private void trackBarSpeed_ValueChanged(object sender, EventArgs e)
         {
             if(trackBarSpeed.Value == 0){ player.Speed(0.5); }
-            else if (trackBarSpeed.Value == 1) { player.Speed(1); }
+            else if (trackBarSpeed.Value == 1) { player.Speed(0.75); }
+            else if (trackBarSpeed.Value == 2) { player.Speed(1); }
+            else if (trackBarSpeed.Value == 3) { player.Speed(1.5); }
             else { player.Speed(2); }
         }
 
         private void timeStampBtn_Click(object sender, EventArgs e)
         {
             RTBText.AppendText(player.Timestamp());
+        }
+
+        private void progressBar_MouseUp(object sender, MouseEventArgs e)
+        {
+            player.PlayFrom(progressBar.Value);
+        }
+
+        private void progressBar_Scroll(object sender, EventArgs e)
+        {
+            var ts = TimeSpan.FromSeconds(progressBar.Value);
+            progressToolTip.SetToolTip(progressBar, ts.ToString(@"hh\:mm\:ss"));
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            progressBar.Value = player.CurrentPosition();
         }
     }
 }

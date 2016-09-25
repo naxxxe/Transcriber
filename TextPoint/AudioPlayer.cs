@@ -38,21 +38,24 @@ namespace TextPoint
             Stop();
             playing = false;
             repeat = false;
+            timer.Enabled = false;
         }
 
-        public void PlayPause()
+        public bool PlayPause()
         {
-            if (!fileloaded) { }
+            if (!fileloaded) { return false; }
             else if (playing)
             {
                 player.controls.pause();
                 playing = false;
+                return false;
             }
             else
             {
                 player.controls.currentPosition = player.controls.currentPosition - 5;
                 player.controls.play();
                 playing = true;
+                return true;
             }
         }
 
@@ -85,6 +88,8 @@ namespace TextPoint
             {
                 player.controls.stop();
                 playing = false;
+                repeat = false;
+                timer.Enabled = false;
             }
         }
 
@@ -105,6 +110,14 @@ namespace TextPoint
         public double GetLength()
         {
             return player.currentMedia.duration;
+        }
+        public void PlayFrom(int sec)
+        {
+            player.controls.currentPosition = sec;
+        }
+        public int CurrentPosition()
+        {
+            return (int)player.controls.currentPosition;
         }
     }
 }

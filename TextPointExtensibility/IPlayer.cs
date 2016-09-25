@@ -8,7 +8,7 @@ namespace TextPoint
 {
     public interface IPlayer
     {
-        void PlayPause();
+        bool PlayPause();
         void Stop();
         void Load(string path);
         void Repeat(int sec);
@@ -16,6 +16,8 @@ namespace TextPoint
         string Filename();
         void Speed(double speed);
         double GetLength();
+        void PlayFrom(int sec);
+        int CurrentPosition();
 
 
     }
