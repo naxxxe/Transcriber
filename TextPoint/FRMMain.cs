@@ -23,10 +23,6 @@ namespace TextPoint
         {
             InitializeComponent();
             player = new AudioPlayer();
-            //player.Load(@"X:\[musik]\Blink_182_-_Neighborhoods-2011-MOD\01_blink_182_-_ghost_on_the_dance_floor.mp3");
-            //player.PlayPause();
-            //string test = player.Filename();
-            //string timestamp = player.Timestamp();
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -127,7 +123,6 @@ namespace TextPoint
                 timer1.Start();
             }
             else { timer1.Stop(); }
-            progressBar.Maximum = player.GetLength();
         }
 
         private void LoadFileBtn_Click(object sender, EventArgs e)
@@ -141,7 +136,6 @@ namespace TextPoint
                 RTBText.AppendText(player.Filename() + "\n");
                 playing = false;
             }
-            //progressBar.Maximum = (int)player.GetLength();
         }
 
         private void StopBtn_Click(object sender, EventArgs e)
@@ -179,6 +173,11 @@ namespace TextPoint
             RTBText.AppendText(player.Timestamp());
         }
 
+        private void progressBar_MouseDown(object sender, MouseEventArgs e)
+        {
+            timer1.Stop();
+        }
+
         private void progressBar_MouseUp(object sender, MouseEventArgs e)
         {
             player.PlayFrom(progressBar.Value);
@@ -193,12 +192,11 @@ namespace TextPoint
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            progressBar.Value = player.CurrentPosition();
-        }
-
-        private void progressBar_MouseDown(object sender, MouseEventArgs e)
-        {
-            timer1.Stop();
+            if (progressBar.Maximum == 0)
+            {
+                progressBar.Maximum = player.GetLength();
+            }
+            else { progressBar.Value = player.CurrentPosition(); }
         }
     }
 }

@@ -39,6 +39,7 @@ namespace TextPoint
             playing = false;
             repeat = false;
             timer.Enabled = false;
+            int i = player.currentMedia.attributeCount;
         }
 
         public bool PlayPause()
