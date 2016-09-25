@@ -200,6 +200,7 @@
             this.progressBar.Size = new System.Drawing.Size(535, 45);
             this.progressBar.TabIndex = 9;
             this.progressBar.Scroll += new System.EventHandler(this.progressBar_Scroll);
+            this.progressBar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.progressBar_MouseDown);
             this.progressBar.MouseUp += new System.Windows.Forms.MouseEventHandler(this.progressBar_MouseUp);
             // 
             // label1

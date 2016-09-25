@@ -59,7 +59,7 @@ namespace TextPoint
         private void FRMMain_Load(object sender, EventArgs e)
         {
             initiateExtensions();
-            timer1.Interval = 1000;
+            timer1.Interval = 500;
         }
 
         private void initiateExtensions()
@@ -127,7 +127,7 @@ namespace TextPoint
                 timer1.Start();
             }
             else { timer1.Stop(); }
-            progressBar.Maximum = (int)player.GetLength();
+            progressBar.Maximum = player.GetLength();
         }
 
         private void LoadFileBtn_Click(object sender, EventArgs e)
@@ -147,6 +147,8 @@ namespace TextPoint
         private void StopBtn_Click(object sender, EventArgs e)
         {
             player.Stop();
+            playing = false;
+            progressBar.Value = 0;
         }
 
         private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
@@ -180,6 +182,7 @@ namespace TextPoint
         private void progressBar_MouseUp(object sender, MouseEventArgs e)
         {
             player.PlayFrom(progressBar.Value);
+            timer1.Start();
         }
 
         private void progressBar_Scroll(object sender, EventArgs e)
@@ -191,6 +194,11 @@ namespace TextPoint
         private void timer1_Tick(object sender, EventArgs e)
         {
             progressBar.Value = player.CurrentPosition();
+        }
+
+        private void progressBar_MouseDown(object sender, MouseEventArgs e)
+        {
+            timer1.Stop();
         }
     }
 }

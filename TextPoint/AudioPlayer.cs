@@ -107,9 +107,9 @@ namespace TextPoint
         {
             player.settings.rate = speed;
         }
-        public double GetLength()
+        public int GetLength()
         {
-            return player.currentMedia.duration;
+            return (int)player.currentMedia.duration;
         }
         public void PlayFrom(int sec)
         {
