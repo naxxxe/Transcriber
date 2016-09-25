@@ -45,6 +45,12 @@ namespace TextPoint
         public bool PlayPause()
         {
             if (!fileloaded) { return false; }
+            else if (repeat)
+            {
+                repeat = false;
+                timer.Enabled = false;
+                return true;
+            }
             else if (playing)
             {
                 player.controls.pause();
@@ -53,7 +59,11 @@ namespace TextPoint
             }
             else
             {
-                player.controls.currentPosition = player.controls.currentPosition - 5;
+                if(player.controls.currentPosition < 5)
+                {
+                    player.controls.currentPosition = 0;
+                }
+                else { player.controls.currentPosition = player.controls.currentPosition - 5; }
                 player.controls.play();
                 playing = true;
                 return true;

@@ -135,6 +135,8 @@ namespace TextPoint
                 player.Load(ofd.FileName);
                 RTBText.AppendText(player.Filename() + "\n");
                 playing = false;
+                timer1.Stop();
+                progressBar.Value = 0;
             }
         }
 
@@ -192,11 +194,17 @@ namespace TextPoint
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            if (progressBar.Maximum == 0)
+            if (progressBar.Maximum != player.GetLength())
             {
-                progressBar.Maximum = player.GetLength();
+                GetLength();
             }
             else { progressBar.Value = player.CurrentPosition(); }
+        }
+        private void GetLength()
+        {
+            progressBar.Maximum = player.GetLength();
+            var ts = TimeSpan.FromSeconds(progressBar.Maximum);
+            length_Label.Text = "Length: " + ts.ToString(@"hh\:mm\:ss");
         }
     }
 }

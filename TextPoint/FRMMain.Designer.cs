@@ -50,6 +50,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.progressToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.length_Label = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarSpeed)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.progressBar)).BeginInit();
@@ -235,11 +236,25 @@
             // 
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // length_Label
+            // 
+            this.length_Label.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.length_Label.AutoEllipsis = true;
+            this.length_Label.AutoSize = true;
+            this.length_Label.Location = new System.Drawing.Point(447, 107);
+            this.length_Label.Name = "length_Label";
+            this.length_Label.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.length_Label.Size = new System.Drawing.Size(88, 13);
+            this.length_Label.TabIndex = 13;
+            this.length_Label.Text = "Length: 00:00:00";
+            this.length_Label.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // FRMMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(535, 486);
+            this.Controls.Add(this.length_Label);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -290,6 +305,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ToolTip progressToolTip;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Label length_Label;
     }
 }
 
