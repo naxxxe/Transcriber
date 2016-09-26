@@ -16,7 +16,9 @@ namespace TextPoint
         WindowsMediaPlayer player;
         string filename;
         double current;
-        
+        /// <summary>
+        /// Initializes a Audioplayer
+        /// </summary>
         public AudioPlayer()
         {
             playing = false;
@@ -24,12 +26,18 @@ namespace TextPoint
             repeat = false;
             player = new WindowsMediaPlayer();
         }
-        
+        /// <summary>
+        /// Gets the Filename from the file that's opened in the media player
+        /// </summary>
+        /// <returns>The filename of the opened file</returns>
         public string Filename()
         {
             return Path.GetFileName(filename);
         }
-
+        /// <summary>
+        /// Loads the file from the path
+        /// </summary>
+        /// <param name="path">The path of the file that will be loaded</param>
         public void Load(string path)
         {
             filename = path;
@@ -41,7 +49,10 @@ namespace TextPoint
             timer.Enabled = false;
             int i = player.currentMedia.attributeCount;
         }
-
+        /// <summary>
+        /// Plays or Pauses the mediafile if a file is loaded
+        /// </summary>
+        /// <returns>returns true if playing, false if not playing</returns>
         public bool PlayPause()
         {
             if (!fileloaded) { return false; }
@@ -69,7 +80,11 @@ namespace TextPoint
                 return true;
             }
         }
-
+        /// <summary>
+        /// Repeats the number of seconds that is sent into the method
+        /// </summary>
+        /// <param name="sec">number of seconds to be repeated</param>
+        /// <returns>true if repeating, false if not</returns>
         public bool Repeat(int sec)
         {
             timer.Interval = sec * 1000;
@@ -89,12 +104,18 @@ namespace TextPoint
                 return repeat;
             }
         }
-
+        /// <summary>
+        /// A timer that "rewinds" the position of the file.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Timer_Elapsed(object sender, ElapsedEventArgs e)
         {
             player.controls.currentPosition = current - (timer.Interval/1000);
         }
-
+        /// <summary>
+        /// Stops the playing media file and resets the variables in the class if a file is loaded.
+        /// </summary>
         public void Stop()
         {
             if (fileloaded)
@@ -105,7 +126,10 @@ namespace TextPoint
                 timer.Enabled = false;
             }
         }
-
+        /// <summary>
+        /// Returns a string of the current position of the playing media file
+        /// </summary>
+        /// <returns> a string in the format hh:mm:ss:fff with a new line </returns>
         public string Timestamp()
         {
             if (fileloaded)
@@ -115,19 +139,34 @@ namespace TextPoint
             }
             else { return ""; }
         }
-
+        /// <summary>
+        /// Changes the playback speed
+        /// </summary>
+        /// <param name="speed">the new playback speed</param>
         public void Speed(double speed)
         {
             player.settings.rate = speed;
         }
+        /// <summary>
+        /// Get the duration of the media file
+        /// </summary>
+        /// <returns>An int with the length of the loaded media file in seconds</returns>
         public int GetLength()
         {
             return (int)player.currentMedia.duration;
         }
+        /// <summary>
+        /// Changes the current position of the playing media file
+        /// </summary>
+        /// <param name="sec">The place from which the file should be played</param>
         public void PlayFrom(int sec)
         {
             player.controls.currentPosition = sec;
         }
+        /// <summary>
+        /// Returns the current position of the playing media file
+        /// </summary>
+        /// <returns>An int which represents the seconds of the currrent position of the loaded media file</returns>
         public int CurrentPosition()
         {
             return (int)player.controls.currentPosition;
