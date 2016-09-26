@@ -206,5 +206,11 @@ namespace TextPoint
             var ts = TimeSpan.FromSeconds(progressBar.Maximum);
             length_Label.Text = "Length: " + ts.ToString(@"hh\:mm\:ss");
         }
+
+        private void progressBar_MouseHover(object sender, EventArgs e)
+        {
+            var ts = TimeSpan.FromSeconds(progressBar.Value);
+            progressToolTip.SetToolTip(progressBar, ts.ToString(@"hh\:mm\:ss"));
+        }
     }
 }
