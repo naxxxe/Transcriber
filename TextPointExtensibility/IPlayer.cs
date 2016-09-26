@@ -11,7 +11,7 @@ namespace TextPoint
         bool PlayPause();
         void Stop();
         void Load(string path);
-        void Repeat(int sec);
+        bool Repeat(int sec);
         string Timestamp();
         string Filename();
         void Speed(double speed);

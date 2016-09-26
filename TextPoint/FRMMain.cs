@@ -18,11 +18,14 @@ namespace TextPoint
     {
         IPlayer player;
         bool playing = false;
+        bool fileloaded = false;
+        string loadedfile = "";
 
         public FRMMain()
         {
             InitializeComponent();
             player = new AudioPlayer();
+            KeyPreview = true;
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -115,50 +118,19 @@ namespace TextPoint
             Environment.Exit(0);
         }
 
-        private void playPauseBtn_Click(object sender, EventArgs e)
-        {
-            playing = player.PlayPause();
-            if (playing)
-            {
-                timer1.Start();
-            }
-            else { timer1.Stop(); }
-        }
-
         private void LoadFileBtn_Click(object sender, EventArgs e)
         {
-            OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Filter = "Sound Files (*.mp3, *.wav)|*.mp3;*.wav";
-            ofd.CheckFileExists = true;
-            if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            {
-                player.Load(ofd.FileName);
-                RTBText.AppendText(player.Filename() + "\n");
-                playing = false;
-                timer1.Stop();
-                progressBar.Value = 0;
-            }
+            LoadFile();
         }
 
         private void StopBtn_Click(object sender, EventArgs e)
         {
-            player.Stop();
-            playing = false;
-            progressBar.Value = 0;
+            Stop();
         }
 
         private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
             e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
-        }
-
-        private void RepeatBtn_Click(object sender, EventArgs e)
-        {
-            if (textBox1.Text != "")
-            {
-                int sec = Convert.ToInt32(textBox1.Text);
-                player.Repeat(sec);
-            }
         }
 
         private void trackBarSpeed_ValueChanged(object sender, EventArgs e)
@@ -172,7 +144,7 @@ namespace TextPoint
 
         private void timeStampBtn_Click(object sender, EventArgs e)
         {
-            RTBText.AppendText(player.Timestamp());
+            TimeStamp();
         }
 
         private void progressBar_MouseDown(object sender, MouseEventArgs e)
@@ -211,6 +183,119 @@ namespace TextPoint
         {
             var ts = TimeSpan.FromSeconds(progressBar.Value);
             progressToolTip.SetToolTip(progressBar, ts.ToString(@"hh\:mm\:ss"));
+        }
+        private void Reset()
+        {
+            playing = false;
+            timer1.Stop();
+            progressBar.Value = 0;
+            PlayPauseCheckboxBtn.Text = "Play";
+            PlayPauseCheckboxBtn.Checked = false;
+            RepeatCheckBoxBtn.Checked = false;
+        }
+
+        private void PlayPauseCheckboxBtn_Click(object sender, EventArgs e)
+        {
+             PlayPause();
+        }
+        private void PlayPause()
+        {
+            if (fileloaded)
+            {
+                playing = player.PlayPause();
+                if (playing)
+                {
+                    PlayPauseCheckboxBtn.Checked = true;
+                    PlayPauseCheckboxBtn.Text = "Playing";
+                    timer1.Start();
+                }
+                else { PlayPauseCheckboxBtn.Checked = false; PlayPauseCheckboxBtn.Text = "Paused"; timer1.Stop(); }
+            }
+            else { PlayPauseCheckboxBtn.Checked = false; }
+        }
+
+        private void RepeatCheckBoxBtn_Click(object sender, EventArgs e)
+        {
+             Repeat(); 
+        }
+        private void Repeat()
+        {
+            if (fileloaded)
+            {
+                if (textBox1.Text != "")
+                {
+                    int sec = Convert.ToInt32(textBox1.Text);
+                    if (player.Repeat(sec))
+                    {
+                        RepeatCheckBoxBtn.Checked = true;
+                    }
+                    else
+                    {
+                        RepeatCheckBoxBtn.Checked = false;
+                    }
+                }
+            }
+            else { RepeatCheckBoxBtn.Checked = false; }
+        }
+        private void Stop()
+        {
+            player.Stop();
+            playing = false;
+            progressBar.Value = 0;
+            Reset();
+        }
+        private void TimeStamp()
+        {
+            RTBText.AppendText(player.Timestamp());
+        }
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == Keys.F1)
+            {
+                LoadFile();
+                return true;    // indicate that you handled this keystroke
+            }
+            if (keyData == Keys.F2)
+            {
+                PlayPause();
+                return true;    // indicate that you handled this keystroke
+            }
+            if (keyData == Keys.F3)
+            {
+                Stop();
+                return true;    // indicate that you handled this keystroke
+            }
+            if (keyData == Keys.F4)
+            {
+                Repeat();
+                return true;    // indicate that you handled this keystroke
+            }
+            if (keyData == Keys.F5)
+            {
+                TimeStamp();
+                return true;    // indicate that you handled this keystroke
+            }
+
+            // Call the base class
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+        private void LoadFile()
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "Sound Files (*.mp3, *.wav)|*.mp3;*.wav";
+            ofd.CheckFileExists = true;
+            if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                if (loadedfile != ofd.FileName)
+                {
+                    loadedfile = ofd.FileName;
+                    player.Load(ofd.FileName);
+                    RTBText.AppendText(player.Filename() + "\n");
+                    fileloaded = true;
+                    Reset();
+                }
+            }
         }
     }
 }

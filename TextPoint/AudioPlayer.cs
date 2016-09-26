@@ -70,7 +70,7 @@ namespace TextPoint
             }
         }
 
-        public void Repeat(int sec)
+        public bool Repeat(int sec)
         {
             timer.Interval = sec * 1000;
             
@@ -78,6 +78,7 @@ namespace TextPoint
             {
                 repeat = false;
                 timer.Enabled = false;
+                return repeat;
             }
             else {
                 repeat = true;
@@ -85,6 +86,7 @@ namespace TextPoint
                 player.controls.currentPosition = current - (timer.Interval / 1000);
                 timer.Elapsed += Timer_Elapsed;
                 timer.Enabled = true;
+                return repeat;
             }
         }
 
