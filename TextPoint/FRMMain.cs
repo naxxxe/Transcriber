@@ -21,12 +21,50 @@ namespace TextPoint
         bool fileloaded = false;
         string loadedfile = "";
 
-        public FRMMain()
+        #region Form functions
+
+        private void FRMMain_Load(object sender, EventArgs e)
         {
-            InitializeComponent();
-            player = new AudioPlayer();
-            KeyPreview = true;
+            initiateExtensions();
+            timer1.Interval = 500;
         }
+        private void FRMMain_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Environment.Exit(0);
+        }
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == Keys.F1)
+            {
+                LoadSoundFile();
+                return true;    // indicate that you handled this keystroke
+            }
+            if (keyData == Keys.F2)
+            {
+                PlayPause();
+                return true;    // indicate that you handled this keystroke
+            }
+            if (keyData == Keys.F3)
+            {
+                Stop();
+                return true;    // indicate that you handled this keystroke
+            }
+            if (keyData == Keys.F4)
+            {
+                Repeat();
+                return true;    // indicate that you handled this keystroke
+            }
+            if (keyData == Keys.F5)
+            {
+                TimeStamp();
+                return true;    // indicate that you handled this keystroke
+            }
+
+            // Call the base class
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+        #endregion
+
         #region Toolstrip functions
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -69,50 +107,6 @@ namespace TextPoint
         private void pasteToolStripMenuItem_Click(object sender, EventArgs e)
         {
             RTBText.Paste();
-        }
-        #endregion
-
-        #region Form functions
-
-        private void FRMMain_Load(object sender, EventArgs e)
-        {
-            initiateExtensions();
-            timer1.Interval = 500;
-        }
-        private void FRMMain_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            Environment.Exit(0);
-        }
-        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
-        {
-            if (keyData == Keys.F1)
-            {
-                LoadSoundFile();
-                return true;    // indicate that you handled this keystroke
-            }
-            if (keyData == Keys.F2)
-            {
-                PlayPause();
-                return true;    // indicate that you handled this keystroke
-            }
-            if (keyData == Keys.F3)
-            {
-                Stop();
-                return true;    // indicate that you handled this keystroke
-            }
-            if (keyData == Keys.F4)
-            {
-                Repeat();
-                return true;    // indicate that you handled this keystroke
-            }
-            if (keyData == Keys.F5)
-            {
-                TimeStamp();
-                return true;    // indicate that you handled this keystroke
-            }
-
-            // Call the base class
-            return base.ProcessCmdKey(ref msg, keyData);
         }
         #endregion
 
@@ -166,7 +160,6 @@ namespace TextPoint
         }
         #endregion
 
-
         #region Buttons
         private void LoadFileBtn_Click(object sender, EventArgs e)
         {
@@ -191,6 +184,7 @@ namespace TextPoint
         }
 
         #endregion
+
         #region TextBoxes
 
         private void RepeatTextBox_KeyPress(object sender, KeyPressEventArgs e)
@@ -198,6 +192,7 @@ namespace TextPoint
             e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
         }
         #endregion
+
         #region Trackbars
 
         private void trackBarSpeed_ValueChanged(object sender, EventArgs e)
@@ -231,6 +226,7 @@ namespace TextPoint
             progressToolTip.SetToolTip(progressBar, ts.ToString(@"hh\:mm\:ss"));
         }
         #endregion
+
         #region Timers
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -243,6 +239,7 @@ namespace TextPoint
         }
 
         #endregion
+
         #region AudioPlayer function calls 
         private void GetLength()
         {

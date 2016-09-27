@@ -166,7 +166,7 @@ namespace TextPoint
         /// <summary>
         /// Returns the current position of the playing media file
         /// </summary>
-        /// <returns>An int which represents the seconds of the currrent position of the loaded media file</returns>
+        /// <returns>An int which represents the current position of the loaded media file in seconds</returns>
         public int CurrentPosition()
         {
             return (int)player.controls.currentPosition;
