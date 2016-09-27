@@ -60,7 +60,8 @@
             this.UnderlineCheckboxBtn = new System.Windows.Forms.CheckBox();
             this.FontcomboBox = new System.Windows.Forms.ComboBox();
             this.FontSizeCombobox = new System.Windows.Forms.ComboBox();
-            this.FontColorCombobox = new System.Windows.Forms.ComboBox();
+            this.colorDialog1 = new System.Windows.Forms.ColorDialog();
+            this.ColorChangerBtn = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarSpeed)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.progressBar)).BeginInit();
@@ -104,26 +105,26 @@
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.openToolStripMenuItem.Text = "Open";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.saveToolStripMenuItem.Text = "Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(100, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(149, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -379,20 +380,22 @@
             this.FontSizeCombobox.Size = new System.Drawing.Size(38, 21);
             this.FontSizeCombobox.TabIndex = 21;
             // 
-            // FontColorCombobox
+            // ColorChangerBtn
             // 
-            this.FontColorCombobox.FormattingEnabled = true;
-            this.FontColorCombobox.Location = new System.Drawing.Point(279, 27);
-            this.FontColorCombobox.Name = "FontColorCombobox";
-            this.FontColorCombobox.Size = new System.Drawing.Size(121, 21);
-            this.FontColorCombobox.TabIndex = 22;
+            this.ColorChangerBtn.Location = new System.Drawing.Point(279, 27);
+            this.ColorChangerBtn.Name = "ColorChangerBtn";
+            this.ColorChangerBtn.Size = new System.Drawing.Size(75, 23);
+            this.ColorChangerBtn.TabIndex = 22;
+            this.ColorChangerBtn.Text = "Color";
+            this.ColorChangerBtn.UseVisualStyleBackColor = true;
+            this.ColorChangerBtn.Click += new System.EventHandler(this.ColorChangerBtn_Click);
             // 
             // FRMMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(718, 486);
-            this.Controls.Add(this.FontColorCombobox);
+            this.Controls.Add(this.ColorChangerBtn);
             this.Controls.Add(this.FontSizeCombobox);
             this.Controls.Add(this.FontcomboBox);
             this.Controls.Add(this.UnderlineCheckboxBtn);
@@ -458,7 +461,8 @@
         private System.Windows.Forms.CheckBox UnderlineCheckboxBtn;
         private System.Windows.Forms.ComboBox FontcomboBox;
         private System.Windows.Forms.ComboBox FontSizeCombobox;
-        private System.Windows.Forms.ComboBox FontColorCombobox;
+        private System.Windows.Forms.ColorDialog colorDialog1;
+        private System.Windows.Forms.Button ColorChangerBtn;
     }
 }
 

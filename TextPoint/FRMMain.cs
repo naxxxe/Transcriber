@@ -28,7 +28,6 @@ namespace TextPoint
             InitializeComponent();
             player = new AudioPlayer();
             KeyPreview = true;
-            GetColors();
         }
         private void FRMMain_Load(object sender, EventArgs e)
         {
@@ -315,11 +314,16 @@ namespace TextPoint
             }
         }
         #endregion
-        private void GetColors()
+
+        private void ColorChangerBtn_Click(object sender, EventArgs e)
         {
-            ColorChanger cc = new ColorChanger();
-            FontColorCombobox.Items.Clear();
-            FontColorCombobox.DataSource = cc.GetAll(RTBText.BackColor);
+            DialogResult result = colorDialog1.ShowDialog();
+            // See if user pressed ok.
+            if (result == DialogResult.OK)
+            {
+                // Set form background to the selected color.
+                RTBText.ForeColor = colorDialog1.Color;
+            }
         }
     }
 }
