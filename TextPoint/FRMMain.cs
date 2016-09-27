@@ -325,5 +325,16 @@ namespace TextPoint
                 RTBText.ForeColor = colorDialog1.Color;
             }
         }
+
+        private void FontBtn_Click(object sender, EventArgs e)
+        {
+            DialogResult result = fontDialog1.ShowDialog();
+            // See if user pressed ok.
+            if (result == DialogResult.OK)
+            {
+                // Set form background to the selected color.
+                RTBText.Font = fontDialog1.Font;
+            }
+        }
     }
 }

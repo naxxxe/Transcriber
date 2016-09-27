@@ -62,6 +62,8 @@
             this.FontSizeCombobox = new System.Windows.Forms.ComboBox();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.ColorChangerBtn = new System.Windows.Forms.Button();
+            this.fontDialog1 = new System.Windows.Forms.FontDialog();
+            this.FontBtn = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarSpeed)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.progressBar)).BeginInit();
@@ -390,11 +392,22 @@
             this.ColorChangerBtn.UseVisualStyleBackColor = true;
             this.ColorChangerBtn.Click += new System.EventHandler(this.ColorChangerBtn_Click);
             // 
+            // FontBtn
+            // 
+            this.FontBtn.Location = new System.Drawing.Point(361, 28);
+            this.FontBtn.Name = "FontBtn";
+            this.FontBtn.Size = new System.Drawing.Size(75, 23);
+            this.FontBtn.TabIndex = 23;
+            this.FontBtn.Text = "Font";
+            this.FontBtn.UseVisualStyleBackColor = true;
+            this.FontBtn.Click += new System.EventHandler(this.FontBtn_Click);
+            // 
             // FRMMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(718, 486);
+            this.Controls.Add(this.FontBtn);
             this.Controls.Add(this.ColorChangerBtn);
             this.Controls.Add(this.FontSizeCombobox);
             this.Controls.Add(this.FontcomboBox);
@@ -463,6 +476,8 @@
         private System.Windows.Forms.ComboBox FontSizeCombobox;
         private System.Windows.Forms.ColorDialog colorDialog1;
         private System.Windows.Forms.Button ColorChangerBtn;
+        private System.Windows.Forms.FontDialog fontDialog1;
+        private System.Windows.Forms.Button FontBtn;
     }
 }
 
