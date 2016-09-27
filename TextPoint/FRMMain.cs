@@ -27,6 +27,7 @@ namespace TextPoint
             player = new AudioPlayer();
             KeyPreview = true;
         }
+        #region Toolstrip functions
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -54,13 +55,68 @@ namespace TextPoint
                 File.WriteAllText(sfd.FileName, RTBText.Text);
             }
         }
+        
+        private void cutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            RTBText.Cut();
+        }
+
+        private void copyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            RTBText.Copy();
+        }
+
+        private void pasteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            RTBText.Paste();
+        }
+        #endregion
+
+        #region Form functions
 
         private void FRMMain_Load(object sender, EventArgs e)
         {
             initiateExtensions();
             timer1.Interval = 500;
         }
+        private void FRMMain_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Environment.Exit(0);
+        }
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == Keys.F1)
+            {
+                LoadSoundFile();
+                return true;    // indicate that you handled this keystroke
+            }
+            if (keyData == Keys.F2)
+            {
+                PlayPause();
+                return true;    // indicate that you handled this keystroke
+            }
+            if (keyData == Keys.F3)
+            {
+                Stop();
+                return true;    // indicate that you handled this keystroke
+            }
+            if (keyData == Keys.F4)
+            {
+                Repeat();
+                return true;    // indicate that you handled this keystroke
+            }
+            if (keyData == Keys.F5)
+            {
+                TimeStamp();
+                return true;    // indicate that you handled this keystroke
+            }
 
+            // Call the base class
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+        #endregion
+
+        #region ITextPoint functions
         private void initiateExtensions()
         {
             var path = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
@@ -81,10 +137,6 @@ namespace TextPoint
                     }
                 }
             }
-        }
-        void tsi_Click(object sender, EventArgs e)
-        {
-            
         }
         // Plugin support below from here (ITextPoint)
         
@@ -112,26 +164,41 @@ namespace TextPoint
         {
             RTBText.Text = text;
         }
+        #endregion
 
-        private void FRMMain_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            Environment.Exit(0);
-        }
 
+        #region Buttons
         private void LoadFileBtn_Click(object sender, EventArgs e)
         {
-            LoadFile();
+            LoadSoundFile();
         }
 
         private void StopBtn_Click(object sender, EventArgs e)
         {
             Stop();
         }
+        private void timeStampBtn_Click(object sender, EventArgs e)
+        {
+            TimeStamp();
+        }
+        private void PlayPauseCheckboxBtn_Click(object sender, EventArgs e)
+        {
+            PlayPause();
+        }
+        private void RepeatCheckBoxBtn_Click(object sender, EventArgs e)
+        {
+            Repeat();
+        }
 
-        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+        #endregion
+        #region TextBoxes
+
+        private void RepeatTextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
         }
+        #endregion
+        #region Trackbars
 
         private void trackBarSpeed_ValueChanged(object sender, EventArgs e)
         {
@@ -140,11 +207,6 @@ namespace TextPoint
             else if (trackBarSpeed.Value == 2) { player.Speed(1); }
             else if (trackBarSpeed.Value == 3) { player.Speed(1.5); }
             else { player.Speed(2); }
-        }
-
-        private void timeStampBtn_Click(object sender, EventArgs e)
-        {
-            TimeStamp();
         }
 
         private void progressBar_MouseDown(object sender, MouseEventArgs e)
@@ -163,6 +225,13 @@ namespace TextPoint
             var ts = TimeSpan.FromSeconds(progressBar.Value);
             progressToolTip.SetToolTip(progressBar, ts.ToString(@"hh\:mm\:ss"));
         }
+        private void progressBar_MouseHover(object sender, EventArgs e)
+        {
+            var ts = TimeSpan.FromSeconds(progressBar.Value);
+            progressToolTip.SetToolTip(progressBar, ts.ToString(@"hh\:mm\:ss"));
+        }
+        #endregion
+        #region Timers
 
         private void timer1_Tick(object sender, EventArgs e)
         {
@@ -172,6 +241,9 @@ namespace TextPoint
             }
             else { progressBar.Value = player.CurrentPosition(); }
         }
+
+        #endregion
+        #region AudioPlayer function calls 
         private void GetLength()
         {
             progressBar.Maximum = player.GetLength();
@@ -179,11 +251,7 @@ namespace TextPoint
             length_Label.Text = "Length: " + ts.ToString(@"hh\:mm\:ss");
         }
 
-        private void progressBar_MouseHover(object sender, EventArgs e)
-        {
-            var ts = TimeSpan.FromSeconds(progressBar.Value);
-            progressToolTip.SetToolTip(progressBar, ts.ToString(@"hh\:mm\:ss"));
-        }
+        
         private void Reset()
         {
             playing = false;
@@ -194,10 +262,7 @@ namespace TextPoint
             RepeatCheckBoxBtn.Checked = false;
         }
 
-        private void PlayPauseCheckboxBtn_Click(object sender, EventArgs e)
-        {
-             PlayPause();
-        }
+        
         private void PlayPause()
         {
             if (fileloaded)
@@ -214,17 +279,14 @@ namespace TextPoint
             else { PlayPauseCheckboxBtn.Checked = false; }
         }
 
-        private void RepeatCheckBoxBtn_Click(object sender, EventArgs e)
-        {
-             Repeat(); 
-        }
+        
         private void Repeat()
         {
             if (fileloaded)
             {
-                if (textBox1.Text != "")
+                if (RepeatTextBox.Text != "")
                 {
-                    int sec = Convert.ToInt32(textBox1.Text);
+                    int sec = Convert.ToInt32(RepeatTextBox.Text);
                     if (player.Repeat(sec))
                     {
                         RepeatCheckBoxBtn.Checked = true;
@@ -240,8 +302,6 @@ namespace TextPoint
         private void Stop()
         {
             player.Stop();
-            playing = false;
-            progressBar.Value = 0;
             Reset();
         }
         private void TimeStamp()
@@ -249,38 +309,7 @@ namespace TextPoint
             RTBText.AppendText(player.Timestamp());
         }
 
-        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
-        {
-            if (keyData == Keys.F1)
-            {
-                LoadFile();
-                return true;    // indicate that you handled this keystroke
-            }
-            if (keyData == Keys.F2)
-            {
-                PlayPause();
-                return true;    // indicate that you handled this keystroke
-            }
-            if (keyData == Keys.F3)
-            {
-                Stop();
-                return true;    // indicate that you handled this keystroke
-            }
-            if (keyData == Keys.F4)
-            {
-                Repeat();
-                return true;    // indicate that you handled this keystroke
-            }
-            if (keyData == Keys.F5)
-            {
-                TimeStamp();
-                return true;    // indicate that you handled this keystroke
-            }
-
-            // Call the base class
-            return base.ProcessCmdKey(ref msg, keyData);
-        }
-        private void LoadFile()
+        private void LoadSoundFile()
         {
             OpenFileDialog ofd = new OpenFileDialog();
             ofd.Filter = "Sound Files (*.mp3, *.wav)|*.mp3;*.wav";
@@ -297,5 +326,7 @@ namespace TextPoint
                 }
             }
         }
+        #endregion
+
     }
 }

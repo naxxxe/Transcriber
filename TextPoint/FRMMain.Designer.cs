@@ -40,7 +40,7 @@
             this.trackBarSpeed = new System.Windows.Forms.TrackBar();
             this.LoadFileBtn = new System.Windows.Forms.Button();
             this.StopBtn = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.RepeatTextBox = new System.Windows.Forms.TextBox();
             this.timeStampBtn = new System.Windows.Forms.Button();
             this.progressBar = new System.Windows.Forms.TrackBar();
             this.label1 = new System.Windows.Forms.Label();
@@ -51,6 +51,10 @@
             this.length_Label = new System.Windows.Forms.Label();
             this.PlayPauseCheckboxBtn = new System.Windows.Forms.CheckBox();
             this.RepeatCheckBoxBtn = new System.Windows.Forms.CheckBox();
+            this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.copyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pasteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarSpeed)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.progressBar)).BeginInit();
@@ -72,6 +76,7 @@
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
+            this.editToolStripMenuItem,
             this.toolsToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -156,15 +161,15 @@
             this.StopBtn.UseVisualStyleBackColor = true;
             this.StopBtn.Click += new System.EventHandler(this.StopBtn_Click);
             // 
-            // textBox1
+            // RepeatTextBox
             // 
-            this.textBox1.Location = new System.Drawing.Point(256, 52);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(74, 20);
-            this.textBox1.TabIndex = 7;
-            this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.progressToolTip.SetToolTip(this.textBox1, "Type in the number of seconds you want to repeat");
-            this.textBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
+            this.RepeatTextBox.Location = new System.Drawing.Point(256, 52);
+            this.RepeatTextBox.Name = "RepeatTextBox";
+            this.RepeatTextBox.Size = new System.Drawing.Size(74, 20);
+            this.RepeatTextBox.TabIndex = 7;
+            this.RepeatTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.progressToolTip.SetToolTip(this.RepeatTextBox, "Type in the number of seconds you want to repeat");
+            this.RepeatTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.RepeatTextBox_KeyPress);
             // 
             // timeStampBtn
             // 
@@ -264,6 +269,37 @@
             this.RepeatCheckBoxBtn.UseVisualStyleBackColor = true;
             this.RepeatCheckBoxBtn.Click += new System.EventHandler(this.RepeatCheckBoxBtn_Click);
             // 
+            // editToolStripMenuItem
+            // 
+            this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cutToolStripMenuItem,
+            this.copyToolStripMenuItem,
+            this.pasteToolStripMenuItem});
+            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(39, 20);
+            this.editToolStripMenuItem.Text = "Edit";
+            // 
+            // cutToolStripMenuItem
+            // 
+            this.cutToolStripMenuItem.Name = "cutToolStripMenuItem";
+            this.cutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.cutToolStripMenuItem.Text = "Cut";
+            this.cutToolStripMenuItem.Click += new System.EventHandler(this.cutToolStripMenuItem_Click);
+            // 
+            // copyToolStripMenuItem
+            // 
+            this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
+            this.copyToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.copyToolStripMenuItem.Text = "Copy";
+            this.copyToolStripMenuItem.Click += new System.EventHandler(this.copyToolStripMenuItem_Click);
+            // 
+            // pasteToolStripMenuItem
+            // 
+            this.pasteToolStripMenuItem.Name = "pasteToolStripMenuItem";
+            this.pasteToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.pasteToolStripMenuItem.Text = "Paste";
+            this.pasteToolStripMenuItem.Click += new System.EventHandler(this.pasteToolStripMenuItem_Click);
+            // 
             // FRMMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -277,7 +313,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.progressBar);
             this.Controls.Add(this.timeStampBtn);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.RepeatTextBox);
             this.Controls.Add(this.StopBtn);
             this.Controls.Add(this.LoadFileBtn);
             this.Controls.Add(this.trackBarSpeed);
@@ -310,7 +346,7 @@
         private System.Windows.Forms.TrackBar trackBarSpeed;
         private System.Windows.Forms.Button LoadFileBtn;
         private System.Windows.Forms.Button StopBtn;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox RepeatTextBox;
         private System.Windows.Forms.Button timeStampBtn;
         private System.Windows.Forms.TrackBar progressBar;
         private System.Windows.Forms.Label label1;
@@ -321,6 +357,10 @@
         private System.Windows.Forms.Label length_Label;
         private System.Windows.Forms.CheckBox PlayPauseCheckboxBtn;
         private System.Windows.Forms.CheckBox RepeatCheckBoxBtn;
+        private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem cutToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem copyToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem pasteToolStripMenuItem;
     }
 }
 
