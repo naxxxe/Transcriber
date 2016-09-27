@@ -87,22 +87,27 @@ namespace TextPoint
         /// <returns>true if repeating, false if not</returns>
         public bool Repeat(int sec)
         {
-            timer.Interval = sec * 1000;
-            
-            if (repeat)
+            if (fileloaded)
             {
-                repeat = false;
-                timer.Enabled = false;
-                return repeat;
+                timer.Interval = sec * 1000;
+
+                if (repeat)
+                {
+                    repeat = false;
+                    timer.Enabled = false;
+                    return repeat;
+                }
+                else
+                {
+                    repeat = true;
+                    current = player.controls.currentPosition;
+                    player.controls.currentPosition = current - (timer.Interval / 1000);
+                    timer.Elapsed += Timer_Elapsed;
+                    timer.Enabled = true;
+                    return repeat;
+                }
             }
-            else {
-                repeat = true;
-                current = player.controls.currentPosition;
-                player.controls.currentPosition = current - (timer.Interval / 1000);
-                timer.Elapsed += Timer_Elapsed;
-                timer.Enabled = true;
-                return repeat;
-            }
+            else { return false; }
         }
         /// <summary>
         /// A timer that "rewinds" the position of the file.

@@ -23,38 +23,50 @@ namespace TextPoint
 
         #region Form functions
 
+        public FRMMain()
+        {
+            InitializeComponent();
+            player = new AudioPlayer();
+            KeyPreview = true;
+            GetColors();
+        }
         private void FRMMain_Load(object sender, EventArgs e)
         {
-            initiateExtensions();
             timer1.Interval = 500;
         }
         private void FRMMain_FormClosing(object sender, FormClosingEventArgs e)
         {
             Environment.Exit(0);
         }
+        /// <summary>
+        /// Keyboard shortcuts for the audioplayer
+        /// </summary>
+        /// <param name="msg"></param>
+        /// <param name="keyData"></param>
+        /// <returns></returns>
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
-            if (keyData == Keys.F1)
+            if (keyData == Keys.F1) //F1 Loads a soundfile
             {
                 LoadSoundFile();
                 return true;    // indicate that you handled this keystroke
             }
-            if (keyData == Keys.F2)
+            if (keyData == Keys.F2) //F2 Plays or pauses a soundfile
             {
                 PlayPause();
                 return true;    // indicate that you handled this keystroke
             }
-            if (keyData == Keys.F3)
+            if (keyData == Keys.F3) //F3 Stops the soundfile
             {
                 Stop();
                 return true;    // indicate that you handled this keystroke
             }
-            if (keyData == Keys.F4)
+            if (keyData == Keys.F4) //F4 Toggles repeat on/off
             {
                 Repeat();
                 return true;    // indicate that you handled this keystroke
             }
-            if (keyData == Keys.F5)
+            if (keyData == Keys.F5) //F5 Inserts a Timestamp in the Rich Textbox
             {
                 TimeStamp();
                 return true;    // indicate that you handled this keystroke
@@ -111,27 +123,6 @@ namespace TextPoint
         #endregion
 
         #region ITextPoint functions
-        private void initiateExtensions()
-        {
-            var path = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            var dlls = Directory.GetFiles(path, "*.dll");
-            foreach (var dll in dlls)
-            {
-                Assembly assm = Assembly.LoadFile(dll);
-                foreach (var type in assm.GetTypes())
-                {
-                    if ((typeof(IExtension).IsAssignableFrom(type)) && !type.IsInterface)
-                    {
-                        var extensionInstance = (IExtension)Activator.CreateInstance(type);
-                        extensionInstance.Initialize(this);
-                        string title = extensionInstance.GetTitle();
-                        ToolStripItem tsi = new ToolStripMenuItem(title);
-                        tsi.Click += (o, e) => { extensionInstance.Execute(); };
-                        toolsToolStripMenuItem.DropDownItems.Add(tsi);
-                    }
-                }
-            }
-        }
         // Plugin support below from here (ITextPoint)
         
         public void SetBackgroundColor(Color col)
@@ -324,6 +315,11 @@ namespace TextPoint
             }
         }
         #endregion
-
+        private void GetColors()
+        {
+            ColorChanger cc = new ColorChanger();
+            FontColorCombobox.Items.Clear();
+            FontColorCombobox.DataSource = cc.GetAll(RTBText.BackColor);
+        }
     }
 }

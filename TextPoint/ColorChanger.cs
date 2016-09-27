@@ -9,13 +9,14 @@ namespace TextPoint
 {
     public class ColorChanger
     {
-        public List<Color> GetAll()
+        public List<Color> GetAll(Color backgroundcolor)
         {
             ColorConverter cc = new ColorConverter();
             List<Color> ColorList = new List<Color>();
             foreach (Color c in cc.GetStandardValues())
             {
-                if (c.GetBrightness() <= 0.5)
+                double value = backgroundcolor.GetBrightness() - c.GetBrightness();
+                if (value >= 0.5)
                     ColorList.Add(c);
             }
             return ColorList;

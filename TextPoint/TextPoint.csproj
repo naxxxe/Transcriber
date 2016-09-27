@@ -82,10 +82,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\InvertedColorsExtension\InvertedColorsExtension.csproj">
-      <Project>{ee947ce0-abbb-4d09-aaba-98ce49d1e4b6}</Project>
-      <Name>InvertedColorsExtension</Name>
-    </ProjectReference>
     <ProjectReference Include="..\TextPointExtensibility\TextPointExtensibility.csproj">
       <Project>{48c83839-72a4-4e94-8725-e8537db9860f}</Project>
       <Name>TextPointExtensibility</Name>
