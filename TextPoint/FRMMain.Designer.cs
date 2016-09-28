@@ -63,7 +63,6 @@
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.ColorChangerBtn = new System.Windows.Forms.Button();
             this.fontDialog1 = new System.Windows.Forms.FontDialog();
-            this.FontBtn = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarSpeed)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.progressBar)).BeginInit();
@@ -75,12 +74,14 @@
             this.RTBText.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.RTBText.AutoWordSelection = true;
             this.RTBText.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.RTBText.Location = new System.Drawing.Point(0, 56);
             this.RTBText.Name = "RTBText";
             this.RTBText.Size = new System.Drawing.Size(718, 338);
             this.RTBText.TabIndex = 0;
             this.RTBText.Text = "";
+            this.RTBText.SelectionChanged += new System.EventHandler(this.RTBText_SelectionChanged);
             // 
             // menuStrip1
             // 
@@ -107,26 +108,26 @@
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.openToolStripMenuItem.Text = "Open";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.saveToolStripMenuItem.Text = "Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(149, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(100, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -367,20 +368,33 @@
             this.FontcomboBox.Name = "FontcomboBox";
             this.FontcomboBox.Size = new System.Drawing.Size(121, 21);
             this.FontcomboBox.TabIndex = 20;
+            this.FontcomboBox.SelectedIndexChanged += new System.EventHandler(this.FontcomboBox_SelectedIndexChanged);
             // 
             // FontSizeCombobox
             // 
             this.FontSizeCombobox.FormattingEnabled = true;
             this.FontSizeCombobox.Items.AddRange(new object[] {
             "8",
+            "9",
+            "10",
+            "11",
             "12",
             "14",
+            "16",
+            "18",
             "20",
-            "24"});
+            "22",
+            "24",
+            "26",
+            "28",
+            "36",
+            "48",
+            "72"});
             this.FontSizeCombobox.Location = new System.Drawing.Point(234, 27);
             this.FontSizeCombobox.Name = "FontSizeCombobox";
             this.FontSizeCombobox.Size = new System.Drawing.Size(38, 21);
             this.FontSizeCombobox.TabIndex = 21;
+            this.FontSizeCombobox.SelectedIndexChanged += new System.EventHandler(this.FontSizeCombobox_SelectedIndexChanged);
             // 
             // ColorChangerBtn
             // 
@@ -392,22 +406,11 @@
             this.ColorChangerBtn.UseVisualStyleBackColor = true;
             this.ColorChangerBtn.Click += new System.EventHandler(this.ColorChangerBtn_Click);
             // 
-            // FontBtn
-            // 
-            this.FontBtn.Location = new System.Drawing.Point(361, 28);
-            this.FontBtn.Name = "FontBtn";
-            this.FontBtn.Size = new System.Drawing.Size(75, 23);
-            this.FontBtn.TabIndex = 23;
-            this.FontBtn.Text = "Font";
-            this.FontBtn.UseVisualStyleBackColor = true;
-            this.FontBtn.Click += new System.EventHandler(this.FontBtn_Click);
-            // 
             // FRMMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(718, 486);
-            this.Controls.Add(this.FontBtn);
             this.Controls.Add(this.ColorChangerBtn);
             this.Controls.Add(this.FontSizeCombobox);
             this.Controls.Add(this.FontcomboBox);
@@ -477,7 +480,6 @@
         private System.Windows.Forms.ColorDialog colorDialog1;
         private System.Windows.Forms.Button ColorChangerBtn;
         private System.Windows.Forms.FontDialog fontDialog1;
-        private System.Windows.Forms.Button FontBtn;
     }
 }
 

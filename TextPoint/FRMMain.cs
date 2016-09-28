@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Text;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -19,7 +20,9 @@ namespace TextPoint
         IPlayer player;
         bool playing = false;
         bool fileloaded = false;
+        bool fontsloaded = false;
         string loadedfile = "";
+        FontConverter converter = new FontConverter();
 
         #region Form functions
 
@@ -28,10 +31,13 @@ namespace TextPoint
             InitializeComponent();
             player = new AudioPlayer();
             KeyPreview = true;
+            FontcomboBox.DataSource = GetAllFonts();
+            
         }
         private void FRMMain_Load(object sender, EventArgs e)
         {
             timer1.Interval = 500;
+            FontcomboBox.Text = RTBText.SelectionFont.Name;
         }
         private void FRMMain_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -315,26 +321,66 @@ namespace TextPoint
         }
         #endregion
 
+        #region RichTextBox functions
+
         private void ColorChangerBtn_Click(object sender, EventArgs e)
         {
             DialogResult result = colorDialog1.ShowDialog();
             // See if user pressed ok.
             if (result == DialogResult.OK)
             {
-                // Set form background to the selected color.
-                RTBText.ForeColor = colorDialog1.Color;
+                // Set selected text color to the selected color.
+                RTBText.SelectionColor = colorDialog1.Color;
             }
         }
 
-        private void FontBtn_Click(object sender, EventArgs e)
+        private IList<string> GetAllFonts()
         {
-            DialogResult result = fontDialog1.ShowDialog();
-            // See if user pressed ok.
-            if (result == DialogResult.OK)
+            return FontFamily.Families.Select(f => f.Name).ToList();
+        }
+        #endregion
+
+        private void FontcomboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (fontsloaded)
             {
-                // Set form background to the selected color.
-                RTBText.Font = fontDialog1.Font;
+                try
+                {
+                    Font font = new Font(FontcomboBox.SelectedValue.ToString(), RTBText.SelectionFont.Size);
+                    if (font != null) { RTBText.SelectionFont = font; }
+                }
+                catch
+                {
+                    Font font = new Font(FontcomboBox.SelectedValue.ToString(), int.Parse(FontSizeCombobox.Text));
+                    if (font != null) { RTBText.SelectionFont = font; }
+                }
             }
+            else { fontsloaded = true; }
+            
+        }
+
+        private void RTBText_SelectionChanged(object sender, EventArgs e)
+        {
+            ChangeComboboxes();
+        }
+        private void ChangeComboboxes()
+        {
+            try
+            {
+                FontcomboBox.Text = RTBText.SelectionFont.Name;
+                if (RTBText.SelectionFont.Size == 13) { FontSizeCombobox.Text = ""; }
+                else
+                {
+                    FontSizeCombobox.Text = RTBText.SelectionFont.Size.ToString();
+                }
+            }
+            catch { FontcomboBox.Text = ""; }
+        }
+
+        private void FontSizeCombobox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int size = int.Parse(FontSizeCombobox.Text);
+            RTBText.SelectionFont = new Font(RTBText.SelectionFont.FontFamily, size);
         }
     }
 }
