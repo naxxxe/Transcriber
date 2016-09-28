@@ -22,7 +22,8 @@ namespace TextPoint
         bool fileloaded = false;
         bool fontsloaded = false;
         string loadedfile = "";
-        FontConverter converter = new FontConverter();
+        string size;
+        //FontConverter converter = new FontConverter();
 
         #region Form functions
 
@@ -38,6 +39,7 @@ namespace TextPoint
         {
             timer1.Interval = 500;
             FontcomboBox.Text = RTBText.SelectionFont.Name;
+            FontSizeCombobox.Text = RTBText.SelectionFont.Size.ToString();
         }
         private void FRMMain_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -344,15 +346,17 @@ namespace TextPoint
         {
             if (fontsloaded)
             {
-                try
+                using (RichTextBox tmpRB = new RichTextBox())
                 {
-                    Font font = new Font(FontcomboBox.SelectedValue.ToString(), RTBText.SelectionFont.Size);
-                    if (font != null) { RTBText.SelectionFont = font; }
-                }
-                catch
-                {
-                    Font font = new Font(FontcomboBox.SelectedValue.ToString(), int.Parse(FontSizeCombobox.Text));
-                    if (font != null) { RTBText.SelectionFont = font; }
+                    tmpRB.SelectAll();
+                    tmpRB.SelectedRtf = RTBText.SelectedRtf;
+                    for (int i = 0; i < tmpRB.TextLength; ++i)
+                    {
+                        tmpRB.Select(i, 1);
+                        tmpRB.SelectionFont = new Font(FontcomboBox.SelectedValue.ToString(), tmpRB.SelectionFont.Size);
+                    }
+                    tmpRB.SelectAll();
+                    RTBText.SelectedRtf = tmpRB.SelectedRtf;
                 }
             }
             else { fontsloaded = true; }
@@ -367,20 +371,72 @@ namespace TextPoint
         {
             try
             {
-                FontcomboBox.Text = RTBText.SelectionFont.Name;
-                if (RTBText.SelectionFont.Size == 13) { FontSizeCombobox.Text = ""; }
-                else
+                if (FontcomboBox.Text != RTBText.SelectionFont.Name)
                 {
-                    FontSizeCombobox.Text = RTBText.SelectionFont.Size.ToString();
+                    FontcomboBox.Text = RTBText.SelectionFont.Name;
                 }
             }
             catch { FontcomboBox.Text = ""; }
+
+            if (RTBText.SelectionFont == null || FontSizeCombobox.Text != RTBText.SelectionFont.Size.ToString())
+            {
+                if (!SameSizeSelection()) { FontSizeCombobox.Text = ""; }
+                else
+                {
+                    FontSizeCombobox.Text = size;
+                }
+            }
+        }
+        private bool SameSizeSelection()
+        {
+            float previousValue = -10;
+            using (RichTextBox tmpRB = new RichTextBox())
+            {
+                tmpRB.SelectAll();
+                tmpRB.SelectedRtf = RTBText.SelectedRtf;
+                for (int i = 0; i < tmpRB.TextLength; ++i)
+                {
+                    tmpRB.Select(i, 1);
+                    if (previousValue == -10)
+                    {
+                        previousValue = tmpRB.SelectionFont.Size;
+                    }
+                    else
+                    {
+                        if(previousValue != tmpRB.SelectionFont.Size) { return false; }
+                    }
+                }
+                if (previousValue == -10) { size = RTBText.SelectionFont.Size.ToString(); return true; }
+                else
+                {
+                    size = previousValue.ToString();
+                    return true;
+                }
+            }
         }
 
         private void FontSizeCombobox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            int size = int.Parse(FontSizeCombobox.Text);
-            RTBText.SelectionFont = new Font(RTBText.SelectionFont.FontFamily, size);
+            try
+            {
+                int size = int.Parse(FontSizeCombobox.Text);
+                RTBText.SelectionFont = new Font(RTBText.SelectionFont.Name, size);
+            }
+            catch
+            {
+                using (RichTextBox tmpRB = new RichTextBox())
+                {
+                    tmpRB.SelectAll();
+                    tmpRB.SelectedRtf = RTBText.SelectedRtf;
+                    for (int i = 0; i < tmpRB.TextLength; ++i)
+                    {
+                        tmpRB.Select(i, 1);
+                        tmpRB.SelectionFont = new Font(tmpRB.SelectionFont.Name, int.Parse(FontSizeCombobox.Text));
+                    }
+                    tmpRB.SelectAll();
+                    RTBText.SelectedRtf = tmpRB.SelectedRtf;
+                }
+            }
         }
     }
 }
