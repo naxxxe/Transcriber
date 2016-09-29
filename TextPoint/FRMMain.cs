@@ -20,10 +20,8 @@ namespace TextPoint
         IPlayer player;
         bool playing = false;
         bool fileloaded = false;
-        bool fontsloaded = false;
         string loadedfile = "";
         string size;
-        //FontConverter converter = new FontConverter();
 
         #region Form functions
 
@@ -94,22 +92,25 @@ namespace TextPoint
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Filter = "Text files (*.txt)|*.txt";
+            ofd.Filter = "Text files (*.txt, *.rtf)|*.txt;*.rtf";
             ofd.CheckFileExists = true;
-            if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            if (ofd.ShowDialog() == DialogResult.OK)
             {
-                RTBText.Text = File.ReadAllText(ofd.FileName);
+                if (ofd.FileName.EndsWith(".rtf")) { RTBText.LoadFile(ofd.FileName); }
+                else { RTBText.Text = File.ReadAllText(ofd.FileName); }
             }
         }
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SaveFileDialog sfd = new SaveFileDialog();
-            sfd.Filter = "Text files (*.txt)|*.txt";
+            sfd.Filter = "Text files|*.txt|Rich Text Format files|*.rtf";
             sfd.CheckPathExists = true;
-            if (sfd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            if (sfd.ShowDialog() == DialogResult.OK)
             {
-                File.WriteAllText(sfd.FileName, RTBText.Text);
+                if (sfd.FileName.EndsWith(".txt")) { File.WriteAllText(sfd.FileName, RTBText.Text); }
+                else if( sfd.FileName.EndsWith(".rtf")) { File.WriteAllText(sfd.FileName, RTBText.Rtf); }
+                
             }
         }
         
@@ -309,7 +310,7 @@ namespace TextPoint
             OpenFileDialog ofd = new OpenFileDialog();
             ofd.Filter = "Sound Files (*.mp3, *.wav)|*.mp3;*.wav";
             ofd.CheckFileExists = true;
-            if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            if (ofd.ShowDialog() == DialogResult.OK)
             {
                 if (loadedfile != ofd.FileName)
                 {
@@ -342,27 +343,6 @@ namespace TextPoint
         }
         #endregion
 
-        private void FontcomboBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (fontsloaded)
-            {
-                using (RichTextBox tmpRB = new RichTextBox())
-                {
-                    tmpRB.SelectAll();
-                    tmpRB.SelectedRtf = RTBText.SelectedRtf;
-                    for (int i = 0; i < tmpRB.TextLength; ++i)
-                    {
-                        tmpRB.Select(i, 1);
-                        tmpRB.SelectionFont = new Font(FontcomboBox.SelectedValue.ToString(), tmpRB.SelectionFont.Size);
-                    }
-                    tmpRB.SelectAll();
-                    RTBText.SelectedRtf = tmpRB.SelectedRtf;
-                }
-            }
-            else { fontsloaded = true; }
-            
-        }
-
         private void RTBText_SelectionChanged(object sender, EventArgs e)
         {
             ChangeComboboxes();
@@ -386,6 +366,14 @@ namespace TextPoint
                     FontSizeCombobox.Text = size;
                 }
             }
+            if (RTBText.SelectionFont.Bold) { BoldCheckboxBtn.Checked = true; }
+            else { BoldCheckboxBtn.Checked = false; }
+
+            if (RTBText.SelectionFont.Italic) { ItalicCheckboxBtn.Checked = true; }
+            else { ItalicCheckboxBtn.Checked = false; }
+
+            if (RTBText.SelectionFont.Underline) { UnderlineCheckboxBtn.Checked = true; }
+            else { UnderlineCheckboxBtn.Checked = false; }
         }
         private bool SameSizeSelection()
         {
@@ -415,28 +403,121 @@ namespace TextPoint
             }
         }
 
-        private void FontSizeCombobox_SelectedIndexChanged(object sender, EventArgs e)
+        private void FontcomboBox_SelectionChangeCommitted(object sender, EventArgs e)
         {
+            ChangeFormat("Font", FontcomboBox.SelectedValue.ToString());
+            RTBText.Focus();
+        }
+
+        private void FontSizeCombobox_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            int size = int.Parse(FontSizeCombobox.SelectedItem.ToString());
             try
             {
-                int size = int.Parse(FontSizeCombobox.Text);
                 RTBText.SelectionFont = new Font(RTBText.SelectionFont.Name, size);
             }
             catch
             {
-                using (RichTextBox tmpRB = new RichTextBox())
+                ChangeFormat("Size", size.ToString());
+            }
+            RTBText.Focus();
+        }
+        private void ChangeFormat(string what, string value)
+        {
+            using (RichTextBox tmpRB = new RichTextBox())
+            {
+                tmpRB.SelectAll();
+                tmpRB.SelectedRtf = RTBText.SelectedRtf;
+                if (tmpRB.TextLength < 1)
                 {
-                    tmpRB.SelectAll();
-                    tmpRB.SelectedRtf = RTBText.SelectedRtf;
+                    int size = (int)RTBText.SelectionFont.Size;
+                    string font = RTBText.SelectionFont.Name;
+                    var style = RTBText.SelectionFont.Style;
+                    if (what == "Size")
+                    {
+                        size = int.Parse(value);
+                    }
+                    else if (what == "Font")
+                    {
+                        font = value;
+                    }
+                    else if (what == "Bold")
+                    {
+                        if (value == "bold") { style = style | FontStyle.Bold; }
+                        else { style = style & ~FontStyle.Bold; }
+                    }
+                    else if (what == "Italic")
+                    {
+                        if (value == "italic") { style = style | FontStyle.Italic; }
+                        else { style = style & ~FontStyle.Italic; }
+                    }
+                    else if (what == "Underline")
+                    {
+                        if (value == "underline") { style = style | FontStyle.Underline; }
+                        else { style = style & ~FontStyle.Underline; }
+                    }
+
+                    RTBText.SelectionFont = new Font(font, size, style);
+                }
+                else
+                {
                     for (int i = 0; i < tmpRB.TextLength; ++i)
                     {
                         tmpRB.Select(i, 1);
-                        tmpRB.SelectionFont = new Font(tmpRB.SelectionFont.Name, int.Parse(FontSizeCombobox.Text));
+                        int size = (int)tmpRB.SelectionFont.Size;
+                        string font = tmpRB.SelectionFont.Name;
+                        var style = tmpRB.SelectionFont.Style;
+                        if (what == "Size")
+                        {
+                            size = int.Parse(value);
+                        }
+                        else if (what == "Font")
+                        {
+                            font = value;
+                        }
+                        else if (what == "Bold")
+                        {
+                            if (value == "bold") { style = style | FontStyle.Bold; }
+                            else { style = style & ~FontStyle.Bold; }
+                        }
+                        else if (what == "Italic")
+                        {
+                            if (value == "italic") { style = style | FontStyle.Italic; }
+                            else { style = style & ~FontStyle.Italic; }
+                        }
+                        else if (what == "Underline")
+                        {
+                            if (value == "underline") { style = style | FontStyle.Underline; }
+                            else { style = style & ~FontStyle.Underline; }
+                        }
+
+                        tmpRB.SelectionFont = new Font(font, size, style);
                     }
                     tmpRB.SelectAll();
                     RTBText.SelectedRtf = tmpRB.SelectedRtf;
-                }
+                } 
             }
+        }
+
+        private void BoldCheckboxBtn_Click(object sender, EventArgs e)
+        {
+            if (BoldCheckboxBtn.Checked) { ChangeFormat("Bold", "bold"); }
+            else { ChangeFormat("Bold", "notbold"); }
+            RTBText.Focus();
+        }
+
+        private void ItalicCheckboxBtn_Click(object sender, EventArgs e)
+        {
+            if (ItalicCheckboxBtn.Checked){ ChangeFormat("Italic", "italic"); }
+            else { ChangeFormat("Italic", "notitalic"); }
+            RTBText.Focus();
+        }
+
+        private void UnderlineCheckboxBtn_Click(object sender, EventArgs e)
+        {
+            if (UnderlineCheckboxBtn.Checked) { ChangeFormat("Underline", "underline"); }
+            else { ChangeFormat("Underline", "notunderline"); }
+            RTBText.Focus();
         }
     }
 }

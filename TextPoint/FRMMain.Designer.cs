@@ -74,7 +74,6 @@
             this.RTBText.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.RTBText.AutoWordSelection = true;
             this.RTBText.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.RTBText.Location = new System.Drawing.Point(0, 56);
             this.RTBText.Name = "RTBText";
@@ -334,6 +333,7 @@
             this.BoldCheckboxBtn.Text = "B";
             this.BoldCheckboxBtn.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.BoldCheckboxBtn.UseVisualStyleBackColor = true;
+            this.BoldCheckboxBtn.Click += new System.EventHandler(this.BoldCheckboxBtn_Click);
             // 
             // ItalicCheckboxBtn
             // 
@@ -345,6 +345,7 @@
             this.ItalicCheckboxBtn.Text = "I";
             this.ItalicCheckboxBtn.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.ItalicCheckboxBtn.UseVisualStyleBackColor = true;
+            this.ItalicCheckboxBtn.Click += new System.EventHandler(this.ItalicCheckboxBtn_Click);
             // 
             // UnderlineCheckboxBtn
             // 
@@ -356,6 +357,7 @@
             this.UnderlineCheckboxBtn.Text = "U";
             this.UnderlineCheckboxBtn.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.UnderlineCheckboxBtn.UseVisualStyleBackColor = true;
+            this.UnderlineCheckboxBtn.Click += new System.EventHandler(this.UnderlineCheckboxBtn_Click);
             // 
             // FontcomboBox
             // 
@@ -368,7 +370,7 @@
             this.FontcomboBox.Name = "FontcomboBox";
             this.FontcomboBox.Size = new System.Drawing.Size(121, 21);
             this.FontcomboBox.TabIndex = 20;
-            this.FontcomboBox.SelectedIndexChanged += new System.EventHandler(this.FontcomboBox_SelectedIndexChanged);
+            this.FontcomboBox.SelectionChangeCommitted += new System.EventHandler(this.FontcomboBox_SelectionChangeCommitted);
             // 
             // FontSizeCombobox
             // 
@@ -394,7 +396,7 @@
             this.FontSizeCombobox.Name = "FontSizeCombobox";
             this.FontSizeCombobox.Size = new System.Drawing.Size(38, 21);
             this.FontSizeCombobox.TabIndex = 21;
-            this.FontSizeCombobox.SelectedIndexChanged += new System.EventHandler(this.FontSizeCombobox_SelectedIndexChanged);
+            this.FontSizeCombobox.SelectionChangeCommitted += new System.EventHandler(this.FontSizeCombobox_SelectionChangeCommitted);
             // 
             // ColorChangerBtn
             // 
