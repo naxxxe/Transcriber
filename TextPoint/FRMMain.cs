@@ -366,13 +366,15 @@ namespace TextPoint
                     FontSizeCombobox.Text = size;
                 }
             }
-            if (RTBText.SelectionFont.Bold) { BoldCheckboxBtn.Checked = true; }
+
+            //Cant set bold/italics/underline for mutiple fonts
+            if (RTBText.SelectionFont != null && RTBText.SelectionFont.Bold) { BoldCheckboxBtn.Checked = true; }
             else { BoldCheckboxBtn.Checked = false; }
 
-            if (RTBText.SelectionFont.Italic) { ItalicCheckboxBtn.Checked = true; }
+            if (RTBText.SelectionFont != null && RTBText.SelectionFont.Italic) { ItalicCheckboxBtn.Checked = true; }
             else { ItalicCheckboxBtn.Checked = false; }
 
-            if (RTBText.SelectionFont.Underline) { UnderlineCheckboxBtn.Checked = true; }
+            if (RTBText.SelectionFont != null && RTBText.SelectionFont.Underline) { UnderlineCheckboxBtn.Checked = true; }
             else { UnderlineCheckboxBtn.Checked = false; }
         }
         private bool SameSizeSelection()
