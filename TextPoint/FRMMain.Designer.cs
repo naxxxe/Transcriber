@@ -79,7 +79,7 @@
             this.RTBText.Name = "RTBText";
             this.RTBText.Size = new System.Drawing.Size(718, 329);
             this.RTBText.TabIndex = 0;
-            this.RTBText.Text = "testing testing";
+            this.RTBText.Text = "";
             this.RTBText.SelectionChanged += new System.EventHandler(this.RTBText_SelectionChanged);
             this.RTBText.KeyDown += new System.Windows.Forms.KeyEventHandler(this.RTBText_KeyDown);
             // 
