@@ -77,10 +77,11 @@
             this.RTBText.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.RTBText.Location = new System.Drawing.Point(0, 56);
             this.RTBText.Name = "RTBText";
-            this.RTBText.Size = new System.Drawing.Size(718, 338);
+            this.RTBText.Size = new System.Drawing.Size(718, 329);
             this.RTBText.TabIndex = 0;
             this.RTBText.Text = "";
             this.RTBText.SelectionChanged += new System.EventHandler(this.RTBText_SelectionChanged);
+            this.RTBText.KeyDown += new System.Windows.Forms.KeyEventHandler(this.RTBText_KeyDown);
             // 
             // menuStrip1
             // 
@@ -224,7 +225,7 @@
             // 
             this.progressBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.progressBar.Location = new System.Drawing.Point(0, 400);
+            this.progressBar.Location = new System.Drawing.Point(0, 391);
             this.progressBar.Maximum = 0;
             this.progressBar.Name = "progressBar";
             this.progressBar.Size = new System.Drawing.Size(621, 45);
@@ -301,7 +302,7 @@
             this.length_Label.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.length_Label.AutoEllipsis = true;
             this.length_Label.AutoSize = true;
-            this.length_Label.Location = new System.Drawing.Point(630, 404);
+            this.length_Label.Location = new System.Drawing.Point(630, 395);
             this.length_Label.Name = "length_Label";
             this.length_Label.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.length_Label.Size = new System.Drawing.Size(88, 13);
@@ -326,6 +327,7 @@
             // BoldCheckboxBtn
             // 
             this.BoldCheckboxBtn.Appearance = System.Windows.Forms.Appearance.Button;
+            this.BoldCheckboxBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BoldCheckboxBtn.Location = new System.Drawing.Point(12, 27);
             this.BoldCheckboxBtn.Name = "BoldCheckboxBtn";
             this.BoldCheckboxBtn.Size = new System.Drawing.Size(25, 25);
@@ -338,6 +340,7 @@
             // ItalicCheckboxBtn
             // 
             this.ItalicCheckboxBtn.Appearance = System.Windows.Forms.Appearance.Button;
+            this.ItalicCheckboxBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ItalicCheckboxBtn.Location = new System.Drawing.Point(43, 27);
             this.ItalicCheckboxBtn.Name = "ItalicCheckboxBtn";
             this.ItalicCheckboxBtn.Size = new System.Drawing.Size(25, 25);
@@ -350,6 +353,7 @@
             // UnderlineCheckboxBtn
             // 
             this.UnderlineCheckboxBtn.Appearance = System.Windows.Forms.Appearance.Button;
+            this.UnderlineCheckboxBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.UnderlineCheckboxBtn.Location = new System.Drawing.Point(74, 27);
             this.UnderlineCheckboxBtn.Name = "UnderlineCheckboxBtn";
             this.UnderlineCheckboxBtn.Size = new System.Drawing.Size(25, 25);
