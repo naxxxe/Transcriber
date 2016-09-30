@@ -181,6 +181,29 @@ namespace TextPoint
         {
             Repeat();
         }
+        private void BoldCheckboxBtn_Click(object sender, EventArgs e)
+        {
+            if (RTBText.SelectionFont == null) { ChangeFormat("Bold", "unknown"); }
+            else if (BoldCheckboxBtn.Checked) { ChangeFormat("Bold", "bold"); }
+            else { ChangeFormat("Bold", "notbold"); }
+            RTBText.Focus();
+        }
+
+        private void ItalicCheckboxBtn_Click(object sender, EventArgs e)
+        {
+            if (RTBText.SelectionFont == null) { ChangeFormat("Italic", "unknown"); }
+            else if (ItalicCheckboxBtn.Checked) { ChangeFormat("Italic", "italic"); }
+            else { ChangeFormat("Italic", "notitalic"); }
+            RTBText.Focus();
+        }
+
+        private void UnderlineCheckboxBtn_Click(object sender, EventArgs e)
+        {
+            if (RTBText.SelectionFont == null) { ChangeFormat("Underline", "unknown"); }
+            else if (UnderlineCheckboxBtn.Checked) { ChangeFormat("Underline", "underline"); }
+            else { ChangeFormat("Underline", "notunderline"); }
+            RTBText.Focus();
+        }
 
         #endregion
 
@@ -341,22 +364,50 @@ namespace TextPoint
         {
             return FontFamily.Families.Select(f => f.Name).ToList();
         }
-        #endregion
 
         private void RTBText_SelectionChanged(object sender, EventArgs e)
         {
             ChangeComboboxes();
         }
+        private bool SameSizeSelection()
+        {
+            float previousValue = -10;
+            using (RichTextBox tmpRB = new RichTextBox())
+            {
+                tmpRB.SelectAll();
+                tmpRB.SelectedRtf = RTBText.SelectedRtf;
+                for (int i = 0; i < tmpRB.TextLength; ++i)
+                {
+                    tmpRB.Select(i, 1);
+                    if (previousValue == -10)
+                    {
+                        previousValue = tmpRB.SelectionFont.Size;
+                    }
+                    else
+                    {
+                        if (previousValue != tmpRB.SelectionFont.Size) { return false; }
+                    }
+                }
+                if (previousValue == -10) { size = RTBText.SelectionFont.Size.ToString(); return true; }
+                else
+                {
+                    size = previousValue.ToString();
+                    return true;
+                }
+            }
+        }
+        #endregion
+
+        #region Comboboxes and their functions
         private void ChangeComboboxes()
         {
-            try
-            {
+            if(RTBText.SelectionFont != null) { 
                 if (FontcomboBox.Text != RTBText.SelectionFont.Name)
                 {
                     FontcomboBox.Text = RTBText.SelectionFont.Name;
                 }
             }
-            catch { FontcomboBox.Text = ""; }
+            else { FontcomboBox.Text = ""; }
 
             if (RTBText.SelectionFont == null || FontSizeCombobox.Text != RTBText.SelectionFont.Size.ToString())
             {
@@ -376,33 +427,7 @@ namespace TextPoint
             if (RTBText.SelectionFont != null && RTBText.SelectionFont.Underline) { UnderlineCheckboxBtn.Checked = true; }
             else { UnderlineCheckboxBtn.Checked = false; }
         }
-        private bool SameSizeSelection()
-        {
-            float previousValue = -10;
-            using (RichTextBox tmpRB = new RichTextBox())
-            {
-                tmpRB.SelectAll();
-                tmpRB.SelectedRtf = RTBText.SelectedRtf;
-                for (int i = 0; i < tmpRB.TextLength; ++i)
-                {
-                    tmpRB.Select(i, 1);
-                    if (previousValue == -10)
-                    {
-                        previousValue = tmpRB.SelectionFont.Size;
-                    }
-                    else
-                    {
-                        if(previousValue != tmpRB.SelectionFont.Size) { return false; }
-                    }
-                }
-                if (previousValue == -10) { size = RTBText.SelectionFont.Size.ToString(); return true; }
-                else
-                {
-                    size = previousValue.ToString();
-                    return true;
-                }
-            }
-        }
+        
 
         private void FontcomboBox_SelectionChangeCommitted(object sender, EventArgs e)
         {
@@ -423,6 +448,9 @@ namespace TextPoint
             }
             RTBText.Focus();
         }
+        #endregion
+
+        #region Font and other formating
         private void ChangeFormat(string what, string value)
         {
             using (RichTextBox tmpRB = new RichTextBox())
@@ -569,28 +597,6 @@ namespace TextPoint
             }
             return tmpRB;
         }
-        private void BoldCheckboxBtn_Click(object sender, EventArgs e)
-        {
-            if(RTBText.SelectionFont == null) { ChangeFormat("Bold", "unknown"); }
-            else if (BoldCheckboxBtn.Checked) { ChangeFormat("Bold", "bold"); }
-            else { ChangeFormat("Bold", "notbold"); }
-            RTBText.Focus();
-        }
-
-        private void ItalicCheckboxBtn_Click(object sender, EventArgs e)
-        {
-            if (RTBText.SelectionFont == null) { ChangeFormat("Italic", "unknown"); }
-            else if (ItalicCheckboxBtn.Checked){ ChangeFormat("Italic", "italic"); }
-            else { ChangeFormat("Italic", "notitalic"); }
-            RTBText.Focus();
-        }
-
-        private void UnderlineCheckboxBtn_Click(object sender, EventArgs e)
-        {
-            if (RTBText.SelectionFont == null) { ChangeFormat("Underline", "unknown"); }
-            else if (UnderlineCheckboxBtn.Checked) { ChangeFormat("Underline", "underline"); }
-            else { ChangeFormat("Underline", "notunderline"); }
-            RTBText.Focus();
-        }
+        #endregion
     }
 }
