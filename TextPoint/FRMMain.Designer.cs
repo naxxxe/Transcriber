@@ -62,7 +62,6 @@
             this.FontSizeCombobox = new System.Windows.Forms.ComboBox();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.ColorChangerBtn = new System.Windows.Forms.Button();
-            this.fontDialog1 = new System.Windows.Forms.FontDialog();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarSpeed)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.progressBar)).BeginInit();
@@ -491,7 +490,6 @@
         private System.Windows.Forms.ComboBox FontSizeCombobox;
         private System.Windows.Forms.ColorDialog colorDialog1;
         private System.Windows.Forms.Button ColorChangerBtn;
-        private System.Windows.Forms.FontDialog fontDialog1;
     }
 }
 
