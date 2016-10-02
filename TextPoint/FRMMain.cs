@@ -352,11 +352,6 @@ namespace TextPoint
             RTBText.Focus();
         }
 
-        private IList<string> GetAllFonts()
-        {
-            return FontFamily.Families.Select(f => f.Name).ToList();
-        }
-
         private void RTBText_SelectionChanged(object sender, EventArgs e)
         {
             ChangeComboboxes();
@@ -388,9 +383,41 @@ namespace TextPoint
                 }
             }
         }
+
+        private void RTBText_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Control)
+            {
+                switch (e.KeyCode)
+                {
+                    case Keys.B:
+                        e.SuppressKeyPress = true;
+                        if (BoldCheckboxBtn.Checked) { BoldCheckboxBtn.Checked = false; }
+                        else { BoldCheckboxBtn.Checked = true; }
+                        Bold();
+                        break;
+                    case Keys.I:
+                        e.SuppressKeyPress = true;
+                        if (ItalicCheckboxBtn.Checked) { ItalicCheckboxBtn.Checked = false; }
+                        else { ItalicCheckboxBtn.Checked = true; }
+                        Italic();
+                        break;
+                    case Keys.U:
+                        e.SuppressKeyPress = true;
+                        if (UnderlineCheckboxBtn.Checked) { UnderlineCheckboxBtn.Checked = false; }
+                        else { UnderlineCheckboxBtn.Checked = true; }
+                        Underline();
+                        break;
+                }
+            }
+        }
         #endregion
 
         #region Comboboxes and their functions
+        private IList<string> GetAllFonts()
+        {
+            return FontFamily.Families.Select(f => f.Name).ToList();
+        }
         private void ChangeComboboxes()
         {
             if(RTBText.SelectionFont != null) { 
@@ -420,7 +447,6 @@ namespace TextPoint
             else { UnderlineCheckboxBtn.Checked = false; }
         }
         
-
         private void FontcomboBox_SelectionChangeCommitted(object sender, EventArgs e)
         {
             ChangeFormat("Font", FontcomboBox.SelectedValue.ToString());
@@ -472,17 +498,17 @@ namespace TextPoint
                 tmpRB.SelectedRtf = RTBText.SelectedRtf;
                 if (tmpRB.TextLength < 1)
                 {
-                    ChangeFormatNoSelection(what, value);
+                    RTBText.SelectionFont = ChangeFormatNoSelection(what, value);
                 }
                 else
                 {
-                    ChangeFormatLongText(what, value, tmpRB);
+                    RTBText.SelectedRtf = ChangeFormatLongText(what, value, tmpRB);
                 }
                  
             }
         }
 
-        private void ChangeFormatNoSelection(string what, string value)
+        private Font ChangeFormatNoSelection(string what, string value)
         {
             int size = (int)RTBText.SelectionFont.Size;
             string font = RTBText.SelectionFont.Name;
@@ -511,7 +537,33 @@ namespace TextPoint
                 else { style = style & ~FontStyle.Underline; }
             }
 
-            RTBText.SelectionFont = new Font(font, size, style);
+            return new Font(font, size, style);
+        }
+        private string ChangeFormatLongText(string what, string value, RichTextBox tmpRB)
+        {
+            {
+                bool AllBold = false;
+                bool AllItalic = false;
+                bool AllUnderline = false;
+                if (value == "unknown")
+                {
+                    if (what == "Bold")
+                    {
+                        AllBold = CheckAllBold(tmpRB);
+                    }
+                    else if (what == "Italic")
+                    {
+                        AllItalic = CheckAllItalic(tmpRB);
+                    }
+                    else if (what == "Underline")
+                    {
+                        AllUnderline = CheckAllUnderline(tmpRB);
+                    }
+                }
+                tmpRB = ChangeAllText(tmpRB, what, value, AllBold, AllItalic, AllUnderline);
+                tmpRB.SelectAll();
+                return tmpRB.SelectedRtf;
+            }
         }
         private bool CheckAllBold(RichTextBox tmpRB)
         {
@@ -540,32 +592,7 @@ namespace TextPoint
             }
             return true;
         }
-        private void ChangeFormatLongText(string what, string value, RichTextBox tmpRB)
-        {
-            {
-                bool AllBold = false;
-                bool AllItalic = false;
-                bool AllUnderline = false;
-                if (value == "unknown")
-                {
-                    if (what == "Bold")
-                    {
-                        AllBold = CheckAllBold(tmpRB);
-                    }
-                    else if (what == "Italic")
-                    {
-                        AllItalic = CheckAllItalic(tmpRB);
-                    }
-                    else if (what == "Underline")
-                    {
-                        AllUnderline = CheckAllUnderline(tmpRB);
-                    }
-                }
-                tmpRB = ChangeAllText(tmpRB, what, value, AllBold, AllItalic, AllUnderline);
-                tmpRB.SelectAll();
-                RTBText.SelectedRtf = tmpRB.SelectedRtf;
-            }
-        }
+        
         private RichTextBox ChangeAllText(RichTextBox tmpRB, string what, string value, bool AllBold, bool AllItalic, bool AllUnderline)
         {
             for (int i = 0; i < tmpRB.TextLength; ++i)
@@ -627,32 +654,6 @@ namespace TextPoint
         }
         #endregion
 
-        private void RTBText_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Control)
-            {
-                switch (e.KeyCode)
-                {
-                    case Keys.B:
-                        e.SuppressKeyPress = true;
-                        if (BoldCheckboxBtn.Checked){ BoldCheckboxBtn.Checked = false; }
-                        else { BoldCheckboxBtn.Checked = true; }
-                        Bold();
-                        break;
-                    case Keys.I:
-                        e.SuppressKeyPress = true;
-                        if (ItalicCheckboxBtn.Checked) { ItalicCheckboxBtn.Checked = false; }
-                        else { ItalicCheckboxBtn.Checked = true; }
-                        Italic();
-                        break;
-                    case Keys.U:
-                        e.SuppressKeyPress = true;
-                        if (UnderlineCheckboxBtn.Checked) { UnderlineCheckboxBtn.Checked = false; }
-                        else { UnderlineCheckboxBtn.Checked = true; }
-                        Underline();
-                        break;
-                }
-            }
-        }
+        
     }
 }
