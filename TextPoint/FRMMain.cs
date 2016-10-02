@@ -478,14 +478,28 @@ namespace TextPoint
         }
         private void Italic()
         {
-            if (RTBText.SelectionFont == null) { ChangeFormat("Italic", "unknown"); }
+            if (RTBText.SelectionFont != null && SameSizeSelection())
+            {
+                var style = RTBText.SelectionFont.Style;
+                if (!RTBText.SelectionFont.Italic) { style = style | FontStyle.Italic; }
+                else { style = style & ~FontStyle.Italic; }
+                RTBText.SelectionFont = new Font(RTBText.SelectionFont, style);
+            }
+            else if (RTBText.SelectionFont == null) { ChangeFormat("Italic", "unknown"); }
             else if (ItalicCheckboxBtn.Checked) { ChangeFormat("Italic", "italic"); }
             else { ChangeFormat("Italic", "notitalic"); }
             RTBText.Focus();
         }
         private void Underline()
         {
-            if (RTBText.SelectionFont == null) { ChangeFormat("Underline", "unknown"); }
+            if (RTBText.SelectionFont != null && SameSizeSelection())
+            {
+                var style = RTBText.SelectionFont.Style;
+                if (!RTBText.SelectionFont.Underline) { style = style | FontStyle.Underline; }
+                else { style = style & ~FontStyle.Underline; }
+                RTBText.SelectionFont = new Font(RTBText.SelectionFont, style);
+            }
+            else if (RTBText.SelectionFont == null) { ChangeFormat("Underline", "unknown"); }
             else if (UnderlineCheckboxBtn.Checked) { ChangeFormat("Underline", "underline"); }
             else { ChangeFormat("Underline", "notunderline"); }
             RTBText.Focus();
