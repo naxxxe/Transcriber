@@ -456,14 +456,7 @@ namespace TextPoint
         private void FontSizeCombobox_SelectionChangeCommitted(object sender, EventArgs e)
         {
             int size = int.Parse(FontSizeCombobox.SelectedItem.ToString());
-            if(RTBText.SelectionFont != null)
-            {
-                RTBText.SelectionFont = new Font(RTBText.SelectionFont.Name, size);
-            }
-            else
-            {
-                ChangeFormat("Size", size.ToString());
-            }
+            ChangeFormat("Size", size.ToString());
             RTBText.Focus();
         }
         #endregion
@@ -471,7 +464,14 @@ namespace TextPoint
         #region Font and other formating
         private void Bold()
         {
-            if (RTBText.SelectionFont == null) { ChangeFormat("Bold", "unknown"); }
+            if(RTBText.SelectionFont != null && SameSizeSelection())
+            {
+                var style = RTBText.SelectionFont.Style;
+                if (!RTBText.SelectionFont.Bold) { style = style | FontStyle.Bold; }
+                else { style = style & ~FontStyle.Bold; }
+                RTBText.SelectionFont = new Font(RTBText.SelectionFont, style);
+            }
+            else if (RTBText.SelectionFont == null) { ChangeFormat("Bold", "unknown"); }
             else if (BoldCheckboxBtn.Checked) { ChangeFormat("Bold", "bold"); }
             else { ChangeFormat("Bold", "notbold"); }
             RTBText.Focus();
