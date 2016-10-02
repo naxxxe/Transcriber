@@ -544,19 +544,22 @@ namespace TextPoint
         {
             {
                 bool AllBold = false;
-                bool AllItalic = true;
-                bool AllUnderline = true;
-                if (what == "Bold" && value == "unknown")
+                bool AllItalic = false;
+                bool AllUnderline = false;
+                if (value == "unknown")
                 {
-                    AllBold = CheckAllBold(tmpRB);
-                }
-                if (what == "Italic" && value == "unknown")
-                {
-                    AllItalic = CheckAllItalic(tmpRB);
-                }
-                if (what == "Underline" && value == "unknown")
-                {
-                    AllUnderline = CheckAllUnderline(tmpRB);
+                    if (what == "Bold")
+                    {
+                        AllBold = CheckAllBold(tmpRB);
+                    }
+                    else if (what == "Italic")
+                    {
+                        AllItalic = CheckAllItalic(tmpRB);
+                    }
+                    else if (what == "Underline")
+                    {
+                        AllUnderline = CheckAllUnderline(tmpRB);
+                    }
                 }
                 tmpRB = ChangeAllText(tmpRB, what, value, AllBold, AllItalic, AllUnderline);
                 tmpRB.SelectAll();
@@ -582,29 +585,41 @@ namespace TextPoint
                     font = value;
                 }
 
-                else if (what == "Bold" && AllBold && value == "unknown") { style = style & ~FontStyle.Bold; }
-                else if (what == "Bold" && !AllBold && value == "unknown") { style = style | FontStyle.Bold; }
-                else if (what == "Bold" && value != "unknown")
+                else if (what == "Bold")
                 {
-                    if (value == "bold") { style = style | FontStyle.Bold; }
+                    if (value == "unknown")
+                    {
+                        if (AllBold) { style = style & ~FontStyle.Bold; }
+                        else if (!AllBold) { style = style | FontStyle.Bold; }
+                    }
+                    else if (value == "bold") { style = style | FontStyle.Bold; }
                     else { style = style & ~FontStyle.Bold; }
                 }
 
-                else if (what == "Italic" && AllItalic && value == "unknown") { style = style & ~FontStyle.Italic; }
-                else if (what == "Italic" && !AllItalic && value == "unknown") { style = style | FontStyle.Italic; }
-                else if (what == "Italic" && value != "unknown")
+
+                else if (what == "Italic")
                 {
-                    if (value == "italic") { style = style | FontStyle.Italic; }
+                    if (value == "unknown")
+                    {
+                        if (AllItalic) { style = style & ~FontStyle.Italic; }
+                        else if (!AllItalic) { style = style | FontStyle.Italic; }
+                    }
+                    else if (value == "italic") { style = style | FontStyle.Italic; }
                     else { style = style & ~FontStyle.Italic; }
                 }
 
-                else if (what == "Underline" && AllUnderline && value == "unknown") { style = style & ~FontStyle.Underline; }
-                else if (what == "Underline" && !AllUnderline && value == "unknown") { style = style | FontStyle.Underline; }
-                else if (what == "Underline" && value != "unknown")
+
+                else if (what == "Underline")
                 {
-                    if (value == "underline") { style = style | FontStyle.Underline; }
+                    if (value == "unknown")
+                    {
+                        if (AllUnderline) { style = style & ~FontStyle.Underline; }
+                        else if (!AllUnderline) { style = style | FontStyle.Underline; }
+                    }
+                    else if (value == "underline") { style = style | FontStyle.Underline; }
                     else { style = style & ~FontStyle.Underline; }
                 }
+
 
                 tmpRB.SelectionFont = new Font(font, size, style);
             }
@@ -620,17 +635,14 @@ namespace TextPoint
                 {
                     case Keys.B:
                         e.SuppressKeyPress = true;
-                        if (BoldCheckboxBtn.Checked)
-                        {
-                            BoldCheckboxBtn.Checked = false;
-                        }
+                        if (BoldCheckboxBtn.Checked){ BoldCheckboxBtn.Checked = false; }
                         else { BoldCheckboxBtn.Checked = true; }
                         Bold();
                         break;
                     case Keys.I:
                         e.SuppressKeyPress = true;
                         if (ItalicCheckboxBtn.Checked) { ItalicCheckboxBtn.Checked = false; }
-                        else { ItalicCheckboxBtn.Checked = false; }
+                        else { ItalicCheckboxBtn.Checked = true; }
                         Italic();
                         break;
                     case Keys.U:
