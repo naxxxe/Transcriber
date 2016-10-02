@@ -231,12 +231,12 @@ namespace TextPoint
         private void progressBar_Scroll(object sender, EventArgs e)
         {
             var ts = TimeSpan.FromSeconds(progressBar.Value);
-            progressToolTip.SetToolTip(progressBar, ts.ToString(@"hh\:mm\:ss"));
+            ToolTip.SetToolTip(progressBar, ts.ToString(@"hh\:mm\:ss"));
         }
         private void progressBar_MouseHover(object sender, EventArgs e)
         {
             var ts = TimeSpan.FromSeconds(progressBar.Value);
-            progressToolTip.SetToolTip(progressBar, ts.ToString(@"hh\:mm\:ss"));
+            ToolTip.SetToolTip(progressBar, ts.ToString(@"hh\:mm\:ss"));
         }
         #endregion
 

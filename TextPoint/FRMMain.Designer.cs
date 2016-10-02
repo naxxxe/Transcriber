@@ -49,7 +49,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.progressToolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.ToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.PlayPauseCheckboxBtn = new System.Windows.Forms.CheckBox();
             this.RepeatCheckBoxBtn = new System.Windows.Forms.CheckBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
@@ -182,7 +182,7 @@
             this.LoadFileBtn.Size = new System.Drawing.Size(75, 45);
             this.LoadFileBtn.TabIndex = 4;
             this.LoadFileBtn.Text = "Load";
-            this.progressToolTip.SetToolTip(this.LoadFileBtn, "F1");
+            this.ToolTip.SetToolTip(this.LoadFileBtn, "F1");
             this.LoadFileBtn.UseVisualStyleBackColor = true;
             this.LoadFileBtn.Click += new System.EventHandler(this.LoadFileBtn_Click);
             // 
@@ -194,7 +194,7 @@
             this.StopBtn.Size = new System.Drawing.Size(75, 45);
             this.StopBtn.TabIndex = 5;
             this.StopBtn.Text = "Stop";
-            this.progressToolTip.SetToolTip(this.StopBtn, "F3");
+            this.ToolTip.SetToolTip(this.StopBtn, "F3");
             this.StopBtn.UseVisualStyleBackColor = true;
             this.StopBtn.Click += new System.EventHandler(this.StopBtn_Click);
             // 
@@ -206,7 +206,7 @@
             this.RepeatTextBox.Size = new System.Drawing.Size(74, 20);
             this.RepeatTextBox.TabIndex = 7;
             this.RepeatTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.progressToolTip.SetToolTip(this.RepeatTextBox, "Type in the number of seconds you want to repeat");
+            this.ToolTip.SetToolTip(this.RepeatTextBox, "Type in the number of seconds you want to repeat");
             this.RepeatTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.RepeatTextBox_KeyPress);
             // 
             // timeStampBtn
@@ -217,7 +217,7 @@
             this.timeStampBtn.Size = new System.Drawing.Size(75, 45);
             this.timeStampBtn.TabIndex = 8;
             this.timeStampBtn.Text = "Timestamp";
-            this.progressToolTip.SetToolTip(this.timeStampBtn, "F5");
+            this.ToolTip.SetToolTip(this.timeStampBtn, "F5");
             this.timeStampBtn.UseVisualStyleBackColor = true;
             this.timeStampBtn.Click += new System.EventHandler(this.timeStampBtn_Click);
             // 
@@ -275,7 +275,7 @@
             this.PlayPauseCheckboxBtn.TabIndex = 14;
             this.PlayPauseCheckboxBtn.Text = "Play";
             this.PlayPauseCheckboxBtn.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.progressToolTip.SetToolTip(this.PlayPauseCheckboxBtn, "F2");
+            this.ToolTip.SetToolTip(this.PlayPauseCheckboxBtn, "F2");
             this.PlayPauseCheckboxBtn.UseVisualStyleBackColor = true;
             this.PlayPauseCheckboxBtn.Click += new System.EventHandler(this.PlayPauseCheckboxBtn_Click);
             // 
@@ -289,7 +289,7 @@
             this.RepeatCheckBoxBtn.TabIndex = 15;
             this.RepeatCheckBoxBtn.Text = "Repeat";
             this.RepeatCheckBoxBtn.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.progressToolTip.SetToolTip(this.RepeatCheckBoxBtn, "F4");
+            this.ToolTip.SetToolTip(this.RepeatCheckBoxBtn, "F4");
             this.RepeatCheckBoxBtn.UseVisualStyleBackColor = true;
             this.RepeatCheckBoxBtn.Click += new System.EventHandler(this.RepeatCheckBoxBtn_Click);
             // 
@@ -334,6 +334,7 @@
             this.BoldCheckboxBtn.TabIndex = 17;
             this.BoldCheckboxBtn.Text = "B";
             this.BoldCheckboxBtn.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.ToolTip.SetToolTip(this.BoldCheckboxBtn, "Bold");
             this.BoldCheckboxBtn.UseVisualStyleBackColor = true;
             this.BoldCheckboxBtn.Click += new System.EventHandler(this.BoldCheckboxBtn_Click);
             // 
@@ -347,6 +348,7 @@
             this.ItalicCheckboxBtn.TabIndex = 18;
             this.ItalicCheckboxBtn.Text = "I";
             this.ItalicCheckboxBtn.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.ToolTip.SetToolTip(this.ItalicCheckboxBtn, "Italic");
             this.ItalicCheckboxBtn.UseVisualStyleBackColor = true;
             this.ItalicCheckboxBtn.Click += new System.EventHandler(this.ItalicCheckboxBtn_Click);
             // 
@@ -360,6 +362,7 @@
             this.UnderlineCheckboxBtn.TabIndex = 19;
             this.UnderlineCheckboxBtn.Text = "U";
             this.UnderlineCheckboxBtn.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.ToolTip.SetToolTip(this.UnderlineCheckboxBtn, "Underline");
             this.UnderlineCheckboxBtn.UseVisualStyleBackColor = true;
             this.UnderlineCheckboxBtn.Click += new System.EventHandler(this.UnderlineCheckboxBtn_Click);
             // 
@@ -374,6 +377,7 @@
             this.FontcomboBox.Name = "FontcomboBox";
             this.FontcomboBox.Size = new System.Drawing.Size(121, 21);
             this.FontcomboBox.TabIndex = 20;
+            this.ToolTip.SetToolTip(this.FontcomboBox, "Change Font");
             this.FontcomboBox.SelectionChangeCommitted += new System.EventHandler(this.FontcomboBox_SelectionChangeCommitted);
             // 
             // FontSizeCombobox
@@ -400,6 +404,7 @@
             this.FontSizeCombobox.Name = "FontSizeCombobox";
             this.FontSizeCombobox.Size = new System.Drawing.Size(38, 21);
             this.FontSizeCombobox.TabIndex = 21;
+            this.ToolTip.SetToolTip(this.FontSizeCombobox, "Change Font Size");
             this.FontSizeCombobox.SelectionChangeCommitted += new System.EventHandler(this.FontSizeCombobox_SelectionChangeCommitted);
             // 
             // ColorChangerBtn
@@ -409,6 +414,7 @@
             this.ColorChangerBtn.Size = new System.Drawing.Size(75, 23);
             this.ColorChangerBtn.TabIndex = 22;
             this.ColorChangerBtn.Text = "Color";
+            this.ToolTip.SetToolTip(this.ColorChangerBtn, "Change Font color");
             this.ColorChangerBtn.UseVisualStyleBackColor = true;
             this.ColorChangerBtn.Click += new System.EventHandler(this.ColorChangerBtn_Click);
             // 
@@ -468,7 +474,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ToolTip progressToolTip;
+        private System.Windows.Forms.ToolTip ToolTip;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Label length_Label;
         private System.Windows.Forms.CheckBox PlayPauseCheckboxBtn;
