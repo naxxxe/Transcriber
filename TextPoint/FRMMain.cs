@@ -196,6 +196,18 @@ namespace TextPoint
             Underline();
         }
 
+        private void ColorChangerBtn_Click(object sender, EventArgs e)
+        {
+            DialogResult result = colorDialog1.ShowDialog();
+            // See if user pressed ok.
+            if (result == DialogResult.OK)
+            {
+                // Set selected text color to the selected color.
+                RTBText.SelectionColor = colorDialog1.Color;
+            }
+            RTBText.Focus();
+        }
+
         #endregion
 
         #region TextBoxes
@@ -339,18 +351,6 @@ namespace TextPoint
         #endregion
 
         #region RichTextBox functions
-
-        private void ColorChangerBtn_Click(object sender, EventArgs e)
-        {
-            DialogResult result = colorDialog1.ShowDialog();
-            // See if user pressed ok.
-            if (result == DialogResult.OK)
-            {
-                // Set selected text color to the selected color.
-                RTBText.SelectionColor = colorDialog1.Color;
-            }
-            RTBText.Focus();
-        }
 
         private void RTBText_SelectionChanged(object sender, EventArgs e)
         {
