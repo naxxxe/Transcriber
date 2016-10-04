@@ -21,7 +21,6 @@ namespace TextPoint
         bool playing = false;
         bool fileloaded = false;
         string loadedfile = "";
-        string size;
 
         #region Form functions
 
@@ -183,17 +182,17 @@ namespace TextPoint
         }
         private void BoldCheckboxBtn_Click(object sender, EventArgs e)
         {
-            Bold();
+            this.Bold(RTBText, BoldCheckboxBtn.Checked);
         }
 
         private void ItalicCheckboxBtn_Click(object sender, EventArgs e)
         {
-            Italic();
+            this.Italic(RTBText,ItalicCheckboxBtn.Checked);
         }
 
         private void UnderlineCheckboxBtn_Click(object sender, EventArgs e)
         {
-            Underline();
+            this.Underline(RTBText,ItalicCheckboxBtn.Checked);
         }
 
         private void ColorChangerBtn_Click(object sender, EventArgs e)
@@ -329,10 +328,7 @@ namespace TextPoint
         }
         private void TimeStamp()
         {
-            string timestamp = player.Timestamp();
-            RTBText.AppendProtectedWithColor(timestamp, Color.LightBlue);
-            RTBText.Focus();
-
+            RTBText.AppendProtectedWithColor(player.Timestamp(), Color.LightBlue);
         }
 
         private void LoadSoundFile()
@@ -345,7 +341,7 @@ namespace TextPoint
                 if (loadedfile != ofd.FileName)
                 {
                     loadedfile = ofd.FileName;
-                    player.Load(ofd.FileName);
+                    player.Load(loadedfile);
                     RTBText.AppendProtectedWithColor(player.Filename(), Color.LightGreen);
                     fileloaded = true;
                     Reset();
@@ -360,33 +356,7 @@ namespace TextPoint
         {
             ChangeComboboxes();
         }
-        private bool SameSizeSelection()
-        {
-            float previousValue = -10;
-            using (RichTextBox tmpRB = new RichTextBox())
-            {
-                tmpRB.SelectAll();
-                tmpRB.SelectedRtf = RTBText.SelectedRtf;
-                for (int i = 0; i < tmpRB.TextLength; ++i)
-                {
-                    tmpRB.Select(i, 1);
-                    if (previousValue == -10)
-                    {
-                        previousValue = tmpRB.SelectionFont.Size;
-                    }
-                    else
-                    {
-                        if (previousValue != tmpRB.SelectionFont.Size) { return false; }
-                    }
-                }
-                if (previousValue == -10) { size = RTBText.SelectionFont.Size.ToString(); return true; }
-                else
-                {
-                    size = previousValue.ToString();
-                    return true;
-                }
-            }
-        }
+        
 
         private void RTBText_KeyDown(object sender, KeyEventArgs e)
         {
@@ -398,19 +368,19 @@ namespace TextPoint
                         e.SuppressKeyPress = true;
                         if (BoldCheckboxBtn.Checked) { BoldCheckboxBtn.Checked = false; }
                         else { BoldCheckboxBtn.Checked = true; }
-                        Bold();
+                        this.Bold(RTBText,BoldCheckboxBtn.Checked);
                         break;
                     case Keys.I:
                         e.SuppressKeyPress = true;
                         if (ItalicCheckboxBtn.Checked) { ItalicCheckboxBtn.Checked = false; }
                         else { ItalicCheckboxBtn.Checked = true; }
-                        Italic();
+                        this.Italic(RTBText,ItalicCheckboxBtn.Checked);
                         break;
                     case Keys.U:
                         e.SuppressKeyPress = true;
                         if (UnderlineCheckboxBtn.Checked) { UnderlineCheckboxBtn.Checked = false; }
                         else { UnderlineCheckboxBtn.Checked = true; }
-                        Underline();
+                        this.Underline(RTBText,UnderlineCheckboxBtn.Checked);
                         break;
                 }
             }
@@ -434,10 +404,10 @@ namespace TextPoint
 
             if (RTBText.SelectionFont == null || FontSizeCombobox.Text != RTBText.SelectionFont.Size.ToString())
             {
-                if (!SameSizeSelection()) { FontSizeCombobox.Text = ""; }
+                if (!RTBText.SameSizeSelection()) { FontSizeCombobox.Text = ""; }
                 else
                 {
-                    FontSizeCombobox.Text = size;
+                    FontSizeCombobox.Text = RTBText.GetCurrentSize();
                 }
             }
 
@@ -453,224 +423,16 @@ namespace TextPoint
         
         private void FontcomboBox_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            ChangeFormat("Font", FontcomboBox.SelectedValue.ToString());
+            RTBText.ChangeFormat("Font", FontcomboBox.SelectedValue.ToString());
             RTBText.Focus();
         }
 
         private void FontSizeCombobox_SelectionChangeCommitted(object sender, EventArgs e)
         {
             int size = int.Parse(FontSizeCombobox.SelectedItem.ToString());
-            ChangeFormat("Size", size.ToString());
+            RTBText.ChangeFormat("Size", size.ToString());
             RTBText.Focus();
         }
-        #endregion
-
-        #region Font and other formating
-        private void Bold()
-        {
-            if(RTBText.SelectionFont != null && SameSizeSelection())
-            {
-                var style = RTBText.SelectionFont.Style;
-                if (!RTBText.SelectionFont.Bold) { style = style | FontStyle.Bold; }
-                else { style = style & ~FontStyle.Bold; }
-                RTBText.SelectionFont = new Font(RTBText.SelectionFont, style);
-            }
-            else if (RTBText.SelectionFont == null) { ChangeFormat("Bold", "unknown"); }
-            else if (BoldCheckboxBtn.Checked) { ChangeFormat("Bold", "bold"); }
-            else { ChangeFormat("Bold", "notbold"); }
-            RTBText.Focus();
-        }
-        private void Italic()
-        {
-            if (RTBText.SelectionFont != null && SameSizeSelection())
-            {
-                var style = RTBText.SelectionFont.Style;
-                if (!RTBText.SelectionFont.Italic) { style = style | FontStyle.Italic; }
-                else { style = style & ~FontStyle.Italic; }
-                RTBText.SelectionFont = new Font(RTBText.SelectionFont, style);
-            }
-            else if (RTBText.SelectionFont == null) { ChangeFormat("Italic", "unknown"); }
-            else if (ItalicCheckboxBtn.Checked) { ChangeFormat("Italic", "italic"); }
-            else { ChangeFormat("Italic", "notitalic"); }
-            RTBText.Focus();
-        }
-        private void Underline()
-        {
-            if (RTBText.SelectionFont != null && SameSizeSelection())
-            {
-                var style = RTBText.SelectionFont.Style;
-                if (!RTBText.SelectionFont.Underline) { style = style | FontStyle.Underline; }
-                else { style = style & ~FontStyle.Underline; }
-                RTBText.SelectionFont = new Font(RTBText.SelectionFont, style);
-            }
-            else if (RTBText.SelectionFont == null) { ChangeFormat("Underline", "unknown"); }
-            else if (UnderlineCheckboxBtn.Checked) { ChangeFormat("Underline", "underline"); }
-            else { ChangeFormat("Underline", "notunderline"); }
-            RTBText.Focus();
-        }
-        private void ChangeFormat(string what, string value)
-        {
-            using (RichTextBox tmpRB = new RichTextBox())
-            {
-                tmpRB.SelectAll();
-                tmpRB.SelectedRtf = RTBText.SelectedRtf;
-                if (tmpRB.TextLength < 1)
-                {
-                    RTBText.SelectionFont = ChangeFormatNoSelection(what, value);
-                }
-                else
-                {
-                    RTBText.SelectedRtf = ChangeFormatLongText(what, value, tmpRB);
-                }
-                 
-            }
-        }
-
-        private Font ChangeFormatNoSelection(string what, string value)
-        {
-            int size = (int)RTBText.SelectionFont.Size;
-            string font = RTBText.SelectionFont.Name;
-            var style = RTBText.SelectionFont.Style;
-            if (what == "Size")
-            {
-                size = int.Parse(value);
-            }
-            else if (what == "Font")
-            {
-                font = value;
-            }
-            else if (what == "Bold")
-            {
-                if (value == "bold") { style = style | FontStyle.Bold; }
-                else { style = style & ~FontStyle.Bold; }
-            }
-            else if (what == "Italic")
-            {
-                if (value == "italic") { style = style | FontStyle.Italic; }
-                else { style = style & ~FontStyle.Italic; }
-            }
-            else if (what == "Underline")
-            {
-                if (value == "underline") { style = style | FontStyle.Underline; }
-                else { style = style & ~FontStyle.Underline; }
-            }
-
-            return new Font(font, size, style);
-        }
-        private string ChangeFormatLongText(string what, string value, RichTextBox tmpRB)
-        {
-            {
-                bool AllBold = false;
-                bool AllItalic = false;
-                bool AllUnderline = false;
-                if (value == "unknown")
-                {
-                    if (what == "Bold")
-                    {
-                        AllBold = CheckAllBold(tmpRB);
-                    }
-                    else if (what == "Italic")
-                    {
-                        AllItalic = CheckAllItalic(tmpRB);
-                    }
-                    else if (what == "Underline")
-                    {
-                        AllUnderline = CheckAllUnderline(tmpRB);
-                    }
-                }
-                tmpRB = ChangeAllText(tmpRB, what, value, AllBold, AllItalic, AllUnderline);
-                tmpRB.SelectAll();
-                return tmpRB.SelectedRtf;
-            }
-        }
-        private bool CheckAllBold(RichTextBox tmpRB)
-        {
-            for (int i = 0; i < tmpRB.TextLength; ++i)
-            {
-                tmpRB.Select(i, 1);
-                if (!tmpRB.SelectionFont.Bold) { return false; }
-            }
-            return true;
-        }
-        private bool CheckAllItalic(RichTextBox tmpRB)
-        {
-            for (int i = 0; i < tmpRB.TextLength; ++i)
-            {
-                tmpRB.Select(i, 1);
-                if (!tmpRB.SelectionFont.Italic) { return false; }
-            }
-            return true;
-        }
-        private bool CheckAllUnderline(RichTextBox tmpRB)
-        {
-            for (int i = 0; i < tmpRB.TextLength; ++i)
-            {
-                tmpRB.Select(i, 1);
-                if (!tmpRB.SelectionFont.Underline) { return false; }
-            }
-            return true;
-        }
-        
-        private RichTextBox ChangeAllText(RichTextBox tmpRB, string what, string value, bool AllBold, bool AllItalic, bool AllUnderline)
-        {
-            for (int i = 0; i < tmpRB.TextLength; ++i)
-            {
-                tmpRB.Select(i, 1);
-                int size = (int)tmpRB.SelectionFont.Size;
-                string font = tmpRB.SelectionFont.Name;
-                var style = tmpRB.SelectionFont.Style;
-
-                if (what == "Size")
-                {
-                    size = int.Parse(value);
-                }
-
-                else if (what == "Font")
-                {
-                    font = value;
-                }
-
-                else if (what == "Bold")
-                {
-                    if (value == "unknown")
-                    {
-                        if (AllBold) { style = style & ~FontStyle.Bold; }
-                        else if (!AllBold) { style = style | FontStyle.Bold; }
-                    }
-                    else if (value == "bold") { style = style | FontStyle.Bold; }
-                    else { style = style & ~FontStyle.Bold; }
-                }
-
-
-                else if (what == "Italic")
-                {
-                    if (value == "unknown")
-                    {
-                        if (AllItalic) { style = style & ~FontStyle.Italic; }
-                        else if (!AllItalic) { style = style | FontStyle.Italic; }
-                    }
-                    else if (value == "italic") { style = style | FontStyle.Italic; }
-                    else { style = style & ~FontStyle.Italic; }
-                }
-
-
-                else if (what == "Underline")
-                {
-                    if (value == "unknown")
-                    {
-                        if (AllUnderline) { style = style & ~FontStyle.Underline; }
-                        else if (!AllUnderline) { style = style | FontStyle.Underline; }
-                    }
-                    else if (value == "underline") { style = style | FontStyle.Underline; }
-                    else { style = style & ~FontStyle.Underline; }
-                }
-
-
-                tmpRB.SelectionFont = new Font(font, size, style);
-            }
-            return tmpRB;
-        }
-
         #endregion
     }
 }
