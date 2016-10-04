@@ -311,6 +311,7 @@ namespace TextPoint
                     int sec = Convert.ToInt32(RepeatTextBox.Text);
                     if (player.Repeat(sec))
                     {
+                        if (!playing) { PlayPause(); }
                         RepeatCheckBoxBtn.Checked = true;
                     }
                     else
@@ -328,7 +329,10 @@ namespace TextPoint
         }
         private void TimeStamp()
         {
-            RTBText.AppendText(player.Timestamp());
+            string timestamp = player.Timestamp();
+            RTBText.AppendProtectedWithColor(timestamp, Color.LightBlue);
+            RTBText.Focus();
+
         }
 
         private void LoadSoundFile()
@@ -342,7 +346,7 @@ namespace TextPoint
                 {
                     loadedfile = ofd.FileName;
                     player.Load(ofd.FileName);
-                    RTBText.AppendText("\n" + player.Filename() + "\n");
+                    RTBText.AppendProtectedWithColor(player.Filename(), Color.LightGreen);
                     fileloaded = true;
                     Reset();
                 }
@@ -666,8 +670,7 @@ namespace TextPoint
             }
             return tmpRB;
         }
-        #endregion
 
-        
+        #endregion
     }
 }
