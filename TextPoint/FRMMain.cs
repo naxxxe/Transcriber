@@ -15,7 +15,7 @@ using WMPLib;
 
 namespace TextPoint
 {
-    public partial class FRMMain : Form, ITextPoint
+    public partial class FRMMain : Form
     {
         IPlayer player;
         bool playing = false;
@@ -126,35 +126,6 @@ namespace TextPoint
         private void pasteToolStripMenuItem_Click(object sender, EventArgs e)
         {
             RTBText.Paste();
-        }
-        #endregion
-
-        #region ITextPoint functions
-        // Plugin support below from here (ITextPoint)
-        
-        public void SetBackgroundColor(Color col)
-        {
-            RTBText.BackColor = col;
-        }
-
-        public void SetForegroundColor(Color col)
-        {
-            RTBText.ForeColor = col;
-        }
-
-        public void SetFont(Font font)
-        {
-            RTBText.Font = font;
-        }
-
-        public string GetText()
-        {
-            return RTBText.Text;
-        }
-
-        public void SetText(string text)
-        {
-            RTBText.Text = text;
         }
         #endregion
 
@@ -271,8 +242,6 @@ namespace TextPoint
             var ts = TimeSpan.FromSeconds(progressBar.Maximum);
             length_Label.Text = "Length: " + ts.ToString(@"hh\:mm\:ss");
         }
-
-        
         private void Reset()
         {
             playing = false;
@@ -282,8 +251,6 @@ namespace TextPoint
             PlayPauseCheckboxBtn.Checked = false;
             RepeatCheckBoxBtn.Checked = false;
         }
-
-        
         private void PlayPause()
         {
             if (fileloaded)
@@ -299,8 +266,6 @@ namespace TextPoint
             }
             else { PlayPauseCheckboxBtn.Checked = false; }
         }
-
-        
         private void Repeat()
         {
             if (fileloaded)
@@ -330,7 +295,6 @@ namespace TextPoint
         {
             RTBText.AppendProtectedWithColor(player.Timestamp(), Color.LightBlue);
         }
-
         private void LoadSoundFile()
         {
             OpenFileDialog ofd = new OpenFileDialog();
