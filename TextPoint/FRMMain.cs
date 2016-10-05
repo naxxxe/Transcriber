@@ -215,11 +215,12 @@ namespace TextPoint
             var ts = TimeSpan.FromSeconds(progressBar.Value);
             ToolTip.SetToolTip(progressBar, ts.ToString(@"hh\:mm\:ss"));
         }
+
         private void progressBar_MouseHover(object sender, EventArgs e)
         {
-            var ts = TimeSpan.FromSeconds(progressBar.Value);
-            ToolTip.SetToolTip(progressBar, ts.ToString(@"hh\:mm\:ss"));
+            ToolTip.SetToolTip(progressBar,"");
         }
+
         #endregion
 
         #region Timers
@@ -230,7 +231,12 @@ namespace TextPoint
             {
                 GetLength();
             }
-            else { progressBar.Value = player.CurrentPosition(); }
+            else
+            {
+                progressBar.Value = player.CurrentPosition();
+                var ts = TimeSpan.FromSeconds(progressBar.Value);
+                CurrentTimeLabel.Text = ts.ToString(@"hh\:mm\:ss");
+            }
         }
 
         #endregion
@@ -247,6 +253,7 @@ namespace TextPoint
             playing = false;
             timer1.Stop();
             progressBar.Value = 0;
+            CurrentTimeLabel.Text = "00:00:00";
             PlayPauseCheckboxBtn.Text = "Play";
             PlayPauseCheckboxBtn.Checked = false;
             RepeatCheckBoxBtn.Checked = false;
@@ -398,5 +405,7 @@ namespace TextPoint
             RTBText.Focus();
         }
         #endregion
+
+        
     }
 }

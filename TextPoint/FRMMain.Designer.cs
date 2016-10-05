@@ -62,6 +62,7 @@
             this.length_Label = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
+            this.CurrentTimeLabel = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarSpeed)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.progressBar)).BeginInit();
@@ -417,11 +418,22 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Speed";
             // 
+            // CurrentTimeLabel
+            // 
+            this.CurrentTimeLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.CurrentTimeLabel.AutoSize = true;
+            this.CurrentTimeLabel.Location = new System.Drawing.Point(343, 421);
+            this.CurrentTimeLabel.Name = "CurrentTimeLabel";
+            this.CurrentTimeLabel.Size = new System.Drawing.Size(49, 13);
+            this.CurrentTimeLabel.TabIndex = 23;
+            this.CurrentTimeLabel.Text = "00:00:00";
+            // 
             // FRMMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(718, 486);
+            this.Controls.Add(this.CurrentTimeLabel);
             this.Controls.Add(this.ColorChangerBtn);
             this.Controls.Add(this.FontSizeCombobox);
             this.Controls.Add(this.FontcomboBox);
@@ -490,6 +502,7 @@
         private System.Windows.Forms.ComboBox FontSizeCombobox;
         private System.Windows.Forms.ColorDialog colorDialog1;
         private System.Windows.Forms.Button ColorChangerBtn;
+        private System.Windows.Forms.Label CurrentTimeLabel;
     }
 }
 
