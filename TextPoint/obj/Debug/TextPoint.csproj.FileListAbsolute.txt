@@ -77,3 +77,9 @@ C:\Users\nAXe_\Source\Repos\Transcriber\TextPoint\obj\Debug\TextPoint.csproj.Gen
 C:\Users\nAXe_\Source\Repos\Transcriber\TextPoint\bin\Debug\Interop.WMPLib.dll
 C:\Users\nAXe_\Source\Repos\Transcriber\TextPoint\bin\Debug\AxInterop.WMPLib.dll
 C:\Users\nAXe_\Source\Repos\Transcriber\TextPoint\obj\Debug\AxInterop.WMPLib.dll
+C:\Users\fredrik\Source\Repos\Transcriber\TextPoint\bin\Debug\TextPoint.exe.config
+C:\Users\fredrik\Source\Repos\Transcriber\TextPoint\obj\Debug\Interop.WMPLib.dll
+C:\Users\fredrik\Source\Repos\Transcriber\TextPoint\obj\Debug\AxInterop.WMPLib.dll
+C:\Users\fredrik\Source\Repos\Transcriber\TextPoint\obj\Debug\TextPoint.csproj.ResolveComReference.cache
+C:\Users\fredrik\Source\Repos\Transcriber\TextPoint\obj\Debug\TextPoint.exe
+C:\Users\fredrik\Source\Repos\Transcriber\TextPoint\obj\Debug\TextPoint.pdb

@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace TextPoint
 {
+    /// <summary>
+    /// Interface class for the AudioPlayer class, These are the methods the AudioPlayer needs to implement
+    /// </summary>
     public interface IPlayer
     {
         bool PlayPause();
