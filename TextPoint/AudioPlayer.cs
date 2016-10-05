@@ -47,7 +47,6 @@ namespace TextPoint
             playing = false;
             repeat = false;
             timer.Enabled = false;
-            int i = player.currentMedia.attributeCount;
         }
         /// <summary>
         /// Plays or Pauses the mediafile if a file is loaded
@@ -56,12 +55,7 @@ namespace TextPoint
         public bool PlayPause()
         {
             if (!fileloaded) { return false; }
-            //else if (repeat)
-            //{
-            //    repeat = false;
-            //    timer.Enabled = false;
-            //    return true;
-            //}
+            
             else if (playing)
             {
                 player.controls.pause();
@@ -70,11 +64,11 @@ namespace TextPoint
             }
             else
             {
-                if(player.controls.currentPosition < 5)
+                if(player.controls.currentPosition < 5)//if less than 5 
                 {
-                    player.controls.currentPosition = 0;
+                    player.controls.currentPosition = 0;//Jumps to start (0)
                 }
-                else { player.controls.currentPosition = player.controls.currentPosition - 5; }
+                else { player.controls.currentPosition = player.controls.currentPosition - 5; }//Jumps to "current position - 5"
                 player.controls.play();
                 playing = true;
                 return true;
@@ -89,27 +83,27 @@ namespace TextPoint
         {
             if (fileloaded)
             {
-                timer.Interval = sec * 1000;
+                timer.Interval = sec * 1000;//Makes the input "sec" represent secouds instead of milliseconds
 
-                if (repeat)
+                if (repeat)//repeat fuction is already on action
                 {
-                    repeat = false;
+                    repeat = false;//repeat set to false
                     timer.Enabled = false;
                     return repeat;
                 }
                 else
                 {
                     repeat = true;
-                    current = player.controls.currentPosition;
-                    player.controls.currentPosition = current - (timer.Interval / 1000);
+                    current = player.controls.currentPosition;//Saves the current time when the repeat is initated
+                    player.controls.currentPosition = current - (timer.Interval / 1000);//Sets the repeat length
                     if (!playing) { player.controls.play(); }
                     
-                    timer.Elapsed += Timer_Elapsed;
+                    timer.Elapsed += Timer_Elapsed;//subscribe to the Timer_elapsed event
                     timer.Enabled = true;
                     return repeat;
                 }
             }
-            else { return false; }
+            else { return false; }//no file is loaded, nothing happens
         }
         /// <summary>
         /// A timer that "rewinds" the position of the file.
@@ -136,7 +130,7 @@ namespace TextPoint
         /// <summary>
         /// Returns a string of the current position of the playing media file
         /// </summary>
-        /// <returns> a string in the format hh:mm:ss:fff with a new line </returns>
+        /// <returns> a string in the format hh:mm:ss with a new line </returns>
         public string Timestamp()
         {
             if (fileloaded)
