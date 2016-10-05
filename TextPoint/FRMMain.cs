@@ -300,7 +300,7 @@ namespace TextPoint
         }
         private void TimeStamp()
         {
-            RTBText.AppendProtectedWithColor(player.Timestamp(), Color.LightBlue);
+            RTBText.AppendWithColor(player.Timestamp(), Color.LightBlue);
         }
         private void LoadSoundFile()
         {
@@ -313,7 +313,7 @@ namespace TextPoint
                 {
                     loadedfile = ofd.FileName;
                     player.Load(loadedfile);
-                    RTBText.AppendProtectedWithColor(player.Filename(), Color.LightGreen);
+                    RTBText.AppendWithColor(player.Filename(), Color.LightGreen);
                     fileloaded = true;
                     Reset();
                 }

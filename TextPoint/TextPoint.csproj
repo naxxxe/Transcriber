@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="AudioPlayer.cs" />
     <Compile Include="ColorChanger.cs" />
+    <Compile Include="ExtendedRichTextBox.cs" />
     <Compile Include="FirstLetterCapital.cs" />
     <Compile Include="FormExtension.cs" />
     <Compile Include="FRMMain.cs">

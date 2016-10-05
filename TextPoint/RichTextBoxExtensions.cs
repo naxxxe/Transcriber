@@ -11,7 +11,7 @@ namespace TextPoint
     public static class RichTextBoxExtensions
     {
         private static string size { get; set; }
-        public static void AppendProtectedWithColor(this RichTextBox rtb, string text, Color color)
+        public static void AppendWithColor(this RichTextBox rtb, string text, Color color)
         {
             if (rtb.GetFirstCharIndexOfCurrentLine() != rtb.TextLength)
             {
@@ -20,9 +20,9 @@ namespace TextPoint
             rtb.SelectionBackColor = color;
             rtb.AppendText(text);
             rtb.Select(rtb.GetFirstCharIndexOfCurrentLine(), text.Length);
-            rtb.SelectionProtected = true;
+            //rtb.SelectionProtected = true;
             rtb.AppendText("\n");
-            rtb.SelectionProtected = false;
+            //rtb.SelectionProtected = false;
             rtb.SelectionBackColor = rtb.BackColor;
             rtb.Focus();
         }

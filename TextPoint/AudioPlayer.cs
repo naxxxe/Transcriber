@@ -64,15 +64,22 @@ namespace TextPoint
             }
             else
             {
-                if(player.controls.currentPosition < 5)//if less than 5 
-                {
-                    player.controls.currentPosition = 0;//Jumps to start (0)
-                }
-                else { player.controls.currentPosition = player.controls.currentPosition - 5; }//Jumps to "current position - 5"
                 player.controls.play();
                 playing = true;
                 return true;
             }
+        }
+        /// <summary>
+        /// Rewinds the player sec seconds
+        /// </summary>
+        /// <param name="sec">the number of seconds to rewind</param>
+        public void Rewind(int sec)
+        {
+            if (player.controls.currentPosition < sec)//if less than 5 
+            {
+                player.controls.currentPosition = 0;//Jumps to start (0)
+            }
+            else { player.controls.currentPosition = player.controls.currentPosition - sec; }//Jumps to "current position - 5"
         }
         /// <summary>
         /// Repeats the number of seconds that is sent into the method
