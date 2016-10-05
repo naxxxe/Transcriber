@@ -52,16 +52,16 @@
             this.ToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.PlayPauseCheckboxBtn = new System.Windows.Forms.CheckBox();
             this.RepeatCheckBoxBtn = new System.Windows.Forms.CheckBox();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.length_Label = new System.Windows.Forms.Label();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.BoldCheckboxBtn = new System.Windows.Forms.CheckBox();
             this.ItalicCheckboxBtn = new System.Windows.Forms.CheckBox();
             this.UnderlineCheckboxBtn = new System.Windows.Forms.CheckBox();
             this.FontcomboBox = new System.Windows.Forms.ComboBox();
             this.FontSizeCombobox = new System.Windows.Forms.ComboBox();
-            this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.ColorChangerBtn = new System.Windows.Forms.Button();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.length_Label = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarSpeed)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.progressBar)).BeginInit();
@@ -292,37 +292,6 @@
             this.RepeatCheckBoxBtn.UseVisualStyleBackColor = true;
             this.RepeatCheckBoxBtn.Click += new System.EventHandler(this.RepeatCheckBoxBtn_Click);
             // 
-            // timer1
-            // 
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
-            // length_Label
-            // 
-            this.length_Label.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.length_Label.AutoEllipsis = true;
-            this.length_Label.AutoSize = true;
-            this.length_Label.Location = new System.Drawing.Point(630, 395);
-            this.length_Label.Name = "length_Label";
-            this.length_Label.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.length_Label.Size = new System.Drawing.Size(88, 13);
-            this.length_Label.TabIndex = 13;
-            this.length_Label.Text = "Length: 00:00:00";
-            this.length_Label.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.trackBarSpeed);
-            this.groupBox1.Location = new System.Drawing.Point(411, 421);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(113, 61);
-            this.groupBox1.TabIndex = 16;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Speed";
-            // 
             // BoldCheckboxBtn
             // 
             this.BoldCheckboxBtn.Appearance = System.Windows.Forms.Appearance.Button;
@@ -416,6 +385,37 @@
             this.ToolTip.SetToolTip(this.ColorChangerBtn, "Change Font color");
             this.ColorChangerBtn.UseVisualStyleBackColor = true;
             this.ColorChangerBtn.Click += new System.EventHandler(this.ColorChangerBtn_Click);
+            // 
+            // timer1
+            // 
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // length_Label
+            // 
+            this.length_Label.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.length_Label.AutoEllipsis = true;
+            this.length_Label.AutoSize = true;
+            this.length_Label.Location = new System.Drawing.Point(630, 395);
+            this.length_Label.Name = "length_Label";
+            this.length_Label.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.length_Label.Size = new System.Drawing.Size(88, 13);
+            this.length_Label.TabIndex = 13;
+            this.length_Label.Text = "Length: 00:00:00";
+            this.length_Label.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Controls.Add(this.label2);
+            this.groupBox1.Controls.Add(this.label3);
+            this.groupBox1.Controls.Add(this.trackBarSpeed);
+            this.groupBox1.Location = new System.Drawing.Point(411, 421);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(113, 61);
+            this.groupBox1.TabIndex = 16;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Speed";
             // 
             // FRMMain
             // 

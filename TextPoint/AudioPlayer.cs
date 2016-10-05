@@ -32,7 +32,7 @@ namespace TextPoint
         /// <returns>The filename of the opened file</returns>
         public string Filename()
         {
-            return Path.GetFileName(filename);
+            return Path.GetFullPath(filename);
         }
         /// <summary>
         /// Loads the file from the path
@@ -56,12 +56,12 @@ namespace TextPoint
         public bool PlayPause()
         {
             if (!fileloaded) { return false; }
-            else if (repeat)
-            {
-                repeat = false;
-                timer.Enabled = false;
-                return true;
-            }
+            //else if (repeat)
+            //{
+            //    repeat = false;
+            //    timer.Enabled = false;
+            //    return true;
+            //}
             else if (playing)
             {
                 player.controls.pause();
@@ -102,6 +102,8 @@ namespace TextPoint
                     repeat = true;
                     current = player.controls.currentPosition;
                     player.controls.currentPosition = current - (timer.Interval / 1000);
+                    if (!playing) { player.controls.play(); }
+                    
                     timer.Elapsed += Timer_Elapsed;
                     timer.Enabled = true;
                     return repeat;
@@ -140,7 +142,7 @@ namespace TextPoint
             if (fileloaded)
             {
                 TimeSpan timestamp = TimeSpan.FromSeconds(player.controls.currentPosition);
-                return "(" + timestamp.ToString(@"hh\:mm\:ss\:fff") +")" + "\n";
+                return "(" + timestamp.ToString(@"hh\:mm\:ss") +")";
             }
             else { return ""; }
         }
