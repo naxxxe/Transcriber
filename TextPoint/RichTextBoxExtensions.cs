@@ -10,7 +10,7 @@ namespace TextPoint
 {
     public static class RichTextBoxExtensions
     {
-        public static string size { get; private set; }
+        private static string size { get; set; }
         public static void AppendProtectedWithColor(this RichTextBox rtb, string text, Color color)
         {
             if (rtb.GetFirstCharIndexOfCurrentLine() != rtb.TextLength)
