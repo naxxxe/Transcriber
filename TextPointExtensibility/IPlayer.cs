@@ -12,7 +12,7 @@ namespace TextPoint
     public interface IPlayer
     {
         bool PlayPause();
-        void Stop();
+        void Stop();//sdhsahdsahdhsjhdsjhsajhsa
         void Load(string path);
         bool Repeat(int sec);
         string Timestamp();
