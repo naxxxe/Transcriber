@@ -21,6 +21,8 @@ namespace TextPoint
         bool playing = false;
         bool fileloaded = false;
         string loadedfile = "";
+        ExtendedRichTextBox ertb;
+
 
         #region Form functions
 
@@ -30,7 +32,7 @@ namespace TextPoint
             player = new AudioPlayer();
             KeyPreview = true;
             FontcomboBox.DataSource = GetAllFonts();
-            
+            ertb = new ExtendedRichTextBox(RTBText);
         }
         private void FRMMain_Load(object sender, EventArgs e)
         {
@@ -153,17 +155,17 @@ namespace TextPoint
         }
         private void BoldCheckboxBtn_Click(object sender, EventArgs e)
         {
-            this.Bold(RTBText, BoldCheckboxBtn.Checked);
+            ertb.Bold(BoldCheckboxBtn.Checked);
         }
 
         private void ItalicCheckboxBtn_Click(object sender, EventArgs e)
         {
-            this.Italic(RTBText,ItalicCheckboxBtn.Checked);
+            ertb.Italic(ItalicCheckboxBtn.Checked);
         }
 
         private void UnderlineCheckboxBtn_Click(object sender, EventArgs e)
         {
-            this.Underline(RTBText,ItalicCheckboxBtn.Checked);
+            ertb.Underline(ItalicCheckboxBtn.Checked);
         }
 
         private void ColorChangerBtn_Click(object sender, EventArgs e)
@@ -300,7 +302,7 @@ namespace TextPoint
         }
         private void TimeStamp()
         {
-            RTBText.AppendWithColor(player.Timestamp(), Color.LightBlue);
+            ertb.AppendWithColor(player.Timestamp(), Color.LightBlue);
         }
         private void LoadSoundFile()
         {
@@ -313,7 +315,7 @@ namespace TextPoint
                 {
                     loadedfile = ofd.FileName;
                     player.Load(loadedfile);
-                    RTBText.AppendWithColor(player.Filename(), Color.LightGreen);
+                    ertb.AppendWithColor(player.Filename(), Color.LightGreen);
                     fileloaded = true;
                     Reset();
                 }
@@ -339,19 +341,19 @@ namespace TextPoint
                         e.SuppressKeyPress = true;
                         if (BoldCheckboxBtn.Checked) { BoldCheckboxBtn.Checked = false; }
                         else { BoldCheckboxBtn.Checked = true; }
-                        this.Bold(RTBText,BoldCheckboxBtn.Checked);
+                        ertb.Bold(BoldCheckboxBtn.Checked);
                         break;
                     case Keys.I:
                         e.SuppressKeyPress = true;
                         if (ItalicCheckboxBtn.Checked) { ItalicCheckboxBtn.Checked = false; }
                         else { ItalicCheckboxBtn.Checked = true; }
-                        this.Italic(RTBText,ItalicCheckboxBtn.Checked);
+                        ertb.Italic(ItalicCheckboxBtn.Checked);
                         break;
                     case Keys.U:
                         e.SuppressKeyPress = true;
                         if (UnderlineCheckboxBtn.Checked) { UnderlineCheckboxBtn.Checked = false; }
                         else { UnderlineCheckboxBtn.Checked = true; }
-                        this.Underline(RTBText,UnderlineCheckboxBtn.Checked);
+                        ertb.Underline(UnderlineCheckboxBtn.Checked);
                         break;
                 }
             }
@@ -375,10 +377,10 @@ namespace TextPoint
 
             if (RTBText.SelectionFont == null || FontSizeCombobox.Text != RTBText.SelectionFont.Size.ToString())
             {
-                if (!RTBText.SameSizeSelection()) { FontSizeCombobox.Text = ""; }
+                if (!ertb.SameSizeSelection()) { FontSizeCombobox.Text = ""; }
                 else
                 {
-                    FontSizeCombobox.Text = RTBText.GetCurrentSize();
+                    FontSizeCombobox.Text = ertb.GetCurrentSize();
                 }
             }
 
@@ -394,15 +396,13 @@ namespace TextPoint
         
         private void FontcomboBox_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            RTBText.ChangeFormat("Font", FontcomboBox.SelectedValue.ToString());
-            RTBText.Focus();
+            ertb.ChangeFormat("Font", FontcomboBox.SelectedValue.ToString());
         }
 
         private void FontSizeCombobox_SelectionChangeCommitted(object sender, EventArgs e)
         {
             int size = int.Parse(FontSizeCombobox.SelectedItem.ToString());
-            RTBText.ChangeFormat("Size", size.ToString());
-            RTBText.Focus();
+            ertb.ChangeFormat("Size", size.ToString());
         }
         #endregion
 
