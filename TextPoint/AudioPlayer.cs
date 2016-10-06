@@ -9,9 +9,9 @@ using WMPLib;
 
 namespace TextPoint
 {
-    class AudioPlayer : IPlayer
+    public class AudioPlayer : IPlayer
     {
-        static Timer timer = new Timer();
+        private Timer timer = new Timer();
         bool fileloaded, playing, repeat;
         WindowsMediaPlayer player;
         string filename;
@@ -41,12 +41,16 @@ namespace TextPoint
         public void Load(string path)
         {
             filename = path;
-            player.URL = path;
-            fileloaded = true;
-            Stop();
-            playing = false;
-            repeat = false;
-            timer.Enabled = false;
+            if (path.EndsWith(".mp3") || path.EndsWith(".wav"))
+            {
+                player.URL = path;
+                fileloaded = true;
+                Stop();
+                playing = false;
+                repeat = false;
+                timer.Enabled = false;
+            }
+            else throw new FileLoadException("File not supported");
         }
         /// <summary>
         /// Plays or Pauses the mediafile if a file is loaded
@@ -137,6 +141,7 @@ namespace TextPoint
             if (fileloaded)
             {
                 player.controls.stop();
+                player.controls.currentPosition = 0;
                 playing = false;
                 repeat = false;
                 timer.Enabled = false;
@@ -162,6 +167,10 @@ namespace TextPoint
         public void Speed(double speed)
         {
             player.settings.rate = speed;
+        }
+        public double GetSpeed()
+        {
+            return player.settings.rate;
         }
         /// <summary>
         /// Get the duration of the media file

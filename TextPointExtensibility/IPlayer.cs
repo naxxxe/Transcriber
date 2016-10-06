@@ -18,6 +18,7 @@ namespace TextPoint
         string Timestamp();
         string Filename();
         void Speed(double speed);
+        double GetSpeed();
         int GetLength();
         void PlayFrom(int sec);
         int CurrentPosition();

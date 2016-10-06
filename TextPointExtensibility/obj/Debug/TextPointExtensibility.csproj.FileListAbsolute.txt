@@ -16,9 +16,3 @@ C:\Users\nAXe_\Source\Repos\Transcriber\TextPointExtensibility\bin\Debug\TextPoi
 C:\Users\nAXe_\Source\Repos\Transcriber\TextPointExtensibility\bin\Debug\TextPointExtensibility.pdb
 C:\Users\nAXe_\Source\Repos\Transcriber\TextPointExtensibility\obj\Debug\TextPointExtensibility.dll
 C:\Users\nAXe_\Source\Repos\Transcriber\TextPointExtensibility\obj\Debug\TextPointExtensibility.pdb
-C:\Users\nAXe_\Source\Repos\Transcriber\TextPointExtensibility\obj\Debug\TextPointExtensibility.csprojResolveAssemblyReference.cache
-C:\Users\fredrik\Source\Repos\Transcriber\TextPointExtensibility\bin\Debug\TextPointExtensibility.dll
-C:\Users\fredrik\Source\Repos\Transcriber\TextPointExtensibility\bin\Debug\TextPointExtensibility.pdb
-C:\Users\fredrik\Source\Repos\Transcriber\TextPointExtensibility\obj\Debug\TextPointExtensibility.csprojResolveAssemblyReference.cache
-C:\Users\fredrik\Source\Repos\Transcriber\TextPointExtensibility\obj\Debug\TextPointExtensibility.dll
-C:\Users\fredrik\Source\Repos\Transcriber\TextPointExtensibility\obj\Debug\TextPointExtensibility.pdb
