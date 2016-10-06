@@ -21,6 +21,8 @@ namespace TextPoint
         int GetLength();
         void PlayFrom(int sec);
         int CurrentPosition();
+        void SkipForward(int sec);
+        void SkipBack(int sec);
 
 
     }

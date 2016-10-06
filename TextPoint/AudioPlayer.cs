@@ -32,7 +32,7 @@ namespace TextPoint
         /// <returns>The filename of the opened file</returns>
         public string Filename()
         {
-            return Path.GetFullPath(filename);
+            return "[" + Path.GetFullPath(filename) + "]";
         }
         /// <summary>
         /// Loads the file from the path
@@ -73,13 +73,21 @@ namespace TextPoint
         /// Rewinds the player sec seconds
         /// </summary>
         /// <param name="sec">the number of seconds to rewind</param>
-        public void Rewind(int sec)
+        public void SkipBack(int sec)
         {
-            if (player.controls.currentPosition < sec)//if less than 5 
+            if (player.controls.currentPosition < sec)//if less than sec 
             {
                 player.controls.currentPosition = 0;//Jumps to start (0)
             }
-            else { player.controls.currentPosition = player.controls.currentPosition - sec; }//Jumps to "current position - 5"
+            else { player.controls.currentPosition = player.controls.currentPosition - sec; }//Jumps to "current position - sec"
+        }
+        public void SkipForward(int sec)
+        {
+            if (GetLength() < player.controls.currentPosition + sec)//if currentpos  sec is more than the length of the file
+            {
+                player.controls.currentPosition = GetLength();//Jumps to end
+            }
+            else { player.controls.currentPosition = player.controls.currentPosition + sec; }//Jumps to "current position + sec"
         }
         /// <summary>
         /// Repeats the number of seconds that is sent into the method
