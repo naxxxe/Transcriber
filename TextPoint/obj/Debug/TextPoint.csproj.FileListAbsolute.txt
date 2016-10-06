@@ -83,3 +83,13 @@ C:\Users\fredrik\Source\Repos\Transcriber\TextPoint\obj\Debug\AxInterop.WMPLib.d
 C:\Users\fredrik\Source\Repos\Transcriber\TextPoint\obj\Debug\TextPoint.csproj.ResolveComReference.cache
 C:\Users\fredrik\Source\Repos\Transcriber\TextPoint\obj\Debug\TextPoint.exe
 C:\Users\fredrik\Source\Repos\Transcriber\TextPoint\obj\Debug\TextPoint.pdb
+C:\Users\fredrik\Source\Repos\Transcriber\TextPoint\bin\Debug\TextPoint.exe
+C:\Users\fredrik\Source\Repos\Transcriber\TextPoint\bin\Debug\TextPoint.pdb
+C:\Users\fredrik\Source\Repos\Transcriber\TextPoint\bin\Debug\TextPointExtensibility.dll
+C:\Users\fredrik\Source\Repos\Transcriber\TextPoint\bin\Debug\TextPointExtensibility.pdb
+C:\Users\fredrik\Source\Repos\Transcriber\TextPoint\bin\Debug\Interop.WMPLib.dll
+C:\Users\fredrik\Source\Repos\Transcriber\TextPoint\bin\Debug\AxInterop.WMPLib.dll
+C:\Users\fredrik\Source\Repos\Transcriber\TextPoint\obj\Debug\TextPoint.csprojResolveAssemblyReference.cache
+C:\Users\fredrik\Source\Repos\Transcriber\TextPoint\obj\Debug\TextPoint.FRMMain.resources
+C:\Users\fredrik\Source\Repos\Transcriber\TextPoint\obj\Debug\TextPoint.Properties.Resources.resources
+C:\Users\fredrik\Source\Repos\Transcriber\TextPoint\obj\Debug\TextPoint.csproj.GenerateResource.Cache
