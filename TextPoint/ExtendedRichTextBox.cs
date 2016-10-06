@@ -13,7 +13,11 @@ namespace TextPoint
         private string size { get; set; }
         RichTextBox rtb;
         public ExtendedRichTextBox(RichTextBox rtb) { this.rtb = rtb; }
-        
+        /// <summary>
+        /// Appends a background color to the stamps
+        /// </summary>
+        /// <param name="text"></param>
+        /// <param name="color"></param>
         public void AppendWithColor(string text, Color color)
         {
             if (rtb.GetFirstCharIndexOfCurrentLine() != rtb.TextLength)
@@ -29,6 +33,10 @@ namespace TextPoint
             rtb.SelectionBackColor = rtb.BackColor;
             rtb.Focus();
         }
+        /// <summary>
+        /// The selected text is given the same font size
+        /// </summary>
+        /// <returns></returns>
         public bool SameSizeSelection()
         {
             float previousValue = -10;
@@ -56,10 +64,19 @@ namespace TextPoint
                 }
             }
         }
+        /// <summary>
+        /// Returns the current font size of the selected text
+        /// </summary>
+        /// <returns></returns>
         public string GetCurrentSize()
         {
             return size;
         }
+        /// <summary>
+        /// Changes the font on the selected text
+        /// </summary>
+        /// <param name="what"></param>
+        /// <param name="value"></param>
         public void ChangeFormat(string what, string value)
         {
             using (RichTextBox tmpRB = new RichTextBox())
