@@ -41,7 +41,8 @@ namespace TextPoint
         public void Load(string path)
         {
             filename = path;
-            if (path.EndsWith(".mp3") || path.EndsWith(".wav"))
+            if (!File.Exists(path)) { throw new FileNotFoundException("File not found"); }
+            if (File.Exists(path) && (path.EndsWith(".mp3") || path.EndsWith(".wav")))
             {
                 player.URL = path;
                 fileloaded = true;

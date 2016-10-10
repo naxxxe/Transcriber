@@ -23,11 +23,22 @@ namespace TextPointunitTest
             string result = player.Filename();
             Assert.AreEqual(expected, result);
         }
+        //FileNotFoundException
         [TestMethod]
+        [ExpectedException(typeof(FileNotFoundException))]
+        public void LoadNoFile()
+        {
+            string unsupported = "c:";
+            IPlayer player = new AudioPlayer();
+            player.Load(unsupported);
+
+        }
+        [TestMethod]
+        [DeploymentItem(@"NotSupportedFile.txt")]
         [ExpectedException(typeof(FileLoadException))]
         public void LoadNotSupported()
         {
-            string unsupported = "c:";
+            string unsupported = "NotSupportedFile.txt";
             IPlayer player = new AudioPlayer();
             player.Load(unsupported);
 
