@@ -59,5 +59,15 @@ namespace TextPoint.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] wmp {
+            get {
+                object obj = ResourceManager.GetObject("wmp", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
     }
 }
