@@ -11,9 +11,14 @@ namespace TextPoint
     public class ExtendedRichTextBox
     {
         private string size { get; set; }
-        RichTextBox rtb;
+        private RichTextBox rtb;
         public ExtendedRichTextBox(RichTextBox rtb) { this.rtb = rtb; }
         
+        /// <summary>
+        /// Method to append text with a background color
+        /// </summary>
+        /// <param name="text"></param>
+        /// <param name="color"></param>
         public void AppendWithColor(string text, Color color)
         {
             if (rtb.GetFirstCharIndexOfCurrentLine() != rtb.TextLength)
@@ -29,6 +34,11 @@ namespace TextPoint
             rtb.SelectionBackColor = rtb.BackColor;
             rtb.Focus();
         }
+
+        /// <summary>
+        /// Metod that checks if the selceted text is the same size
+        /// </summary>
+        /// <returns></returns>
         public bool SameSizeSelection()
         {
             float previousValue = -10;
@@ -56,10 +66,21 @@ namespace TextPoint
                 }
             }
         }
+
+        /// <summary>
+        /// Returns the font size of the current selection
+        /// </summary>
+        /// <returns></returns>
         public string GetCurrentSize()
         {
             return size;
         }
+
+        /// <summary>
+        /// Changes the format of the selected text
+        /// </summary>
+        /// <param name="what"></param>
+        /// <param name="value"></param>
         public void ChangeFormat(string what, string value)
         {
             using (RichTextBox tmpRB = new RichTextBox())
@@ -82,6 +103,12 @@ namespace TextPoint
             }
         }
 
+        /// <summary>
+        /// Changes the font for the current selection
+        /// </summary>
+        /// <param name="what"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
         private Font ChangeFormatNoSelection(string what, string value)
         {
             int size = (int)rtb.SelectionFont.Size;
@@ -113,6 +140,14 @@ namespace TextPoint
 
             return new Font(font, size, style);
         }
+
+        /// <summary>
+        /// Changes the format of a longer text. Also checks if the Bold, Italic and Underline attributes should be added or not
+        /// </summary>
+        /// <param name="what"></param>
+        /// <param name="value"></param>
+        /// <param name="tmpRB"></param>
+        /// <returns></returns>
         private string ChangeFormatLongText(string what, string value, RichTextBox tmpRB)
         {
             {
@@ -139,6 +174,12 @@ namespace TextPoint
                 return tmpRB.SelectedRtf;
             }
         }
+
+        /// <summary>
+        /// Checks if the selected text is Bold
+        /// </summary>
+        /// <param name="tmpRB"></param>
+        /// <returns></returns>
         private bool CheckAllBold(RichTextBox tmpRB)
         {
             for (int i = 0; i < tmpRB.TextLength; ++i)
@@ -148,6 +189,12 @@ namespace TextPoint
             }
             return true;
         }
+
+        /// <summary>
+        /// Checks if the selected text is Italic
+        /// </summary>
+        /// <param name="tmpRB"></param>
+        /// <returns></returns>
         private bool CheckAllItalic(RichTextBox tmpRB)
         {
             for (int i = 0; i < tmpRB.TextLength; ++i)
@@ -157,7 +204,13 @@ namespace TextPoint
             }
             return true;
         }
-        private static bool CheckAllUnderline(RichTextBox tmpRB)
+
+        /// <summary>
+        /// Checks if the selected text is Underline
+        /// </summary>
+        /// <param name="tmpRB"></param>
+        /// <returns></returns>
+        private bool CheckAllUnderline(RichTextBox tmpRB)
         {
             for (int i = 0; i < tmpRB.TextLength; ++i)
             {
@@ -167,6 +220,16 @@ namespace TextPoint
             return true;
         }
 
+        /// <summary>
+        /// Changes the size, font and style character by character
+        /// </summary>
+        /// <param name="tmpRB"></param>
+        /// <param name="what"></param>
+        /// <param name="value"></param>
+        /// <param name="AllBold"></param>
+        /// <param name="AllItalic"></param>
+        /// <param name="AllUnderline"></param>
+        /// <returns></returns>
         private RichTextBox ChangeAllText(RichTextBox tmpRB, string what, string value, bool AllBold, bool AllItalic, bool AllUnderline)
         {
             for (int i = 0; i < tmpRB.TextLength; ++i)
@@ -224,6 +287,11 @@ namespace TextPoint
             }
             return tmpRB;
         }
+
+        /// <summary>
+        /// Appends the style Bold to the text or removes it deppending on the bool
+        /// </summary>
+        /// <param name="bold"></param>
         public void Bold(bool bold)
         {
             if (rtb.SelectionFont != null && SameSizeSelection())
@@ -238,6 +306,11 @@ namespace TextPoint
             else { ChangeFormat("Bold", "notbold"); }
             rtb.Focus();
         }
+
+        /// <summary>
+        /// Appends the style Italic to the text or removes it deppending on the bool
+        /// </summary>
+        /// <param name="italic"></param>
         public void Italic(bool italic)
         {
             if (rtb.SelectionFont != null && SameSizeSelection())
@@ -252,6 +325,11 @@ namespace TextPoint
             else { ChangeFormat("Italic", "notitalic"); }
             rtb.Focus();
         }
+
+        /// <summary>
+        /// Appends the style Underline to the text or removes it deppending on the bool
+        /// </summary>
+        /// <param name="underline"></param>
         public void Underline(bool underline)
         {
             if (rtb.SelectionFont != null && SameSizeSelection())
