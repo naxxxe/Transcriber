@@ -28,6 +28,7 @@ namespace TextPoint
 
         public FRMMain()
         {
+            
             InitializeComponent();
             player = new AudioPlayer();
             KeyPreview = true;
