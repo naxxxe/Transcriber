@@ -270,7 +270,7 @@ namespace TextPointunitTest
             Assert.IsTrue(rtb.SelectionFont.Italic);
         }
         [TestMethod()]
-        public void BoldTest_SetNotItalic()
+        public void ItalicTest_SetNotItalic()
         {
             rtb = new RichTextBox();
             ertb = new ExtendedRichTextBox(rtb);
@@ -315,6 +315,34 @@ namespace TextPointunitTest
             Assert.IsTrue(rtb.SelectionFont.Bold);
             ertb.Underline(true);
             Assert.IsTrue(rtb.SelectionFont.Underline);
+            Assert.IsTrue(rtb.SelectionFont.Bold);
+        }
+        [TestMethod()]
+        public void UnderlineTest_SetItalicAndUnderline()
+        {
+            rtb = new RichTextBox();
+            ertb = new ExtendedRichTextBox(rtb);
+            rtb.Font = new Font(rtb.Font, FontStyle.Italic);
+            rtb.AppendText("testing1");
+            rtb.SelectAll();
+            Assert.IsTrue(rtb.SelectionFont.Italic);
+            ertb.Underline(true);
+            Assert.IsTrue(rtb.SelectionFont.Underline);
+            Assert.IsTrue(rtb.SelectionFont.Italic);
+        }
+        [TestMethod()]
+        public void StyleTest_SetAllStyles()
+        {
+            rtb = new RichTextBox();
+            ertb = new ExtendedRichTextBox(rtb);
+            rtb.Font = new Font(rtb.Font, FontStyle.Italic);
+            rtb.AppendText("testing1");
+            rtb.SelectAll();
+            Assert.IsTrue(rtb.SelectionFont.Italic);
+            ertb.Underline(true);
+            ertb.Bold(true);
+            Assert.IsTrue(rtb.SelectionFont.Underline);
+            Assert.IsTrue(rtb.SelectionFont.Italic);
             Assert.IsTrue(rtb.SelectionFont.Bold);
         }
     }

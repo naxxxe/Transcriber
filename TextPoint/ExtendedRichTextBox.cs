@@ -295,14 +295,7 @@ namespace TextPoint
         /// <param name="bold">true if it should be bold, false if it should not be bold</param>
         public void Bold(bool bold)
         {
-            if (rtb.SelectionFont != null && SameSizeSelection())
-            {
-                var style = rtb.SelectionFont.Style;
-                if (!rtb.SelectionFont.Bold) { style = style | FontStyle.Bold; }
-                else { style = style & ~FontStyle.Bold; }
-                rtb.SelectionFont = new Font(rtb.SelectionFont, style);
-            }
-            else if (rtb.SelectionFont == null) { ChangeFormat("Bold", "unknown"); }
+            if (rtb.SelectionFont == null) { ChangeFormat("Bold", "unknown"); }
             else if (bold) { ChangeFormat("Bold", "bold"); }
             else { ChangeFormat("Bold", "notbold"); }
             rtb.Focus();
@@ -314,14 +307,7 @@ namespace TextPoint
         /// <param name="italic">true if it should be italic, false if not</param>
         public void Italic(bool italic)
         {
-            if (rtb.SelectionFont != null && SameSizeSelection())
-            {
-                var style = rtb.SelectionFont.Style;
-                if (!rtb.SelectionFont.Italic) { style = style | FontStyle.Italic; }
-                else { style = style & ~FontStyle.Italic; }
-                rtb.SelectionFont = new Font(rtb.SelectionFont, style);
-            }
-            else if (rtb.SelectionFont == null) { ChangeFormat("Italic", "unknown"); }
+            if (rtb.SelectionFont == null) { ChangeFormat("Italic", "unknown"); }
             else if (italic) { ChangeFormat("Italic", "italic"); }
             else { ChangeFormat("Italic", "notitalic"); }
             rtb.Focus();
@@ -333,14 +319,7 @@ namespace TextPoint
         /// <param name="underline">true if it should be undelined, false if not</param>
         public void Underline(bool underline)
         {
-            if (rtb.SelectionFont != null && SameSizeSelection())
-            {
-                var style = rtb.SelectionFont.Style;
-                if (!rtb.SelectionFont.Underline) { style = style | FontStyle.Underline; }
-                else { style = style & ~FontStyle.Underline; }
-                rtb.SelectionFont = new Font(rtb.SelectionFont, style);
-            }
-            else if (rtb.SelectionFont == null) { ChangeFormat("Underline", "unknown"); }
+            if (rtb.SelectionFont == null) { ChangeFormat("Underline", "unknown"); }
             else if (underline) { ChangeFormat("Underline", "underline"); }
             else { ChangeFormat("Underline", "notunderline"); }
             rtb.Focus();

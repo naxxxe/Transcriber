@@ -166,7 +166,7 @@ namespace TextPoint
 
         private void UnderlineCheckboxBtn_Click(object sender, EventArgs e)
         {
-            ertb.Underline(ItalicCheckboxBtn.Checked);
+            ertb.Underline(UnderlineCheckboxBtn.Checked);
         }
 
         private void ColorChangerBtn_Click(object sender, EventArgs e)
