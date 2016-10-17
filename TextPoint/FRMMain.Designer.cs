@@ -63,6 +63,8 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.CurrentTimeLabel = new System.Windows.Forms.Label();
+            this.tagComboBox = new System.Windows.Forms.ComboBox();
+            this.findTagBtn = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarSpeed)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.progressBar)).BeginInit();
@@ -299,7 +301,7 @@
             this.BoldCheckboxBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BoldCheckboxBtn.Location = new System.Drawing.Point(12, 27);
             this.BoldCheckboxBtn.Name = "BoldCheckboxBtn";
-            this.BoldCheckboxBtn.Size = new System.Drawing.Size(25, 25);
+            this.BoldCheckboxBtn.Size = new System.Drawing.Size(25, 21);
             this.BoldCheckboxBtn.TabIndex = 17;
             this.BoldCheckboxBtn.Text = "B";
             this.BoldCheckboxBtn.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -313,7 +315,7 @@
             this.ItalicCheckboxBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ItalicCheckboxBtn.Location = new System.Drawing.Point(43, 27);
             this.ItalicCheckboxBtn.Name = "ItalicCheckboxBtn";
-            this.ItalicCheckboxBtn.Size = new System.Drawing.Size(25, 25);
+            this.ItalicCheckboxBtn.Size = new System.Drawing.Size(25, 21);
             this.ItalicCheckboxBtn.TabIndex = 18;
             this.ItalicCheckboxBtn.Text = "I";
             this.ItalicCheckboxBtn.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -327,7 +329,7 @@
             this.UnderlineCheckboxBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.UnderlineCheckboxBtn.Location = new System.Drawing.Point(74, 27);
             this.UnderlineCheckboxBtn.Name = "UnderlineCheckboxBtn";
-            this.UnderlineCheckboxBtn.Size = new System.Drawing.Size(25, 25);
+            this.UnderlineCheckboxBtn.Size = new System.Drawing.Size(25, 21);
             this.UnderlineCheckboxBtn.TabIndex = 19;
             this.UnderlineCheckboxBtn.Text = "U";
             this.UnderlineCheckboxBtn.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -380,7 +382,7 @@
             // 
             this.ColorChangerBtn.Location = new System.Drawing.Point(279, 27);
             this.ColorChangerBtn.Name = "ColorChangerBtn";
-            this.ColorChangerBtn.Size = new System.Drawing.Size(75, 23);
+            this.ColorChangerBtn.Size = new System.Drawing.Size(75, 21);
             this.ColorChangerBtn.TabIndex = 22;
             this.ColorChangerBtn.Text = "Color";
             this.ToolTip.SetToolTip(this.ColorChangerBtn, "Change Font color");
@@ -428,11 +430,30 @@
             this.CurrentTimeLabel.TabIndex = 23;
             this.CurrentTimeLabel.Text = "00:00:00";
             // 
+            // tagComboBox
+            // 
+            this.tagComboBox.FormattingEnabled = true;
+            this.tagComboBox.Location = new System.Drawing.Point(403, 27);
+            this.tagComboBox.Name = "tagComboBox";
+            this.tagComboBox.Size = new System.Drawing.Size(121, 21);
+            this.tagComboBox.TabIndex = 24;
+            // 
+            // findTagBtn
+            // 
+            this.findTagBtn.Location = new System.Drawing.Point(530, 27);
+            this.findTagBtn.Name = "findTagBtn";
+            this.findTagBtn.Size = new System.Drawing.Size(37, 21);
+            this.findTagBtn.TabIndex = 25;
+            this.findTagBtn.Text = "Find";
+            this.findTagBtn.UseVisualStyleBackColor = true;
+            // 
             // FRMMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(718, 486);
+            this.Controls.Add(this.findTagBtn);
+            this.Controls.Add(this.tagComboBox);
             this.Controls.Add(this.CurrentTimeLabel);
             this.Controls.Add(this.ColorChangerBtn);
             this.Controls.Add(this.FontSizeCombobox);
@@ -503,6 +524,8 @@
         private System.Windows.Forms.ColorDialog colorDialog1;
         private System.Windows.Forms.Button ColorChangerBtn;
         private System.Windows.Forms.Label CurrentTimeLabel;
+        private System.Windows.Forms.ComboBox tagComboBox;
+        private System.Windows.Forms.Button findTagBtn;
     }
 }
 
