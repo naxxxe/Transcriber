@@ -29,17 +29,6 @@ namespace TextPointunitTest
             result = wordCounter.Count("Hej jag heter Alan och detta är många ord");
             Assert.AreEqual(9, result);
         }
-        [TestMethod]
-        public void ColorTester()
-        {
-            ColorChanger cc = new ColorChanger();
-            List<Color> colors = cc.GetAll();
-            foreach(Color c in colors)
-            {
-                Assert.IsTrue(c.GetBrightness() <= 0.5);
-            }
-
-        }
-
     }
+
 }
