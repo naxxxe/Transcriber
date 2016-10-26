@@ -10,6 +10,8 @@ namespace TextPoint
 {
     public class ExtendedRichTextBox
     {
+        int startpos = 0;
+        string stringtofind = "";
         private string size { get; set; }
         private RichTextBox rtb;
         public ExtendedRichTextBox(RichTextBox rtb) { this.rtb = rtb; }
@@ -90,6 +92,7 @@ namespace TextPoint
                 if (tmpRB.TextLength < 1)
                 {
                     rtb.SelectionFont = ChangeFormatNoSelection(what, value);
+                    rtb.Focus();
                 }
                 else
                 {
@@ -99,8 +102,28 @@ namespace TextPoint
                     rtb.Select(start, length);
                     rtb.Focus();
                 }
-
             }
+        }
+        /// <summary>
+        /// Finds the string ""find" in the text if it exists.
+        /// If it occurs multiple times the next occasion is selected on the next search.
+        /// </summary>
+        /// <param name="find">The string to search for in the text</param>
+        public void Find_FindNext(string find)
+        {
+            if (stringtofind == find)
+            {
+                startpos = startpos + stringtofind.Length;
+                startpos = rtb.Find(stringtofind, startpos, RichTextBoxFinds.None);
+            }
+            else
+            {
+                stringtofind = find;
+                startpos = rtb.Find(stringtofind, RichTextBoxFinds.None);
+            }
+            if (rtb.Find(stringtofind, RichTextBoxFinds.None) == -1) { return; }
+            else if (startpos == -1) { startpos = rtb.Find(stringtofind, RichTextBoxFinds.None); }
+            rtb.Select(startpos, stringtofind.Length);
         }
 
         /// <summary>
@@ -240,15 +263,9 @@ namespace TextPoint
                 string font = tmpRB.SelectionFont.Name;
                 var style = tmpRB.SelectionFont.Style;
 
-                if (what == "Size")
-                {
-                    size = int.Parse(value);
-                }
+                if (what == "Size") { size = int.Parse(value); }
 
-                else if (what == "Font")
-                {
-                    font = value;
-                }
+                else if (what == "Font"){ font = value; }
 
                 else if (what == "Bold")
                 {
@@ -260,8 +277,6 @@ namespace TextPoint
                     else if (value == "bold") { style = style | FontStyle.Bold; }
                     else { style = style & ~FontStyle.Bold; }
                 }
-
-
                 else if (what == "Italic")
                 {
                     if (value == "unknown")
@@ -272,8 +287,6 @@ namespace TextPoint
                     else if (value == "italic") { style = style | FontStyle.Italic; }
                     else { style = style & ~FontStyle.Italic; }
                 }
-
-
                 else if (what == "Underline")
                 {
                     if (value == "unknown")

@@ -65,6 +65,7 @@
             this.CurrentTimeLabel = new System.Windows.Forms.Label();
             this.tagComboBox = new System.Windows.Forms.ComboBox();
             this.findTagBtn = new System.Windows.Forms.Button();
+            this.spellcheckBtn = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarSpeed)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.progressBar)).BeginInit();
@@ -77,6 +78,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.RTBText.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.RTBText.HideSelection = false;
             this.RTBText.Location = new System.Drawing.Point(0, 56);
             this.RTBText.Name = "RTBText";
             this.RTBText.Size = new System.Drawing.Size(718, 329);
@@ -339,6 +341,8 @@
             // 
             // FontcomboBox
             // 
+            this.FontcomboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.FontcomboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.FontcomboBox.FormattingEnabled = true;
             this.FontcomboBox.Items.AddRange(new object[] {
             "Arial",
@@ -350,9 +354,12 @@
             this.FontcomboBox.TabIndex = 20;
             this.ToolTip.SetToolTip(this.FontcomboBox, "Change Font");
             this.FontcomboBox.SelectionChangeCommitted += new System.EventHandler(this.FontcomboBox_SelectionChangeCommitted);
+            this.FontcomboBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FontcomboBox_KeyDown);
             // 
             // FontSizeCombobox
             // 
+            this.FontSizeCombobox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.FontSizeCombobox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.FontSizeCombobox.FormattingEnabled = true;
             this.FontSizeCombobox.Items.AddRange(new object[] {
             "8",
@@ -432,26 +439,47 @@
             // 
             // tagComboBox
             // 
+            this.tagComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.tagComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.tagComboBox.FormattingEnabled = true;
-            this.tagComboBox.Location = new System.Drawing.Point(403, 27);
+            this.tagComboBox.Location = new System.Drawing.Point(544, 27);
             this.tagComboBox.Name = "tagComboBox";
             this.tagComboBox.Size = new System.Drawing.Size(121, 21);
             this.tagComboBox.TabIndex = 24;
+            this.ToolTip.SetToolTip(this.tagComboBox, "Search by tags or by word");
+            this.tagComboBox.DropDown += new System.EventHandler(this.tagComboBox_DropDown);
+            this.tagComboBox.Enter += new System.EventHandler(this.tagComboBox_Enter);
+            this.tagComboBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tagComboBox_KeyDown);
             // 
             // findTagBtn
             // 
-            this.findTagBtn.Location = new System.Drawing.Point(530, 27);
+            this.findTagBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.findTagBtn.Location = new System.Drawing.Point(671, 27);
             this.findTagBtn.Name = "findTagBtn";
             this.findTagBtn.Size = new System.Drawing.Size(37, 21);
             this.findTagBtn.TabIndex = 25;
             this.findTagBtn.Text = "Find";
+            this.ToolTip.SetToolTip(this.findTagBtn, "Find first or next occurens of the word or tag");
             this.findTagBtn.UseVisualStyleBackColor = true;
+            this.findTagBtn.Click += new System.EventHandler(this.findTagBtn_Click);
+            // 
+            // spellcheckBtn
+            // 
+            this.spellcheckBtn.Location = new System.Drawing.Point(360, 27);
+            this.spellcheckBtn.Name = "spellcheckBtn";
+            this.spellcheckBtn.Size = new System.Drawing.Size(80, 21);
+            this.spellcheckBtn.TabIndex = 26;
+            this.spellcheckBtn.Text = "Spell check";
+            this.ToolTip.SetToolTip(this.spellcheckBtn, "Spell checks the text");
+            this.spellcheckBtn.UseVisualStyleBackColor = true;
+            this.spellcheckBtn.Click += new System.EventHandler(this.spellcheckBtn_Click);
             // 
             // FRMMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(718, 486);
+            this.Controls.Add(this.spellcheckBtn);
             this.Controls.Add(this.findTagBtn);
             this.Controls.Add(this.tagComboBox);
             this.Controls.Add(this.CurrentTimeLabel);
@@ -526,6 +554,7 @@
         private System.Windows.Forms.Label CurrentTimeLabel;
         private System.Windows.Forms.ComboBox tagComboBox;
         private System.Windows.Forms.Button findTagBtn;
+        private System.Windows.Forms.Button spellcheckBtn;
     }
 }
 

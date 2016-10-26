@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WMPLib;
+using System.Text.RegularExpressions;
 
 //Started Sprint 3
 namespace TextPoint
@@ -22,6 +23,7 @@ namespace TextPoint
         bool fileloaded = false;
         string loadedfile = "";
         ExtendedRichTextBox ertb;
+        
 
 
         #region Form functions
@@ -421,6 +423,13 @@ namespace TextPoint
                 }
             }
         }
+        private void SetTextOfRTB(string rtf)
+        {
+            int start = RTBText.SelectionStart;
+            int length = RTBText.SelectionLength;
+            RTBText.Rtf = rtf;
+            RTBText.Select(start, length);
+        }
         #endregion
 
         #region Comboboxes and their functions
@@ -482,8 +491,65 @@ namespace TextPoint
             int size = int.Parse(FontSizeCombobox.SelectedItem.ToString());
             ertb.ChangeFormat("Size", size.ToString());
         }
+
         #endregion
 
-        
+        private void spellcheckBtn_Click(object sender, EventArgs e)
+        {
+            SpellCheckForm spell = new SpellCheckForm(RTBText.Rtf);
+            spell.ShowDialog();
+            SetTextOfRTB(spell.GetChangedText());
+            RTBText.Focus();
+        }
+
+        private void GetTags()
+        {
+            string parse = RTBText.Text;
+            parse = parse.ToLower();
+            MatchCollection matchList = Regex.Matches(parse, @"\#\w+");
+            var list = matchList.Cast<Match>().Select(match => match.Value).ToList();
+            tagComboBox.Items.Clear();
+            foreach (string tag in list)
+            {
+                if (!tagComboBox.Items.Contains(tag))
+                    tagComboBox.Items.Add(tag);
+            }
+        }
+        private void findTagBtn_Click(object sender, EventArgs e)
+        {
+            Find_FindNext();
+        }
+        private void Find_FindNext()
+        {
+            if (tagComboBox.SelectedItem != null)
+            {
+                ertb.Find_FindNext(tagComboBox.SelectedItem.ToString());
+            }
+            else { ertb.Find_FindNext(tagComboBox.Text); }
+
+        }
+
+        private void FontcomboBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                ertb.ChangeFormat("Font", FontcomboBox.SelectedValue.ToString());
+            }
+        }
+
+        private void tagComboBox_DropDown(object sender, EventArgs e)
+        {
+            GetTags();
+        }
+
+        private void tagComboBox_Enter(object sender, EventArgs e)
+        {
+            GetTags();
+        }
+
+        private void tagComboBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter) { Find_FindNext(); }
+        }
     }
 }
