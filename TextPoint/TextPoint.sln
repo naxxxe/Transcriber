@@ -9,8 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TranscriberExtensibility", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TranscriberUnitTest", "..\TextPointunitTest\TranscriberUnitTest.csproj", "{B558459D-6D74-408D-8873-CDBDBC6FC512}"
 EndProject
-Project("{6141683F-8A12-4E36-9623-2EB02B2C2303}") = "Setup", "Setup\Setup.isproj", "{667571B6-9775-47FE-A39C-50A0E044FA52}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		CD_ROM|Any CPU = CD_ROM|Any CPU
@@ -50,16 +48,6 @@ Global
 		{B558459D-6D74-408D-8873-CDBDBC6FC512}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B558459D-6D74-408D-8873-CDBDBC6FC512}.SingleImage|Any CPU.ActiveCfg = Release|Any CPU
 		{B558459D-6D74-408D-8873-CDBDBC6FC512}.SingleImage|Any CPU.Build.0 = Release|Any CPU
-		{667571B6-9775-47FE-A39C-50A0E044FA52}.CD_ROM|Any CPU.ActiveCfg = CD_ROM
-		{667571B6-9775-47FE-A39C-50A0E044FA52}.CD_ROM|Any CPU.Build.0 = CD_ROM
-		{667571B6-9775-47FE-A39C-50A0E044FA52}.Debug|Any CPU.ActiveCfg = DVD-5
-		{667571B6-9775-47FE-A39C-50A0E044FA52}.Debug|Any CPU.Build.0 = DVD-5
-		{667571B6-9775-47FE-A39C-50A0E044FA52}.DVD-5|Any CPU.ActiveCfg = DVD-5
-		{667571B6-9775-47FE-A39C-50A0E044FA52}.DVD-5|Any CPU.Build.0 = DVD-5
-		{667571B6-9775-47FE-A39C-50A0E044FA52}.Release|Any CPU.ActiveCfg = SingleImage
-		{667571B6-9775-47FE-A39C-50A0E044FA52}.Release|Any CPU.Build.0 = SingleImage
-		{667571B6-9775-47FE-A39C-50A0E044FA52}.SingleImage|Any CPU.ActiveCfg = SingleImage
-		{667571B6-9775-47FE-A39C-50A0E044FA52}.SingleImage|Any CPU.Build.0 = SingleImage
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
