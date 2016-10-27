@@ -28,6 +28,7 @@ namespace TextPoint
                 rtb.AppendText("\n");
             }
             rtb.SelectionBackColor = color;
+            rtb.SelectionColor = Color.Black;
             rtb.AppendText(text);
             rtb.Select(rtb.GetFirstCharIndexOfCurrentLine(), text.Length);
             //rtb.SelectionProtected = true;
