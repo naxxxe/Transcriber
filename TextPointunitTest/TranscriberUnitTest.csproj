@@ -59,13 +59,13 @@
     <Compile Include="AudioPlayerUnitTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\TextPointExtensibility\TextPointExtensibility.csproj">
+    <ProjectReference Include="..\TextPointExtensibility\TranscriberExtensibility.csproj">
       <Project>{48c83839-72a4-4e94-8725-e8537db9860f}</Project>
-      <Name>TextPointExtensibility</Name>
+      <Name>TranscriberExtensibility</Name>
     </ProjectReference>
-    <ProjectReference Include="..\TextPoint\TextPoint.csproj">
+    <ProjectReference Include="..\TextPoint\Transcriber.csproj">
       <Project>{072ed78e-29ac-4b05-a88f-78bb64e8096a}</Project>
-      <Name>TextPoint</Name>
+      <Name>Transcriber</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

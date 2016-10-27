@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextPoint", "TextPoint.csproj", "{072ED78E-29AC-4B05-A88F-78BB64E8096A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Transcriber", "Transcriber.csproj", "{072ED78E-29AC-4B05-A88F-78BB64E8096A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextPointExtensibility", "..\TextPointExtensibility\TextPointExtensibility.csproj", "{48C83839-72A4-4E94-8725-E8537DB9860F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TranscriberExtensibility", "..\TextPointExtensibility\TranscriberExtensibility.csproj", "{48C83839-72A4-4E94-8725-E8537DB9860F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextPointunitTest", "..\TextPointunitTest\TextPointunitTest.csproj", "{B558459D-6D74-408D-8873-CDBDBC6FC512}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TranscriberUnitTest", "..\TextPointunitTest\TranscriberUnitTest.csproj", "{B558459D-6D74-408D-8873-CDBDBC6FC512}"
 EndProject
 Project("{6141683F-8A12-4E36-9623-2EB02B2C2303}") = "Setup1", "..\Setup1\Setup1.isproj", "{2E94640B-7EDD-4D08-9F67-09E79E65D887}"
 EndProject

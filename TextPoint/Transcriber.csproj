@@ -101,9 +101,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\TextPointExtensibility\TextPointExtensibility.csproj">
+    <ProjectReference Include="..\TextPointExtensibility\TranscriberExtensibility.csproj">
       <Project>{48c83839-72a4-4e94-8725-e8537db9860f}</Project>
-      <Name>TextPointExtensibility</Name>
+      <Name>TranscriberExtensibility</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
