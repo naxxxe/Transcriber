@@ -1,38 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
+﻿using System.IO;
 using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace TextPoint
 {
     /// <summary>
     /// Interaction logic for WPFSpellCheck.xaml
     /// </summary>
-    public partial class WPFSpellCheck : UserControl
+    public partial class WpfSpellCheck : UserControl
     {
-        public WPFSpellCheck()
+        public WpfSpellCheck()
         {
             //this.rtf = rtf;
             InitializeComponent();
-            var lang = richTextBox.Language;
-            richTextBox.Language = System.Windows.Markup.XmlLanguage.GetLanguage("en-US");
+            var lang = RichTextBox.Language;
+            RichTextBox.Language = System.Windows.Markup.XmlLanguage.GetLanguage("en-US");
             //LoadRTF();
-            var lang2 = richTextBox.Language;
+            var lang2 = RichTextBox.Language;
         }
-        public void LoadRTF(string rtf)
+        public void LoadRtf(string rtf)
         {
-            TextRange range = new TextRange(richTextBox.Document.ContentStart, richTextBox.Document.ContentEnd);
+            TextRange range = new TextRange(RichTextBox.Document.ContentStart, RichTextBox.Document.ContentEnd);
             // convert string to stream
             byte[] byteArray = Encoding.UTF8.GetBytes(rtf);
             //byte[] byteArray = Encoding.ASCII.GetBytes(contents);
@@ -43,12 +32,12 @@ namespace TextPoint
         }
         public TextPointer GetStart()
         {
-            return richTextBox.Document.ContentStart;
+            return RichTextBox.Document.ContentStart;
         }
 
         public TextPointer GetEnd()
         {
-            return richTextBox.Document.ContentEnd;
+            return RichTextBox.Document.ContentEnd;
         }
     }
 }

@@ -30,7 +30,7 @@
         private void InitializeComponent()
         {
             this.elementHost1 = new System.Windows.Forms.Integration.ElementHost();
-            this.wpfSpellCheck1 = new TextPoint.WPFSpellCheck();
+            this.wpfSpellCheck1 = new TextPoint.WpfSpellCheck();
             this.saveBtn = new System.Windows.Forms.Button();
             this.cancelBtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
@@ -46,8 +46,8 @@
             this.elementHost1.TabIndex = 0;
             this.elementHost1.Text = "elementHost1";
             wpfSpellCheck1.Language = System.Windows.Markup.XmlLanguage.GetLanguage("en-GB");
-            wpfSpellCheck1.richTextBox.Language = System.Windows.Markup.XmlLanguage.GetLanguage("en-GB");
-            wpfSpellCheck1.richTextBox.SpellCheck.IsEnabled = true;
+            wpfSpellCheck1.RichTextBox.Language = System.Windows.Markup.XmlLanguage.GetLanguage("en-GB");
+            wpfSpellCheck1.RichTextBox.SpellCheck.IsEnabled = true;
             this.elementHost1.Child = this.wpfSpellCheck1;
             // 
             // saveBtn
@@ -89,7 +89,7 @@
         #endregion
 
         private System.Windows.Forms.Integration.ElementHost elementHost1;
-        private WPFSpellCheck wpfSpellCheck1;
+        private WpfSpellCheck wpfSpellCheck1;
         private System.Windows.Forms.Button saveBtn;
         private System.Windows.Forms.Button cancelBtn;
     }

@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Timers;
 using WMPLib;
 
@@ -11,20 +7,22 @@ namespace TextPoint
 {
     public class AudioPlayer : IPlayer
     {
-        private Timer timer = new Timer();
-        bool fileloaded, playing, repeat;
-        WindowsMediaPlayer player;
-        string filename;
-        double current;
+        private readonly Timer _timer = new Timer();
+        private bool _fileloaded;
+        private bool _playing;
+        private bool _repeat;
+        private readonly WindowsMediaPlayer _player;
+        private string _filename;
+        private double _current;
         /// <summary>
         /// Initializes a Audioplayer
         /// </summary>
         public AudioPlayer()
         {
-            playing = false;
-            fileloaded = false;
-            repeat = false;
-            player = new WindowsMediaPlayer();
+            _playing = false;
+            _fileloaded = false;
+            _repeat = false;
+            _player = new WindowsMediaPlayer();
         }
         /// <summary>
         /// Gets the Filename from the file that's opened in the media player
@@ -32,7 +30,7 @@ namespace TextPoint
         /// <returns>The filename of the opened file</returns>
         public string Filename()
         {
-            return "[" + Path.GetFullPath(filename) + "]";
+            return "[" + Path.GetFullPath(_filename) + "]";
         }
         /// <summary>
         /// Loads the file from the path
@@ -40,16 +38,16 @@ namespace TextPoint
         /// <param name="path">The path of the file that will be loaded</param>
         public void Load(string path)
         {
-            filename = path;
+            _filename = path;
             if (!File.Exists(path)) { throw new FileNotFoundException("File not found"); }
             if (File.Exists(path) && (path.EndsWith(".mp3") || path.EndsWith(".wav")))
             {
-                player.URL = path;
-                fileloaded = true;
+                _player.URL = path;
+                _fileloaded = true;
                 Stop();
-                playing = false;
-                repeat = false;
-                timer.Enabled = false;
+                _playing = false;
+                _repeat = false;
+                _timer.Enabled = false;
             }
             else throw new FileLoadException("File not supported");
         }
@@ -59,18 +57,18 @@ namespace TextPoint
         /// <returns>returns true if playing, false if not playing</returns>
         public bool PlayPause()
         {
-            if (!fileloaded) { return false; }
+            if (!_fileloaded) { return false; }
             
-            else if (playing)
+            else if (_playing)
             {
-                player.controls.pause();
-                playing = false;
+                _player.controls.pause();
+                _playing = false;
                 return false;
             }
             else
             {
-                player.controls.play();
-                playing = true;
+                _player.controls.play();
+                _playing = true;
                 return true;
             }
         }
@@ -80,19 +78,19 @@ namespace TextPoint
         /// <param name="sec">the number of seconds to rewind</param>
         public void SkipBack(int sec)
         {
-            if (player.controls.currentPosition < sec)//if less than sec 
+            if (_player.controls.currentPosition < sec)//if less than sec 
             {
-                player.controls.currentPosition = 0;//Jumps to start (0)
+                _player.controls.currentPosition = 0;//Jumps to start (0)
             }
-            else { player.controls.currentPosition = player.controls.currentPosition - sec; }//Jumps to "current position - sec"
+            else { _player.controls.currentPosition = _player.controls.currentPosition - sec; }//Jumps to "current position - sec"
         }
         public void SkipForward(int sec)
         {
-            if (GetLength() < player.controls.currentPosition + sec)//if currentpos  sec is more than the length of the file
+            if (GetLength() < _player.controls.currentPosition + sec)//if currentpos  sec is more than the length of the file
             {
-                player.controls.currentPosition = GetLength();//Jumps to end
+                _player.controls.currentPosition = GetLength();//Jumps to end
             }
-            else { player.controls.currentPosition = player.controls.currentPosition + sec; }//Jumps to "current position + sec"
+            else { _player.controls.currentPosition = _player.controls.currentPosition + sec; }//Jumps to "current position + sec"
         }
         /// <summary>
         /// Repeats the number of seconds that is sent into the method
@@ -101,26 +99,26 @@ namespace TextPoint
         /// <returns>true if repeating, false if not</returns>
         public bool Repeat(int sec)
         {
-            if (fileloaded)
+            if (_fileloaded)
             {
-                timer.Interval = sec * 1000;//Makes the input "sec" represent secouds instead of milliseconds
+                _timer.Interval = sec * 1000;//Makes the input "sec" represent secouds instead of milliseconds
 
-                if (repeat)//repeat fuction is already on action
+                if (_repeat)//repeat fuction is already on action
                 {
-                    repeat = false;//repeat set to false
-                    timer.Enabled = false;
-                    return repeat;
+                    _repeat = false;//repeat set to false
+                    _timer.Enabled = false;
+                    return _repeat;
                 }
                 else
                 {
-                    repeat = true;
-                    current = player.controls.currentPosition;//Saves the current time when the repeat is initated
-                    player.controls.currentPosition = current - (timer.Interval / 1000);//Sets the repeat length
-                    if (!playing) { player.controls.play(); }
+                    _repeat = true;
+                    _current = _player.controls.currentPosition;//Saves the current time when the repeat is initated
+                    _player.controls.currentPosition = _current - (_timer.Interval / 1000);//Sets the repeat length
+                    if (!_playing) { _player.controls.play(); }
                     
-                    timer.Elapsed += Timer_Elapsed;//subscribe to the Timer_elapsed event
-                    timer.Enabled = true;
-                    return repeat;
+                    _timer.Elapsed += Timer_Elapsed;//subscribe to the Timer_elapsed event
+                    _timer.Enabled = true;
+                    return _repeat;
                 }
             }
             else { return false; }//no file is loaded, nothing happens
@@ -132,20 +130,20 @@ namespace TextPoint
         /// <param name="e"></param>
         private void Timer_Elapsed(object sender, ElapsedEventArgs e)
         {
-            player.controls.currentPosition = current - (timer.Interval/1000);
+            _player.controls.currentPosition = _current - (_timer.Interval/1000);
         }
         /// <summary>
         /// Stops the playing media file and resets the variables in the class if a file is loaded.
         /// </summary>
         public void Stop()
         {
-            if (fileloaded)
+            if (_fileloaded)
             {
-                player.controls.stop();
-                player.controls.currentPosition = 0;
-                playing = false;
-                repeat = false;
-                timer.Enabled = false;
+                _player.controls.stop();
+                _player.controls.currentPosition = 0;
+                _playing = false;
+                _repeat = false;
+                _timer.Enabled = false;
             }
         }
         /// <summary>
@@ -154,9 +152,9 @@ namespace TextPoint
         /// <returns> a string in the format hh:mm:ss with a new line </returns>
         public string Timestamp()
         {
-            if (fileloaded)
+            if (_fileloaded)
             {
-                TimeSpan timestamp = TimeSpan.FromSeconds(player.controls.currentPosition);
+                TimeSpan timestamp = TimeSpan.FromSeconds(_player.controls.currentPosition);
                 return "(" + timestamp.ToString(@"hh\:mm\:ss") +")";
             }
             else { return ""; }
@@ -167,11 +165,11 @@ namespace TextPoint
         /// <param name="speed">the new playback speed</param>
         public void Speed(double speed)
         {
-            player.settings.rate = speed;
+            _player.settings.rate = speed;
         }
         public double GetSpeed()
         {
-            return player.settings.rate;
+            return _player.settings.rate;
         }
         /// <summary>
         /// Get the duration of the media file
@@ -179,7 +177,7 @@ namespace TextPoint
         /// <returns>An int with the length of the loaded media file in seconds</returns>
         public int GetLength()
         {
-            return (int)player.currentMedia.duration;
+            return (int)_player.currentMedia.duration;
         }
         /// <summary>
         /// Changes the current position of the playing media file
@@ -187,7 +185,7 @@ namespace TextPoint
         /// <param name="sec">The place from which the file should be played</param>
         public void PlayFrom(int sec)
         {
-            player.controls.currentPosition = sec;
+            _player.controls.currentPosition = sec;
         }
         /// <summary>
         /// Returns the current position of the playing media file
@@ -195,7 +193,7 @@ namespace TextPoint
         /// <returns>An int which represents the current position of the loaded media file in seconds</returns>
         public int CurrentPosition()
         {
-            return (int)player.controls.currentPosition;
+            return (int)_player.controls.currentPosition;
         }
     }
 }

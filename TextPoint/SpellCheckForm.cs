@@ -1,12 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Documents;
 using System.Windows.Forms;
 
@@ -19,7 +12,7 @@ namespace TextPoint
         {
             this.rtf = rtf;
             InitializeComponent();
-            wpfSpellCheck1.LoadRTF(rtf);
+            wpfSpellCheck1.LoadRtf(rtf);
         }
         public string GetChangedText()
         {

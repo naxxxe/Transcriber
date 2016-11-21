@@ -1,10 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TextPoint;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing;
 
@@ -13,337 +8,337 @@ namespace TextPointunitTest
     [TestClass()]
     public class ExtendedRichTextBoxTests
     {
-        RichTextBox rtb;
-        ExtendedRichTextBox ertb;
+        private RichTextBox _rtb;
+        private ExtendedRichTextBox _ertb;
 
         [TestMethod()]
         public void AppendWithColorTest()
         {
-            rtb = new RichTextBox();
-            ertb = new ExtendedRichTextBox(rtb);
-            Assert.IsTrue(rtb.Text.Length == 0);
-            rtb.BackColor = Color.White;
-            ertb.AppendWithColor("test", Color.Blue);
-            rtb.SelectAll();
-            Assert.AreEqual(Color.Blue, rtb.SelectionBackColor);
-            Assert.AreNotEqual(rtb.BackColor, rtb.SelectionBackColor);
-            Assert.IsTrue(rtb.Text.Contains("test"));
+            _rtb = new RichTextBox();
+            _ertb = new ExtendedRichTextBox(_rtb);
+            Assert.IsTrue(_rtb.Text.Length == 0);
+            _rtb.BackColor = Color.White;
+            _ertb.AppendWithColor("test", Color.Blue);
+            _rtb.SelectAll();
+            Assert.AreEqual(Color.Blue, _rtb.SelectionBackColor);
+            Assert.AreNotEqual(_rtb.BackColor, _rtb.SelectionBackColor);
+            Assert.IsTrue(_rtb.Text.Contains("test"));
         }
 
         [TestMethod()]
         public void SameSizeSelectionTest_DifferentFonts_True()
         {
-            rtb = new RichTextBox();
-            ertb = new ExtendedRichTextBox(rtb);
-            rtb.AppendText("testing1");
-            rtb.SelectionFont = new Font("Arial", rtb.SelectionFont.Size);
-            rtb.SelectedText = " testing2 ";
-            rtb.AppendText("testing 3");
-            rtb.SelectAll();
-            Assert.IsNull(rtb.SelectionFont);
-            Assert.IsTrue(ertb.SameSizeSelection());
+            _rtb = new RichTextBox();
+            _ertb = new ExtendedRichTextBox(_rtb);
+            _rtb.AppendText("testing1");
+            _rtb.SelectionFont = new Font("Arial", _rtb.SelectionFont.Size);
+            _rtb.SelectedText = " testing2 ";
+            _rtb.AppendText("testing 3");
+            _rtb.SelectAll();
+            Assert.IsNull(_rtb.SelectionFont);
+            Assert.IsTrue(_ertb.SameSizeSelection());
         }
         [TestMethod()]
         public void SameSizeSelectionTest_DifferentFonts_False()
         {
-            rtb = new RichTextBox();
-            ertb = new ExtendedRichTextBox(rtb);
-            rtb.AppendText("testing1");
-            rtb.SelectionFont = new Font("Arial",28);
-            rtb.SelectedText = " testing2 ";
-            rtb.AppendText("testing 3");
-            rtb.SelectAll();
-            Assert.IsNull(rtb.SelectionFont);
-            Assert.IsFalse(ertb.SameSizeSelection());
+            _rtb = new RichTextBox();
+            _ertb = new ExtendedRichTextBox(_rtb);
+            _rtb.AppendText("testing1");
+            _rtb.SelectionFont = new Font("Arial",28);
+            _rtb.SelectedText = " testing2 ";
+            _rtb.AppendText("testing 3");
+            _rtb.SelectAll();
+            Assert.IsNull(_rtb.SelectionFont);
+            Assert.IsFalse(_ertb.SameSizeSelection());
         }
         [TestMethod]
         public void SameSizeSelectionTest_SameFontDifferentSize_False()
         {
-            rtb = new RichTextBox();
-            ertb = new ExtendedRichTextBox(rtb);
-            rtb.AppendText("testing1");
-            rtb.SelectionFont = new Font(rtb.SelectionFont.Name, 28);
-            rtb.SelectedText = " testing2 ";
-            rtb.AppendText("testing 3");
-            rtb.SelectAll();
-            Assert.IsNotNull(rtb.SelectionFont);
-            Assert.AreEqual(13, rtb.SelectionFont.Size);
-            Assert.IsFalse(ertb.SameSizeSelection());
+            _rtb = new RichTextBox();
+            _ertb = new ExtendedRichTextBox(_rtb);
+            _rtb.AppendText("testing1");
+            _rtb.SelectionFont = new Font(_rtb.SelectionFont.Name, 28);
+            _rtb.SelectedText = " testing2 ";
+            _rtb.AppendText("testing 3");
+            _rtb.SelectAll();
+            Assert.IsNotNull(_rtb.SelectionFont);
+            Assert.AreEqual(13, _rtb.SelectionFont.Size);
+            Assert.IsFalse(_ertb.SameSizeSelection());
         }
 
         [TestMethod()]
         public void ChangeFormatTest_SetBold()
         {
-            rtb = new RichTextBox();
-            ertb = new ExtendedRichTextBox(rtb);
-            rtb.AppendText("testing1");
-            rtb.SelectAll();
-            Assert.IsFalse(rtb.SelectionFont.Bold);
-            ertb.ChangeFormat("Bold", "bold");
-            Assert.IsTrue(rtb.SelectionFont.Bold);
+            _rtb = new RichTextBox();
+            _ertb = new ExtendedRichTextBox(_rtb);
+            _rtb.AppendText("testing1");
+            _rtb.SelectAll();
+            Assert.IsFalse(_rtb.SelectionFont.Bold);
+            _ertb.ChangeFormat("Bold", "bold");
+            Assert.IsTrue(_rtb.SelectionFont.Bold);
         }
         [TestMethod()]
         public void ChangeFormatTest_SetNotBold()
         {
-            rtb = new RichTextBox();
-            ertb = new ExtendedRichTextBox(rtb);
-            rtb.SelectionFont = new Font(rtb.SelectionFont, FontStyle.Bold);
-            rtb.AppendText("testing1");
-            rtb.SelectAll();
-            Assert.IsTrue(rtb.SelectionFont.Bold);
-            ertb.ChangeFormat("Bold", "notbold");
-            Assert.IsFalse(rtb.SelectionFont.Bold);
+            _rtb = new RichTextBox();
+            _ertb = new ExtendedRichTextBox(_rtb);
+            _rtb.SelectionFont = new Font(_rtb.SelectionFont, FontStyle.Bold);
+            _rtb.AppendText("testing1");
+            _rtb.SelectAll();
+            Assert.IsTrue(_rtb.SelectionFont.Bold);
+            _ertb.ChangeFormat("Bold", "notbold");
+            Assert.IsFalse(_rtb.SelectionFont.Bold);
         }
         [TestMethod()]
         public void ChangeFormatTest_SetBold_MixedStyle()
         {
-            rtb = new RichTextBox();
-            ertb = new ExtendedRichTextBox(rtb);
-            rtb.AppendText("testing1");
-            rtb.SelectAll();
-            Assert.IsFalse(rtb.SelectionFont.Bold);
-            rtb.DeselectAll();
-            rtb.SelectionFont = new Font(rtb.SelectionFont, FontStyle.Bold);
-            rtb.AppendText(" testing2");
-            rtb.SelectAll();
-            ertb.ChangeFormat("Bold", "unknown");
-            Assert.IsTrue(rtb.SelectionFont.Bold);
+            _rtb = new RichTextBox();
+            _ertb = new ExtendedRichTextBox(_rtb);
+            _rtb.AppendText("testing1");
+            _rtb.SelectAll();
+            Assert.IsFalse(_rtb.SelectionFont.Bold);
+            _rtb.DeselectAll();
+            _rtb.SelectionFont = new Font(_rtb.SelectionFont, FontStyle.Bold);
+            _rtb.AppendText(" testing2");
+            _rtb.SelectAll();
+            _ertb.ChangeFormat("Bold", "unknown");
+            Assert.IsTrue(_rtb.SelectionFont.Bold);
         }
 
         [TestMethod()]
         public void ChangeFormatTest_SetItalic()
         {
-            rtb = new RichTextBox();
-            ertb = new ExtendedRichTextBox(rtb);
-            rtb.AppendText("testing1");
-            rtb.SelectAll();
-            Assert.IsFalse(rtb.SelectionFont.Italic);
-            ertb.ChangeFormat("Italic", "italic");
-            Assert.IsTrue(rtb.SelectionFont.Italic);
+            _rtb = new RichTextBox();
+            _ertb = new ExtendedRichTextBox(_rtb);
+            _rtb.AppendText("testing1");
+            _rtb.SelectAll();
+            Assert.IsFalse(_rtb.SelectionFont.Italic);
+            _ertb.ChangeFormat("Italic", "italic");
+            Assert.IsTrue(_rtb.SelectionFont.Italic);
         }
         [TestMethod()]
         public void ChangeFormatTest_SetNotItalic()
         {
-            rtb = new RichTextBox();
-            ertb = new ExtendedRichTextBox(rtb);
-            rtb.SelectionFont = new Font(rtb.SelectionFont, FontStyle.Italic);
-            rtb.AppendText("testing1");
-            rtb.SelectAll();
-            Assert.IsTrue(rtb.SelectionFont.Italic);
-            ertb.ChangeFormat("Italic", "notitalic");
-            Assert.IsFalse(rtb.SelectionFont.Italic);
+            _rtb = new RichTextBox();
+            _ertb = new ExtendedRichTextBox(_rtb);
+            _rtb.SelectionFont = new Font(_rtb.SelectionFont, FontStyle.Italic);
+            _rtb.AppendText("testing1");
+            _rtb.SelectAll();
+            Assert.IsTrue(_rtb.SelectionFont.Italic);
+            _ertb.ChangeFormat("Italic", "notitalic");
+            Assert.IsFalse(_rtb.SelectionFont.Italic);
         }
         [TestMethod()]
         public void ChangeFormatTest_SetItalic_MixedStyle()
         {
-            rtb = new RichTextBox();
-            ertb = new ExtendedRichTextBox(rtb);
-            rtb.AppendText("testing1");
-            rtb.SelectAll();
-            Assert.IsFalse(rtb.SelectionFont.Italic);
-            rtb.DeselectAll();
-            rtb.SelectionFont = new Font(rtb.SelectionFont, FontStyle.Italic);
-            rtb.AppendText(" testing2");
-            rtb.SelectAll();
-            ertb.ChangeFormat("Italic", "unknown");
-            Assert.IsTrue(rtb.SelectionFont.Italic);
+            _rtb = new RichTextBox();
+            _ertb = new ExtendedRichTextBox(_rtb);
+            _rtb.AppendText("testing1");
+            _rtb.SelectAll();
+            Assert.IsFalse(_rtb.SelectionFont.Italic);
+            _rtb.DeselectAll();
+            _rtb.SelectionFont = new Font(_rtb.SelectionFont, FontStyle.Italic);
+            _rtb.AppendText(" testing2");
+            _rtb.SelectAll();
+            _ertb.ChangeFormat("Italic", "unknown");
+            Assert.IsTrue(_rtb.SelectionFont.Italic);
         }
 
         [TestMethod()]
         public void ChangeFormatTest_SetUnderline()
         {
-            rtb = new RichTextBox();
-            ertb = new ExtendedRichTextBox(rtb);
-            rtb.AppendText("testing1");
-            rtb.SelectAll();
-            Assert.IsFalse(rtb.SelectionFont.Underline);
-            ertb.ChangeFormat("Underline", "underline");
-            Assert.IsTrue(rtb.SelectionFont.Underline);
+            _rtb = new RichTextBox();
+            _ertb = new ExtendedRichTextBox(_rtb);
+            _rtb.AppendText("testing1");
+            _rtb.SelectAll();
+            Assert.IsFalse(_rtb.SelectionFont.Underline);
+            _ertb.ChangeFormat("Underline", "underline");
+            Assert.IsTrue(_rtb.SelectionFont.Underline);
         }
         [TestMethod()]
         public void ChangeFormatTest_SetNotUnderline()
         {
-            rtb = new RichTextBox();
-            ertb = new ExtendedRichTextBox(rtb);
-            rtb.SelectionFont = new Font(rtb.SelectionFont, FontStyle.Underline);
-            rtb.AppendText("testing1");
-            rtb.SelectAll();
-            Assert.IsTrue(rtb.SelectionFont.Underline);
-            ertb.ChangeFormat("Underline", "notunderline");
-            Assert.IsFalse(rtb.SelectionFont.Underline);
+            _rtb = new RichTextBox();
+            _ertb = new ExtendedRichTextBox(_rtb);
+            _rtb.SelectionFont = new Font(_rtb.SelectionFont, FontStyle.Underline);
+            _rtb.AppendText("testing1");
+            _rtb.SelectAll();
+            Assert.IsTrue(_rtb.SelectionFont.Underline);
+            _ertb.ChangeFormat("Underline", "notunderline");
+            Assert.IsFalse(_rtb.SelectionFont.Underline);
         }
         [TestMethod()]
         public void ChangeFormatTest_SetUnderline_MixedStyle()
         {
-            rtb = new RichTextBox();
-            ertb = new ExtendedRichTextBox(rtb);
-            rtb.AppendText("testing1");
-            rtb.SelectAll();
-            Assert.IsFalse(rtb.SelectionFont.Underline);
-            rtb.DeselectAll();
-            rtb.SelectionFont = new Font(rtb.SelectionFont, FontStyle.Underline);
-            rtb.AppendText(" testing2");
-            rtb.SelectAll();
-            ertb.ChangeFormat("Underline", "unknown");
-            Assert.IsTrue(rtb.SelectionFont.Underline);
+            _rtb = new RichTextBox();
+            _ertb = new ExtendedRichTextBox(_rtb);
+            _rtb.AppendText("testing1");
+            _rtb.SelectAll();
+            Assert.IsFalse(_rtb.SelectionFont.Underline);
+            _rtb.DeselectAll();
+            _rtb.SelectionFont = new Font(_rtb.SelectionFont, FontStyle.Underline);
+            _rtb.AppendText(" testing2");
+            _rtb.SelectAll();
+            _ertb.ChangeFormat("Underline", "unknown");
+            Assert.IsTrue(_rtb.SelectionFont.Underline);
         }
         [TestMethod()]
         public void ChangeFormatTest_SetUnderlineKeepBold()
         {
-            rtb = new RichTextBox();
-            ertb = new ExtendedRichTextBox(rtb);
-            rtb.SelectionFont = new Font(rtb.SelectionFont, FontStyle.Bold);
-            rtb.AppendText("testing1");
-            rtb.SelectAll();
-            Assert.IsTrue(rtb.SelectionFont.Bold);
-            ertb.ChangeFormat("Underline", "underline");
-            Assert.IsTrue(rtb.SelectionFont.Underline);
-            Assert.IsTrue(rtb.SelectionFont.Bold);
+            _rtb = new RichTextBox();
+            _ertb = new ExtendedRichTextBox(_rtb);
+            _rtb.SelectionFont = new Font(_rtb.SelectionFont, FontStyle.Bold);
+            _rtb.AppendText("testing1");
+            _rtb.SelectAll();
+            Assert.IsTrue(_rtb.SelectionFont.Bold);
+            _ertb.ChangeFormat("Underline", "underline");
+            Assert.IsTrue(_rtb.SelectionFont.Underline);
+            Assert.IsTrue(_rtb.SelectionFont.Bold);
         }
 
         [TestMethod()]
         public void ChangeFormatTest_ChangeSize()
         {
-            rtb = new RichTextBox();
-            ertb = new ExtendedRichTextBox(rtb);
-            rtb.SelectionFont = new Font(rtb.SelectionFont, FontStyle.Bold);
-            rtb.AppendText("testing1");
-            rtb.SelectAll();
-            Assert.IsTrue(rtb.SelectionFont.Bold);
-            string expectedfontname = rtb.SelectionFont.Name;
-            float oldsize = rtb.SelectionFont.Size;
-            ertb.ChangeFormat("Size", "28");
-            string actualfontname = rtb.SelectionFont.Name;
+            _rtb = new RichTextBox();
+            _ertb = new ExtendedRichTextBox(_rtb);
+            _rtb.SelectionFont = new Font(_rtb.SelectionFont, FontStyle.Bold);
+            _rtb.AppendText("testing1");
+            _rtb.SelectAll();
+            Assert.IsTrue(_rtb.SelectionFont.Bold);
+            string expectedfontname = _rtb.SelectionFont.Name;
+            float oldsize = _rtb.SelectionFont.Size;
+            _ertb.ChangeFormat("Size", "28");
+            string actualfontname = _rtb.SelectionFont.Name;
             Assert.AreEqual(expectedfontname, actualfontname);
-            float newsize = rtb.SelectionFont.Size;
+            float newsize = _rtb.SelectionFont.Size;
             Assert.AreNotEqual(oldsize, newsize);
-            Assert.IsTrue(rtb.SelectionFont.Bold);
+            Assert.IsTrue(_rtb.SelectionFont.Bold);
         }
 
         [TestMethod()]
         public void ChangeFormatTest_ChangeSizeDifferentFont()
         {
-            rtb = new RichTextBox();
-            ertb = new ExtendedRichTextBox(rtb);
-            rtb.AppendText("testing1");
-            rtb.SelectionFont = new Font("Arial", rtb.SelectionFont.Size);
-            rtb.AppendText(" testing2");
-            rtb.SelectAll();
-            Assert.IsNull(rtb.SelectionFont);
-            ertb.ChangeFormat("Size", "28");
-            Assert.IsTrue(ertb.SameSizeSelection());
-            Assert.AreEqual("28", ertb.GetCurrentSize());
+            _rtb = new RichTextBox();
+            _ertb = new ExtendedRichTextBox(_rtb);
+            _rtb.AppendText("testing1");
+            _rtb.SelectionFont = new Font("Arial", _rtb.SelectionFont.Size);
+            _rtb.AppendText(" testing2");
+            _rtb.SelectAll();
+            Assert.IsNull(_rtb.SelectionFont);
+            _ertb.ChangeFormat("Size", "28");
+            Assert.IsTrue(_ertb.SameSizeSelection());
+            Assert.AreEqual("28", _ertb.GetCurrentSize());
         }
 
    
         [TestMethod()]
         public void BoldTest_SetBold()
         {
-            rtb = new RichTextBox();
-            ertb = new ExtendedRichTextBox(rtb);
-            rtb.AppendText("testing1");
-            rtb.SelectAll();
-            ertb.Bold(true);
-            Assert.IsTrue(rtb.SelectionFont.Bold);
+            _rtb = new RichTextBox();
+            _ertb = new ExtendedRichTextBox(_rtb);
+            _rtb.AppendText("testing1");
+            _rtb.SelectAll();
+            _ertb.Bold(true);
+            Assert.IsTrue(_rtb.SelectionFont.Bold);
         }
         [TestMethod()]
         public void BoldTest_SetNotBold()
         {
-            rtb = new RichTextBox();
-            ertb = new ExtendedRichTextBox(rtb);
-            rtb.Font = new Font(rtb.Font, FontStyle.Bold);
-            rtb.AppendText("testing1");
-            rtb.SelectAll();
-            Assert.IsTrue(rtb.SelectionFont.Bold);
-            ertb.Bold(false);
-            Assert.IsFalse(rtb.SelectionFont.Bold);
+            _rtb = new RichTextBox();
+            _ertb = new ExtendedRichTextBox(_rtb);
+            _rtb.Font = new Font(_rtb.Font, FontStyle.Bold);
+            _rtb.AppendText("testing1");
+            _rtb.SelectAll();
+            Assert.IsTrue(_rtb.SelectionFont.Bold);
+            _ertb.Bold(false);
+            Assert.IsFalse(_rtb.SelectionFont.Bold);
         }
 
         [TestMethod()]
         public void ItalicTest_SetItalic()
         {
-            rtb = new RichTextBox();
-            ertb = new ExtendedRichTextBox(rtb);
-            rtb.AppendText("testing1");
-            rtb.SelectAll();
-            ertb.Italic(true);
-            Assert.IsTrue(rtb.SelectionFont.Italic);
+            _rtb = new RichTextBox();
+            _ertb = new ExtendedRichTextBox(_rtb);
+            _rtb.AppendText("testing1");
+            _rtb.SelectAll();
+            _ertb.Italic(true);
+            Assert.IsTrue(_rtb.SelectionFont.Italic);
         }
         [TestMethod()]
         public void ItalicTest_SetNotItalic()
         {
-            rtb = new RichTextBox();
-            ertb = new ExtendedRichTextBox(rtb);
-            rtb.Font = new Font(rtb.Font, FontStyle.Italic);
-            rtb.AppendText("testing1");
-            rtb.SelectAll();
-            Assert.IsTrue(rtb.SelectionFont.Italic);
-            ertb.Italic(false);
-            Assert.IsFalse(rtb.SelectionFont.Italic);
+            _rtb = new RichTextBox();
+            _ertb = new ExtendedRichTextBox(_rtb);
+            _rtb.Font = new Font(_rtb.Font, FontStyle.Italic);
+            _rtb.AppendText("testing1");
+            _rtb.SelectAll();
+            Assert.IsTrue(_rtb.SelectionFont.Italic);
+            _ertb.Italic(false);
+            Assert.IsFalse(_rtb.SelectionFont.Italic);
         }
 
         [TestMethod()]
         public void UnderlineTest_SetUnderline()
         {
-            rtb = new RichTextBox();
-            ertb = new ExtendedRichTextBox(rtb);
-            rtb.AppendText("testing1");
-            rtb.SelectAll();
-            ertb.Underline(true);
-            Assert.IsTrue(rtb.SelectionFont.Underline);
+            _rtb = new RichTextBox();
+            _ertb = new ExtendedRichTextBox(_rtb);
+            _rtb.AppendText("testing1");
+            _rtb.SelectAll();
+            _ertb.Underline(true);
+            Assert.IsTrue(_rtb.SelectionFont.Underline);
         }
         [TestMethod()]
         public void UnderlineTest_SetNotUnderline()
         {
-            rtb = new RichTextBox();
-            ertb = new ExtendedRichTextBox(rtb);
-            rtb.Font = new Font(rtb.Font, FontStyle.Underline);
-            rtb.AppendText("testing1");
-            rtb.SelectAll();
-            Assert.IsTrue(rtb.SelectionFont.Underline);
-            ertb.Underline(false);
-            Assert.IsFalse(rtb.SelectionFont.Underline);
+            _rtb = new RichTextBox();
+            _ertb = new ExtendedRichTextBox(_rtb);
+            _rtb.Font = new Font(_rtb.Font, FontStyle.Underline);
+            _rtb.AppendText("testing1");
+            _rtb.SelectAll();
+            Assert.IsTrue(_rtb.SelectionFont.Underline);
+            _ertb.Underline(false);
+            Assert.IsFalse(_rtb.SelectionFont.Underline);
         }
         [TestMethod()]
         public void UnderlineTest_SetBoldAndUnderline()
         {
-            rtb = new RichTextBox();
-            ertb = new ExtendedRichTextBox(rtb);
-            rtb.Font = new Font(rtb.Font, FontStyle.Bold);
-            rtb.AppendText("testing1");
-            rtb.SelectAll();
-            Assert.IsTrue(rtb.SelectionFont.Bold);
-            ertb.Underline(true);
-            Assert.IsTrue(rtb.SelectionFont.Underline);
-            Assert.IsTrue(rtb.SelectionFont.Bold);
+            _rtb = new RichTextBox();
+            _ertb = new ExtendedRichTextBox(_rtb);
+            _rtb.Font = new Font(_rtb.Font, FontStyle.Bold);
+            _rtb.AppendText("testing1");
+            _rtb.SelectAll();
+            Assert.IsTrue(_rtb.SelectionFont.Bold);
+            _ertb.Underline(true);
+            Assert.IsTrue(_rtb.SelectionFont.Underline);
+            Assert.IsTrue(_rtb.SelectionFont.Bold);
         }
         [TestMethod()]
         public void UnderlineTest_SetItalicAndUnderline()
         {
-            rtb = new RichTextBox();
-            ertb = new ExtendedRichTextBox(rtb);
-            rtb.Font = new Font(rtb.Font, FontStyle.Italic);
-            rtb.AppendText("testing1");
-            rtb.SelectAll();
-            Assert.IsTrue(rtb.SelectionFont.Italic);
-            ertb.Underline(true);
-            Assert.IsTrue(rtb.SelectionFont.Underline);
-            Assert.IsTrue(rtb.SelectionFont.Italic);
+            _rtb = new RichTextBox();
+            _ertb = new ExtendedRichTextBox(_rtb);
+            _rtb.Font = new Font(_rtb.Font, FontStyle.Italic);
+            _rtb.AppendText("testing1");
+            _rtb.SelectAll();
+            Assert.IsTrue(_rtb.SelectionFont.Italic);
+            _ertb.Underline(true);
+            Assert.IsTrue(_rtb.SelectionFont.Underline);
+            Assert.IsTrue(_rtb.SelectionFont.Italic);
         }
         [TestMethod()]
         public void StyleTest_SetAllStyles()
         {
-            rtb = new RichTextBox();
-            ertb = new ExtendedRichTextBox(rtb);
-            rtb.Font = new Font(rtb.Font, FontStyle.Italic);
-            rtb.AppendText("testing1");
-            rtb.SelectAll();
-            Assert.IsTrue(rtb.SelectionFont.Italic);
-            ertb.Underline(true);
-            ertb.Bold(true);
-            Assert.IsTrue(rtb.SelectionFont.Underline);
-            Assert.IsTrue(rtb.SelectionFont.Italic);
-            Assert.IsTrue(rtb.SelectionFont.Bold);
+            _rtb = new RichTextBox();
+            _ertb = new ExtendedRichTextBox(_rtb);
+            _rtb.Font = new Font(_rtb.Font, FontStyle.Italic);
+            _rtb.AppendText("testing1");
+            _rtb.SelectAll();
+            Assert.IsTrue(_rtb.SelectionFont.Italic);
+            _ertb.Underline(true);
+            _ertb.Bold(true);
+            Assert.IsTrue(_rtb.SelectionFont.Underline);
+            Assert.IsTrue(_rtb.SelectionFont.Italic);
+            Assert.IsTrue(_rtb.SelectionFont.Bold);
         }
     }
 }

@@ -1,41 +1,34 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Drawing.Text;
 using System.IO;
 using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using WMPLib;
 using System.Text.RegularExpressions;
 
 //Started Sprint 3
 namespace TextPoint
 {
-    public partial class FRMMain : Form
+    public partial class FrmMain : Form
     {
-        IPlayer player;
-        bool playing = false;
-        bool fileloaded = false;
-        string loadedfile = "";
-        ExtendedRichTextBox ertb;
+        private IPlayer _player;
+        private bool _playing = false;
+        private bool _fileloaded = false;
+        private string _loadedfile = "";
+        private ExtendedRichTextBox _ertb;
         
 
 
         #region Form functions
 
-        public FRMMain()
+        public FrmMain()
         {
             
             InitializeComponent();
-            player = new AudioPlayer();
+            _player = new AudioPlayer();
             KeyPreview = true;
             FontcomboBox.DataSource = GetAllFonts();
-            ertb = new ExtendedRichTextBox(RTBText);
+            _ertb = new ExtendedRichTextBox(RTBText);
         }
         private void FRMMain_Load(object sender, EventArgs e)
         {
@@ -158,17 +151,17 @@ namespace TextPoint
         }
         private void BoldCheckboxBtn_Click(object sender, EventArgs e)
         {
-            ertb.Bold(BoldCheckboxBtn.Checked);
+            _ertb.Bold(BoldCheckboxBtn.Checked);
         }
 
         private void ItalicCheckboxBtn_Click(object sender, EventArgs e)
         {
-            ertb.Italic(ItalicCheckboxBtn.Checked);
+            _ertb.Italic(ItalicCheckboxBtn.Checked);
         }
 
         private void UnderlineCheckboxBtn_Click(object sender, EventArgs e)
         {
-            ertb.Underline(UnderlineCheckboxBtn.Checked);
+            _ertb.Underline(UnderlineCheckboxBtn.Checked);
         }
 
         private void ColorChangerBtn_Click(object sender, EventArgs e)
@@ -205,11 +198,11 @@ namespace TextPoint
         /// <param name="e"></param>
         private void trackBarSpeed_ValueChanged(object sender, EventArgs e)
         {
-            if(trackBarSpeed.Value == 0){ player.Speed(0.5); }
-            else if (trackBarSpeed.Value == 1) { player.Speed(0.75); }
-            else if (trackBarSpeed.Value == 2) { player.Speed(1); }
-            else if (trackBarSpeed.Value == 3) { player.Speed(1.5); }
-            else { player.Speed(2); }
+            if(trackBarSpeed.Value == 0){ _player.Speed(0.5); }
+            else if (trackBarSpeed.Value == 1) { _player.Speed(0.75); }
+            else if (trackBarSpeed.Value == 2) { _player.Speed(1); }
+            else if (trackBarSpeed.Value == 3) { _player.Speed(1.5); }
+            else { _player.Speed(2); }
         }
         /// <summary>
         /// Stops the timer so the progressbar slider doesn't jump around while moving it.
@@ -229,7 +222,7 @@ namespace TextPoint
         /// <param name="e"></param>
         private void progressBar_MouseUp(object sender, MouseEventArgs e)
         {
-            player.PlayFrom(progressBar.Value);
+            _player.PlayFrom(progressBar.Value);
             timer1.Start();
         }
 
@@ -264,13 +257,13 @@ namespace TextPoint
         /// <param name="e"></param>
         private void timer1_Tick(object sender, EventArgs e)
         {
-            if (progressBar.Maximum != player.GetLength())
+            if (progressBar.Maximum != _player.GetLength())
             {
                 GetLength();
             }
             else
             {
-                progressBar.Value = player.CurrentPosition();
+                progressBar.Value = _player.CurrentPosition();
                 var ts = TimeSpan.FromSeconds(progressBar.Value);
                 CurrentTimeLabel.Text = ts.ToString(@"hh\:mm\:ss");
             }
@@ -284,7 +277,7 @@ namespace TextPoint
         /// </summary>
         private void GetLength()
         {
-            progressBar.Maximum = player.GetLength();
+            progressBar.Maximum = _player.GetLength();
             var ts = TimeSpan.FromSeconds(progressBar.Maximum);
             length_Label.Text = "Length: " + ts.ToString(@"hh\:mm\:ss");
         }
@@ -293,7 +286,7 @@ namespace TextPoint
         /// </summary>
         private void Reset()
         {
-            playing = false;
+            _playing = false;
             timer1.Stop();
             progressBar.Value = 0;
             CurrentTimeLabel.Text = "00:00:00";
@@ -306,10 +299,10 @@ namespace TextPoint
         /// </summary>
         private void PlayPause()
         {
-            if (fileloaded)
+            if (_fileloaded)
             {
-                playing = player.PlayPause();
-                if (playing)
+                _playing = _player.PlayPause();
+                if (_playing)
                 {
                     PlayPauseCheckboxBtn.Checked = true;
                     PlayPauseCheckboxBtn.Text = "Playing";
@@ -324,14 +317,14 @@ namespace TextPoint
         /// </summary>
         private void Repeat()
         {
-            if (fileloaded)
+            if (_fileloaded)
             {
                 if (RepeatTextBox.Text != "")
                 {
                     int sec = Convert.ToInt32(RepeatTextBox.Text);
-                    if (player.Repeat(sec))
+                    if (_player.Repeat(sec))
                     {
-                        if (!playing) { PlayPause(); }
+                        if (!_playing) { PlayPause(); }
                         RepeatCheckBoxBtn.Checked = true;
                     }
                     else
@@ -347,7 +340,7 @@ namespace TextPoint
         /// </summary>
         private void Stop()
         {
-            player.Stop();
+            _player.Stop();
             Reset();
         }
         /// <summary>
@@ -355,7 +348,7 @@ namespace TextPoint
         /// </summary>
         private void TimeStamp()
         {
-            ertb.AppendWithColor(player.Timestamp(), Color.LightBlue);
+            _ertb.AppendWithColor(_player.Timestamp(), Color.LightBlue);
         }
 
         /// <summary>
@@ -368,12 +361,12 @@ namespace TextPoint
             ofd.CheckFileExists = true;
             if (ofd.ShowDialog() == DialogResult.OK)
             {
-                if (loadedfile != ofd.FileName)
+                if (_loadedfile != ofd.FileName)
                 {
-                    loadedfile = ofd.FileName;
-                    player.Load(loadedfile);
-                    ertb.AppendWithColor(player.Filename(), Color.LightGreen);
-                    fileloaded = true;
+                    _loadedfile = ofd.FileName;
+                    _player.Load(_loadedfile);
+                    _ertb.AppendWithColor(_player.Filename(), Color.LightGreen);
+                    _fileloaded = true;
                     Reset();
                 }
             }
@@ -406,24 +399,24 @@ namespace TextPoint
                         e.SuppressKeyPress = true;
                         if (BoldCheckboxBtn.Checked) { BoldCheckboxBtn.Checked = false; }
                         else { BoldCheckboxBtn.Checked = true; }
-                        ertb.Bold(BoldCheckboxBtn.Checked);
+                        _ertb.Bold(BoldCheckboxBtn.Checked);
                         break;
                     case Keys.I:
                         e.SuppressKeyPress = true;
                         if (ItalicCheckboxBtn.Checked) { ItalicCheckboxBtn.Checked = false; }
                         else { ItalicCheckboxBtn.Checked = true; }
-                        ertb.Italic(ItalicCheckboxBtn.Checked);
+                        _ertb.Italic(ItalicCheckboxBtn.Checked);
                         break;
                     case Keys.U:
                         e.SuppressKeyPress = true;
                         if (UnderlineCheckboxBtn.Checked) { UnderlineCheckboxBtn.Checked = false; }
                         else { UnderlineCheckboxBtn.Checked = true; }
-                        ertb.Underline(UnderlineCheckboxBtn.Checked);
+                        _ertb.Underline(UnderlineCheckboxBtn.Checked);
                         break;
                 }
             }
         }
-        private void SetTextOfRTB(string rtf)
+        private void SetTextOfRtb(string rtf)
         {
             int start = RTBText.SelectionStart;
             int length = RTBText.SelectionLength;
@@ -456,10 +449,10 @@ namespace TextPoint
 
             if (RTBText.SelectionFont == null || FontSizeCombobox.Text != RTBText.SelectionFont.Size.ToString())
             {
-                if (!ertb.SameSizeSelection()) { FontSizeCombobox.Text = ""; }
+                if (!_ertb.SameSizeSelection()) { FontSizeCombobox.Text = ""; }
                 else
                 {
-                    FontSizeCombobox.Text = ertb.GetCurrentSize();
+                    FontSizeCombobox.Text = _ertb.GetCurrentSize();
                 }
             }
 
@@ -479,7 +472,7 @@ namespace TextPoint
         /// <param name="e"></param>
         private void FontcomboBox_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            ertb.ChangeFormat("Font", FontcomboBox.SelectedValue.ToString());
+            _ertb.ChangeFormat("Font", FontcomboBox.SelectedValue.ToString());
         }
         /// <summary>
         /// Changes the size on the selected text or from the point where the marker is placed
@@ -489,7 +482,7 @@ namespace TextPoint
         private void FontSizeCombobox_SelectionChangeCommitted(object sender, EventArgs e)
         {
             int size = int.Parse(FontSizeCombobox.SelectedItem.ToString());
-            ertb.ChangeFormat("Size", size.ToString());
+            _ertb.ChangeFormat("Size", size.ToString());
         }
 
         #endregion
@@ -498,7 +491,7 @@ namespace TextPoint
         {
             SpellCheckForm spell = new SpellCheckForm(RTBText.Rtf);
             spell.ShowDialog();
-            SetTextOfRTB(spell.GetChangedText());
+            SetTextOfRtb(spell.GetChangedText());
             RTBText.Focus();
         }
 
@@ -523,9 +516,9 @@ namespace TextPoint
         {
             if (tagComboBox.SelectedItem != null)
             {
-                ertb.Find_FindNext(tagComboBox.SelectedItem.ToString());
+                _ertb.Find_FindNext(tagComboBox.SelectedItem.ToString());
             }
-            else { ertb.Find_FindNext(tagComboBox.Text); }
+            else { _ertb.Find_FindNext(tagComboBox.Text); }
 
         }
 
@@ -533,7 +526,7 @@ namespace TextPoint
         {
             if (e.KeyCode == Keys.Enter)
             {
-                ertb.ChangeFormat("Font", FontcomboBox.SelectedValue.ToString());
+                _ertb.ChangeFormat("Font", FontcomboBox.SelectedValue.ToString());
             }
         }
 

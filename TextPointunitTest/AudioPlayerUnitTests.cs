@@ -1,10 +1,7 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TextPoint;
 using System.IO;
 using System.Reflection;
-using System.Threading.Tasks;
-using System.Timers;
 
 namespace TextPointunitTest
 {

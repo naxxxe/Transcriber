@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace TextPoint
+﻿namespace TextPoint
 {
     /// <summary>
     /// Interface class for the AudioPlayer class, These are the methods the AudioPlayer needs to implement
